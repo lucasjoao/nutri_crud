@@ -1,5 +1,4 @@
-
-public class Paciente implements Logavel{
+public class Paciente {
     private Dieta dietaPaciente;
     private String login;
     private String senha;
@@ -13,7 +12,9 @@ public class Paciente implements Logavel{
     private String profissao;
     private double imc;
 
-    public Paciente(Dieta dietaPaciente, String login, String senha,
+    Paciente(){}
+
+    Paciente(Dieta dietaPaciente, String login, String senha,
                     int cpf, int rg, String email, double altura, double peso,
                     int idade, String alergiasDoencas, String profissao, double imc) {
         this.dietaPaciente = dietaPaciente;
@@ -30,18 +31,12 @@ public class Paciente implements Logavel{
         this.imc = imc;
     }
 
-    @Override
-    public boolean logar(String login, String senha) {
-        return false;
-    }
-
     public Paciente criarLucas() {
         Alimento pera = new Alimento("Pera", 999);
         Alimento[] alimentosPossiveis = new Alimento[1];
         alimentosPossiveis[0] = pera;
         Dieta dietaDoLucas = new Dieta(alimentosPossiveis);
-        Paciente lucas = new Paciente(dietaDoLucas, "lulu", "123", 44444402, 5094137, "lucas@lucas.br", 1.85, 75.0, 19, "Alergia a Camarao e cenoura", "Vendedor", 0.94);
-        return lucas;
+        return new Paciente(dietaDoLucas, "lulu", "123", 44444402, 5094137, "lucas@lucas.br", 1.85, 75.0, 19, "Alergia a Camarao e cenoura", "Vendedor", 0.94);
     }
 
 
@@ -51,8 +46,7 @@ public class Paciente implements Logavel{
         Alimento[] alimentosPossiveis = new Alimento[1];
         alimentosPossiveis[0] = calzone;
         Dieta dietaDoFausto = new Dieta(alimentosPossiveis);
-        Paciente fausto = new Paciente(dietaDoFausto, "fafa", "123", 44444402, 5094137, "fausto@fausto.br", 1.85, 75.0, 19, "Alergia a Refrigerante e Comida", "Comprador", 0.94 );
-        return fausto;
+        return new Paciente(dietaDoFausto, "fafa", "123", 44444402, 5094137, "fausto@fausto.br", 1.85, 75.0, 19, "Alergia a Refrigerante e Comida", "Comprador", 0.94 );
     }
 
 
@@ -62,7 +56,6 @@ public class Paciente implements Logavel{
         Alimento[] alimentosPossiveis = new Alimento[1];
         alimentosPossiveis[0] = alface;
         Dieta dietaDoJoao = new Dieta(alimentosPossiveis);
-        Paciente joao = new Paciente(dietaDoJoao, "jojo", "123", 44444402, 5094137, "joao@joao.br", 1.85, 75.0, 19, "Alergia a lactose", "Padeiro", 0.94 );
-        return joao;
+        return new Paciente(dietaDoJoao, "jojo", "123", 44444402, 5094137, "joao@joao.br", 1.85, 75.0, 19, "Alergia a lactose", "Padeiro", 0.94 );
     }
 }

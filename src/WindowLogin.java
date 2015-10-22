@@ -1,7 +1,5 @@
-import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -9,85 +7,96 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class WindowLogin extends JFrame implements ActionListener {
-    private JLabel lblTitulo, lblLogin,	lblSenha;
-
+    private JPanel jpanel;
     private Nutricionista nutricionista;
+    private JButton btnCancel, btnLogin;
+    private JTextField txtLogin, txtSenha;
 
-    private JTextField	txtLogin, txtSenha;
+    private JFrame jframe;
 
-    private JButton btnLogin, btnCancel;
+    WindowLogin(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista){
+        this.jframe = jframe;
+        jframe.setTitle("Login");
+        jframe.setSize(width, height);
+        jframe.setResizable(false);
+        jframe.setLocationRelativeTo(null);
 
-    public void WindowLogin(){
-        setSize(400, 400);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        getContentPane().setLayout(null);
-        setTitle("Tela de Login");
-        setResizable(false);
-        initComponent();
+        this.jpanel = jpanel;
+
+        jframe.setContentPane(jpanel);
+
+        this.jpanel.setSize(width,height);
+        this.jpanel.setLayout(null);
+
+        this.nutricionista = nutricionista;
     }
 
-    private void initComponent(){
-        lblTitulo = new JLabel("Tela de Login");
-        lblTitulo.setSize(260, 32);
+    public void initComponent(){
+        //make title lbl
+        JLabel lblTitulo = new JLabel("Login");
+        lblTitulo.setSize(80, 32);
         lblTitulo.setFont(lblTitulo.getFont().deriveFont(24f));
-        lblTitulo.setLocation((getWidth() / 4) + 10, 16);
-        getContentPane().add(lblTitulo);
+        lblTitulo.setLocation((jpanel.getWidth()-lblTitulo.getWidth())/2, 16);
+        jpanel.add(lblTitulo);
 
-        int y = 64;
-        int spacing =24;
+        //make login lbl
         int size = 18;
-
-        lblLogin = new JLabel("Login:");
-        lblLogin.setSize((getWidth()- size), size);
+        JLabel lblLogin = new JLabel("Login:");
+        lblLogin.setSize((jpanel.getWidth()- size), size);
         lblLogin.setLocation(80,120);
-        getContentPane().add(lblLogin);
+        jpanel.add(lblLogin);
 
-        txtLogin = new JTextField();
-        txtLogin.setSize(((getWidth() / 2) - size ), size);
+        //make login field
+        this.txtLogin = new JTextField();
+        txtLogin.setSize(((jpanel.getWidth() / 2) - size ), size);
         txtLogin.setLocation(145, 120);
-        getContentPane().add(txtLogin);
+        jpanel.add(txtLogin);
 
-        y += spacing;
-
-        lblSenha = new JLabel("Senha:");
-        lblSenha.setSize((getWidth()- size), size);
+        //make password lbl
+        JLabel lblSenha = new JLabel("Senha:");
+        lblSenha.setSize((jpanel.getWidth()- size), size);
         lblSenha.setLocation(78,140);
-        getContentPane().add(lblSenha);
+        jpanel.add(lblSenha);
 
-        txtSenha = new JTextField();
-        txtSenha.setSize(((getWidth() / 2) - size ), size);
+        //make password field
+        this.txtSenha = new JTextField();
+        txtSenha.setSize(((jpanel.getWidth() / 2) - size ), size);
         txtSenha.setLocation(145,140);
-        getContentPane().add(txtSenha);
+        jpanel.add(txtSenha);
 
-        y += spacing;
-
-
-
-        btnLogin = new JButton("Logar");
+        //make login btn
+        this.btnLogin = new JButton("Logar");
         btnLogin.setSize(96, 24);
-        btnLogin.setLocation(getWidth() /2 - btnLogin.getWidth(), 300);
+        btnLogin.setLocation(jpanel.getWidth() /2 - btnLogin.getWidth(), 300);
         btnLogin.addActionListener(this);
-        getContentPane().add(btnLogin);
+        jpanel.add(btnLogin);
 
-        btnCancel = new JButton("Cancelar");
+        //make cancel btn
+        this.btnCancel = new JButton("Cancelar");
         btnCancel.setSize(96, 24);
-        btnCancel.setLocation(getWidth() /2 , 300);
+        btnCancel.setLocation(jpanel.getWidth() /2 , 300);
         btnCancel.addActionListener(this);
-        getContentPane().add(btnCancel);
+        jpanel.add(btnCancel);
     }
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        if (event.getSource() == btnCancel){
-            dispose();
-        } else if (event.getSource() == btnLogin){
+        if (event.getSource() == btnCancel)
+            System.exit(1);
+        else if (event.getSource() == btnLogin){
             String login = txtLogin.getText();
             String senha = txtSenha.getText();
-            if(nutricionista.logar(login, senha)==true){
-                this.dispose();
-                WindowPosLogin telaPosLogin = new WindowPosLogin();
-                telaPosLogin.setVisible(true);
+            if(nutricionista.logar(login, senha)){
+                JFrame jframeSecondWindow = new JFrame();
+                JPanel jpanelSecondWindow = new JPanel();
+
+                WindowPosLogin telaPosLogin = new WindowPosLogin(jframeSecondWindow, jpanelSecondWindow, this.nutricionista);
+                telaPosLogin.initComponent();
+
+                jframeSecondWindow.setVisible(true);
+                jframeSecondWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+                jframe.dispose();
             }
         }
     }

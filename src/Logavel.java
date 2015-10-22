@@ -1,3 +1,3 @@
 public interface Logavel {
-    public boolean logar(String  login, String senha);
+    boolean logar(String  login, String senha);
 }
