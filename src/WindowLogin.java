@@ -7,12 +7,13 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class WindowLogin extends JFrame implements ActionListener {
+    private JFrame jframe;
     private JPanel jpanel;
     private Nutricionista nutricionista;
+    private JLabel lblTitulo, lblLogin, lblSenha;
     private JButton btnCancel, btnLogin;
     private JTextField txtLogin, txtSenha;
 
-    private JFrame jframe;
 
     WindowLogin(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista){
         this.jframe = jframe;
@@ -33,7 +34,7 @@ public class WindowLogin extends JFrame implements ActionListener {
 
     public void initComponent(){
         //make title lbl
-        JLabel lblTitulo = new JLabel("Login");
+        this.lblTitulo = new JLabel("Login");
         lblTitulo.setSize(80, 32);
         lblTitulo.setFont(lblTitulo.getFont().deriveFont(24f));
         lblTitulo.setLocation((jpanel.getWidth()-lblTitulo.getWidth())/2, 16);
@@ -41,7 +42,7 @@ public class WindowLogin extends JFrame implements ActionListener {
 
         //make login lbl
         int size = 18;
-        JLabel lblLogin = new JLabel("Login:");
+        this.lblLogin = new JLabel("Login:");
         lblLogin.setSize((jpanel.getWidth()- size), size);
         lblLogin.setLocation(80,120);
         jpanel.add(lblLogin);
@@ -53,7 +54,7 @@ public class WindowLogin extends JFrame implements ActionListener {
         jpanel.add(txtLogin);
 
         //make password lbl
-        JLabel lblSenha = new JLabel("Senha:");
+        this.lblSenha = new JLabel("Senha:");
         lblSenha.setSize((jpanel.getWidth()- size), size);
         lblSenha.setLocation(78,140);
         jpanel.add(lblSenha);
@@ -79,6 +80,16 @@ public class WindowLogin extends JFrame implements ActionListener {
         jpanel.add(btnCancel);
     }
 
+    public void remComponent(){
+        jpanel.remove(lblTitulo);
+        jpanel.remove(lblLogin);
+        jpanel.remove(lblSenha);
+        jpanel.remove(txtLogin);
+        jpanel.remove(txtSenha);
+        jpanel.remove(btnCancel);
+        jpanel.remove(btnLogin);
+    }
+
     @Override
     public void actionPerformed(ActionEvent event) {
         if (event.getSource() == btnCancel)
@@ -87,16 +98,10 @@ public class WindowLogin extends JFrame implements ActionListener {
             String login = txtLogin.getText();
             String senha = txtSenha.getText();
             if(nutricionista.logar(login, senha)){
-                JFrame jframeSecondWindow = new JFrame();
-                JPanel jpanelSecondWindow = new JPanel();
-
-                WindowPosLogin telaPosLogin = new WindowPosLogin(jframeSecondWindow, jpanelSecondWindow, this.nutricionista);
+                WindowPosLogin telaPosLogin = new WindowPosLogin(this.jframe, this.jpanel, this.nutricionista);
+                this.remComponent();
+                jpanel.repaint();
                 telaPosLogin.initComponent();
-
-                jframeSecondWindow.setVisible(true);
-                jframeSecondWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-                jframe.dispose();
             }
         }
     }
