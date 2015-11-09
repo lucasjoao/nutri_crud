@@ -1,10 +1,6 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 public class WindowLogin extends JFrame implements ActionListener {
     private JFrame jframe;
@@ -12,7 +8,8 @@ public class WindowLogin extends JFrame implements ActionListener {
     private Nutricionista nutricionista;
     private JLabel lblTitulo, lblLogin, lblSenha;
     private JButton btnCancel, btnLogin;
-    private JTextField txtLogin, txtSenha;
+    private JTextField txtLogin;
+    private JPasswordField txtSenha;
 
 
     WindowLogin(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista){
@@ -60,7 +57,7 @@ public class WindowLogin extends JFrame implements ActionListener {
         jpanel.add(lblSenha);
 
         //make password field
-        this.txtSenha = new JTextField();
+        this.txtSenha = new JPasswordField(10);
         txtSenha.setSize(((jpanel.getWidth() / 2) - size ), size);
         txtSenha.setLocation(145,140);
         jpanel.add(txtSenha);
@@ -96,7 +93,8 @@ public class WindowLogin extends JFrame implements ActionListener {
             System.exit(1);
         else if (event.getSource() == btnLogin){
             String login = txtLogin.getText();
-            String senha = txtSenha.getText();
+            char[] senhaMask = txtSenha.getPassword();
+            String senha = new String(senhaMask);
             if(nutricionista.logar(login, senha)){
                 WindowPosLogin telaPosLogin = new WindowPosLogin(this.jframe, this.jpanel, this.nutricionista);
                 this.remComponent();
