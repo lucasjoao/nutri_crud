@@ -1,6 +1,5 @@
 import javax.swing.*;
 
-
 public class WindowPosLogin extends JFrame {
 
     private JLabel lblProv;
@@ -19,12 +18,33 @@ public class WindowPosLogin extends JFrame {
 
         this.jpanel = jpanel;
 
+        JScrollPane scrollPane = new JScrollPane();
+
+        //tentativa de list box
+        DefaultListModel lista = new DefaultListModel();
+        int qtdPacientes = nutricionista.retornaQuantPacientes(nutricionista);
+        for(int posicao = 0 ; posicao <= qtdPacientes; posicao++){
+            lista.addElement(nutricionista.retornaPaciente(posicao, nutricionista));
+        }
+        JList list = new JList();
+
+        list.setModel(lista);
+        scrollPane.setViewportView(list);
+        scrollPane.setVisible(true);
+        scrollPane.setBounds(22, 50, 350, 250);
+        jframe.add(scrollPane);
+
         jframe.setContentPane(jpanel);
 
         this.jpanel.setSize(400,400);
         this.jpanel.setLayout(null);
 
         this.nutricionista = nutricionista;
+
+
+
+
+
 
     }
 

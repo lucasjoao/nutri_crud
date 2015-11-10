@@ -13,16 +13,29 @@ public class Nutricionista implements Logavel {
         this.nome = nome;
         this.login = login;
         this.senha = senha;
-		this.pacsDaNut = pacsDaNut;
+        this.pacsDaNut = pacsDaNut;
     }
 
     public Nutricionista criarLucia() {
         Paciente pacAux = new Paciente();
         Paciente[] pacsDaNut = new Paciente[3];
         pacsDaNut[0] = pacAux.criarLucas();
-		pacsDaNut[1] = pacAux.criarJoao();
-		pacsDaNut[2] = pacAux.criarFausto();
+        pacsDaNut[1] = pacAux.criarJoao();
+        pacsDaNut[2] = pacAux.criarFausto();
         return new Nutricionista("lucia", "luluzinha", "123", pacsDaNut);
+    }
+
+    public int retornaQuantPacientes(Nutricionista nutricionista ){
+        int numDePacs = 0;
+        for(int i =0; i < nutricionista.pacsDaNut.length; i++ ){
+            numDePacs = i;
+        }
+        return numDePacs;
+    }
+
+    public String retornaPaciente(int posicao, Nutricionista nutricionista){
+        String nome = nutricionista.pacsDaNut[posicao].pegarLogin();
+        return nome;
     }
 
     public boolean logar(String login, String senha) {

@@ -1,4 +1,21 @@
 public class Paciente {
+
+
+    public String getLogin() {
+        return login;
+    }
+
+
+    public String pegarLogin() {
+        String login;
+        login = this.getLogin().toString();
+
+        return login;
+    }
+
+
+
+
     private Dieta dietaPaciente;
     private String login;
     private String senha;
@@ -15,8 +32,8 @@ public class Paciente {
     Paciente(){}
 
     Paciente(Dieta dietaPaciente, String login, String senha,
-                    int cpf, int rg, String email, double altura, double peso,
-                    int idade, String alergiasDoencas, String profissao, double imc) {
+             int cpf, int rg, String email, double altura, double peso,
+             int idade, String alergiasDoencas, String profissao, double imc) {
         this.dietaPaciente = dietaPaciente;
         this.login = login;
         this.senha = senha;
