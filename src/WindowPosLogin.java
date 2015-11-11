@@ -1,8 +1,10 @@
 import javax.swing.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-public class WindowPosLogin extends JFrame {
+public class WindowPosLogin extends MouseAdapter {
 
-    private JLabel lblProv;
+    private JLabel lblTitulo;
     private JFrame jframe;
     private JPanel jpanel;
     private Nutricionista nutricionista;
@@ -31,9 +33,14 @@ public class WindowPosLogin extends JFrame {
             dadosLista.addElement(nutricionista.retornaPaciente(posicao, nutricionista));
 
         JList list = new JList(dadosLista);
+        //one list index can be selected:
+        list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        list.addMouseListener(this);
 
         this.scrollPane = new JScrollPane(list);
         scrollPane.setBounds(22, 50, 350, 250);
+        //enable scroll with mouse wheel:
+        scrollPane.setWheelScrollingEnabled(true);
         jpanel.add(scrollPane);
     }
 
@@ -41,11 +48,27 @@ public class WindowPosLogin extends JFrame {
         //only here because of conflict with scrollpane
         jframe.setContentPane(jpanel);
 
-        this.lblProv = new JLabel("Em construção");
-        lblProv.setSize(200, 32);
-        lblProv.setFont(lblProv.getFont().deriveFont(24f));
-        lblProv.setLocation(((jpanel.getWidth()- lblProv.getWidth())/2), 16);
-        jpanel.add(lblProv);
+        //make title lbl
+        this.lblTitulo = new JLabel("nome_software");
+        lblTitulo.setSize(200, 32);
+        lblTitulo.setFont(lblTitulo.getFont().deriveFont(24f));
+        lblTitulo.setLocation(((jpanel.getWidth()- lblTitulo.getWidth())/2), 16);
+        jpanel.add(lblTitulo);
     }
 
+    public void remComponent(){
+        jpanel.remove(lblTitulo);
+        jpanel.remove(scrollPane);
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e){
+        if(e.getClickCount() == 2){
+            WindowDadosPaciente telaDadosPaciente = new WindowDadosPaciente(
+                    this.jframe, this.jpanel, this.nutricionista);
+            this.remComponent();
+            jpanel.repaint();
+            telaDadosPaciente.initComponent();
+        }
+    }
 }

@@ -2,7 +2,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-public class WindowLogin extends JFrame implements ActionListener {
+public class WindowLogin implements ActionListener {
     private JFrame jframe;
     private JPanel jpanel;
     private Nutricionista nutricionista;
@@ -11,6 +11,7 @@ public class WindowLogin extends JFrame implements ActionListener {
     private JTextField txtLogin;
     private JPasswordField txtSenha;
 
+    WindowLogin(){}
 
     WindowLogin(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista){
         this.jframe = jframe;

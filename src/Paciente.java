@@ -1,21 +1,5 @@
 public class Paciente {
 
-
-    public String getLogin() {
-        return login;
-    }
-
-
-    public String pegarLogin() {
-        String login;
-        login = this.getLogin().toString();
-
-        return login;
-    }
-
-
-
-
     private Dieta dietaPaciente;
     private String login;
     private String senha;
@@ -74,5 +58,9 @@ public class Paciente {
         alimentosPossiveis[0] = alface;
         Dieta dietaDoJoao = new Dieta(alimentosPossiveis);
         return new Paciente(dietaDoJoao, "jojo", "123", 44444402, 5094137, "joao@joao.br", 1.85, 75.0, 19, "Alergia a lactose", "Padeiro", 0.94 );
+    }
+
+    public String pegarLogin() {
+        return this.login.toString();
     }
 }
