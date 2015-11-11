@@ -9,23 +9,26 @@ public class WindowDadosPaciente implements ActionListener{
     private Nutricionista nutricionista;
     private JLabel lblTitulo;
     private JButton btnLogout;
+    private int width, height;
 
     WindowDadosPaciente(){}
 
-    WindowDadosPaciente(JFrame jframe, JPanel jpanel, Nutricionista nutricionista){
+    WindowDadosPaciente(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista){
         this.jframe = jframe;
         jframe.setTitle("Tela de dados do paciente");
-        jframe.setSize(400, 400);
+        jframe.setSize(width, height);
         jframe.setResizable(false);
         jframe.setLocationRelativeTo(null);
 
         this.jpanel = jpanel;
-        this.jpanel.setSize(400, 400);
+        this.jpanel.setSize(width, height);
         this.jpanel.setLayout(null);
 
         jframe.setContentPane(jpanel);
 
         this.nutricionista = nutricionista;
+        this.width = width;
+        this.height = height;
     }
 
     public void initComponent() {
@@ -52,7 +55,8 @@ public class WindowDadosPaciente implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent event) {
         if (event.getSource() == btnLogout){
-            WindowLogin telaLogin = new WindowLogin(this.jframe, this.jpanel, this.nutricionista);
+            WindowLogin telaLogin = new WindowLogin(
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
             this.remComponent();
             jpanel.repaint();
             telaLogin.initComponent();

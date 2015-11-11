@@ -12,21 +12,24 @@ public class WindowPosLogin extends MouseAdapter implements ActionListener {
     private Nutricionista nutricionista;
     private JScrollPane scrollPane;
     private JButton btnLogout;
+    private int width, height;
 
     WindowPosLogin(){}
 
-    WindowPosLogin(JFrame jframe, JPanel jpanel, Nutricionista nutricionista){
+    WindowPosLogin(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista){
         this.jframe = jframe;
         jframe.setTitle("Tela pós-login");
-        jframe.setSize(400, 400);
+        jframe.setSize(width, height);
         jframe.setResizable(false);
         jframe.setLocationRelativeTo(null);
 
         this.jpanel = jpanel;
-        this.jpanel.setSize(400,400);
+        this.jpanel.setSize(width, height);
         this.jpanel.setLayout(null);
 
         this.nutricionista = nutricionista;
+        this.width = width;
+        this.height = height;
     }
 
     public void initList(){
@@ -76,7 +79,7 @@ public class WindowPosLogin extends MouseAdapter implements ActionListener {
     public void mouseClicked(MouseEvent e){
         if(e.getClickCount() == 2){
             WindowDadosPaciente telaDadosPaciente = new WindowDadosPaciente(
-                    this.jframe, this.jpanel, this.nutricionista);
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
             this.remComponent();
             jpanel.repaint();
             telaDadosPaciente.initComponent();
@@ -86,7 +89,8 @@ public class WindowPosLogin extends MouseAdapter implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent event) {
         if (event.getSource() == btnLogout){
-            WindowLogin telaLogin = new WindowLogin(this.jframe, this.jpanel, this.nutricionista);
+            WindowLogin telaLogin = new WindowLogin(
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
             this.remComponent();
             jpanel.repaint();
             telaLogin.initComponent();

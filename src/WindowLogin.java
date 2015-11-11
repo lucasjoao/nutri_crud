@@ -10,24 +10,9 @@ public class WindowLogin implements ActionListener {
     private JButton btnCancel, btnLogin;
     private JTextField txtLogin;
     private JPasswordField txtSenha;
+    private int width, height;
 
     WindowLogin(){}
-
-    WindowLogin(JFrame jframe, JPanel jpanel, Nutricionista nutricionista){
-        this.jframe = jframe;
-        jframe.setTitle("Login");
-        jframe.setSize(400, 400);
-        jframe.setResizable(false);
-        jframe.setLocationRelativeTo(null);
-
-        this.jpanel = jpanel;
-        this.jpanel.setSize(400,400);
-        this.jpanel.setLayout(null);
-
-        jframe.setContentPane(jpanel);
-
-        this.nutricionista = nutricionista;
-    }
 
     WindowLogin(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista){
         this.jframe = jframe;
@@ -37,13 +22,14 @@ public class WindowLogin implements ActionListener {
         jframe.setLocationRelativeTo(null);
 
         this.jpanel = jpanel;
-
-        jframe.setContentPane(jpanel);
-
         this.jpanel.setSize(width,height);
         this.jpanel.setLayout(null);
 
+        jframe.setContentPane(jpanel);
+
         this.nutricionista = nutricionista;
+        this.width = width;
+        this.height = height;
     }
 
     public void initComponent(){
@@ -113,7 +99,8 @@ public class WindowLogin implements ActionListener {
             char[] senhaMask = txtSenha.getPassword();
             String senha = new String(senhaMask);
             if(nutricionista.logar(login, senha)){
-                WindowPosLogin telaPosLogin = new WindowPosLogin(this.jframe, this.jpanel, this.nutricionista);
+                WindowPosLogin telaPosLogin = new WindowPosLogin(
+                        this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
                 this.remComponent();
                 jpanel.repaint();
                 telaPosLogin.initList();
