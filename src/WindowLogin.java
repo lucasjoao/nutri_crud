@@ -99,6 +99,7 @@ public class WindowLogin extends JFrame implements ActionListener {
                 WindowPosLogin telaPosLogin = new WindowPosLogin(this.jframe, this.jpanel, this.nutricionista);
                 this.remComponent();
                 jpanel.repaint();
+                telaPosLogin.initList();
                 telaPosLogin.initComponent();
             }
         }
