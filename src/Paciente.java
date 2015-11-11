@@ -60,7 +60,7 @@ public class Paciente {
         return new Paciente(dietaDoJoao, "jojo", "123", 44444402, 5094137, "joao@joao.br", 1.85, 75.0, 19, "Alergia a lactose", "Padeiro", 0.94 );
     }
 
-    public String pegarLogin() {
-        return this.login.toString();
+    public String getLogin() {
+        return this.login;
     }
 }

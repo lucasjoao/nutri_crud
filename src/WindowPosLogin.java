@@ -1,14 +1,17 @@
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class WindowPosLogin extends MouseAdapter {
+public class WindowPosLogin extends MouseAdapter implements ActionListener {
 
     private JLabel lblTitulo;
     private JFrame jframe;
     private JPanel jpanel;
     private Nutricionista nutricionista;
     private JScrollPane scrollPane;
+    private JButton btnLogout;
 
     WindowPosLogin(){}
 
@@ -54,11 +57,19 @@ public class WindowPosLogin extends MouseAdapter {
         lblTitulo.setFont(lblTitulo.getFont().deriveFont(24f));
         lblTitulo.setLocation(((jpanel.getWidth()- lblTitulo.getWidth())/2), 16);
         jpanel.add(lblTitulo);
+
+        //make logout btn
+        this.btnLogout = new JButton("Exit");
+        btnLogout.setSize(72, 24);
+        btnLogout.setLocation(jpanel.getWidth() / 4 * 3, 325);
+        btnLogout.addActionListener(this);
+        jpanel.add(btnLogout);
     }
 
     public void remComponent(){
         jpanel.remove(lblTitulo);
         jpanel.remove(scrollPane);
+        jpanel.remove(btnLogout);
     }
 
     @Override
@@ -69,6 +80,16 @@ public class WindowPosLogin extends MouseAdapter {
             this.remComponent();
             jpanel.repaint();
             telaDadosPaciente.initComponent();
+        }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent event) {
+        if (event.getSource() == btnLogout){
+            WindowLogin telaLogin = new WindowLogin(this.jframe, this.jpanel, this.nutricionista);
+            this.remComponent();
+            jpanel.repaint();
+            telaLogin.initComponent();
         }
     }
 }

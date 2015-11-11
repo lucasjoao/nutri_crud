@@ -13,6 +13,22 @@ public class WindowLogin implements ActionListener {
 
     WindowLogin(){}
 
+    WindowLogin(JFrame jframe, JPanel jpanel, Nutricionista nutricionista){
+        this.jframe = jframe;
+        jframe.setTitle("Login");
+        jframe.setSize(400, 400);
+        jframe.setResizable(false);
+        jframe.setLocationRelativeTo(null);
+
+        this.jpanel = jpanel;
+        this.jpanel.setSize(400,400);
+        this.jpanel.setLayout(null);
+
+        jframe.setContentPane(jpanel);
+
+        this.nutricionista = nutricionista;
+    }
+
     WindowLogin(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista){
         this.jframe = jframe;
         jframe.setTitle("Login");

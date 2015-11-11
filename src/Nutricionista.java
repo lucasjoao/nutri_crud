@@ -34,7 +34,7 @@ public class Nutricionista implements Logavel {
     }
 
     public String retornaPaciente(int posicao, Nutricionista nutricionista){
-        String nome = nutricionista.pacsDaNut[posicao].pegarLogin();
+        String nome = nutricionista.pacsDaNut[posicao].getLogin();
         return nome;
     }
 
