@@ -32,9 +32,9 @@ public class Nutricionista implements Logavel {
         return numDePacs;
     }
 
-    public String retornaPaciente(int posicao){
+    public String retornaNomePaciente(int posicao){
         if(pacsDaNut[posicao] != null)
-            return pacsDaNut[posicao].getLogin();
+            return pacsDaNut[posicao].getNome();
         else
             return "";
     }

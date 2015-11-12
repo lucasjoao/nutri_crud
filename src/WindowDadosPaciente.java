@@ -9,11 +9,11 @@ public class WindowDadosPaciente implements ActionListener{
     private Nutricionista nutricionista;
     private JLabel lblTitulo;
     private JButton btnLogout, btnVoltar;
-    private int width, height;
+    private int width, height, nroPac;
 
     WindowDadosPaciente(){}
 
-    WindowDadosPaciente(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista){
+    WindowDadosPaciente(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista, int nroPac){
         this.jframe = jframe;
         jframe.setTitle("Tela de dados do paciente");
         jframe.setSize(width, height);
@@ -29,11 +29,12 @@ public class WindowDadosPaciente implements ActionListener{
         this.nutricionista = nutricionista;
         this.width = width;
         this.height = height;
+        this.nroPac = nroPac;
     }
 
     public void initComponent() {
         //make title lbl
-        this.lblTitulo = new JLabel("nome_paciente");
+        this.lblTitulo = new JLabel(nutricionista.retornaNomePaciente(nroPac));
         lblTitulo.setSize(200, 32);
         lblTitulo.setFont(lblTitulo.getFont().deriveFont(24f));
         lblTitulo.setLocation(((jpanel.getWidth()- lblTitulo.getWidth())/2), 16);
