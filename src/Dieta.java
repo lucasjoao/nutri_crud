@@ -1,6 +1,7 @@
 public class Dieta {
 
     private Alimento[] alimentosDieta;
+    private double totalCalorias;
 
     Dieta(){}
 

@@ -16,6 +16,16 @@ public class Paciente {
 
     Paciente(){}
 
+    Paciente(String nome, int cpf, int rg, String email, String profissao, String login, String senha){
+        this.nome = nome;
+        this.login = login;
+        this.senha = senha;
+        this.cpf = cpf;
+        this.rg = rg;
+        this.email = email;
+        this.profissao = profissao;
+    }
+
     Paciente(Dieta dietaPaciente, String nome, String login, String senha,
              int cpf, int rg, String email, double altura, double peso,
              int idade, String alergiasDoencas, String profissao, double imc) {
