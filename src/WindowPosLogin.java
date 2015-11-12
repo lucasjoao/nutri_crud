@@ -11,6 +11,7 @@ public class WindowPosLogin extends MouseAdapter implements ActionListener {
     private JPanel jpanel;
     private Nutricionista nutricionista;
     private JScrollPane scrollPane;
+    private JList list;
     private JButton btnLogout, btnAdd;
     private int width, height;
 
@@ -34,11 +35,11 @@ public class WindowPosLogin extends MouseAdapter implements ActionListener {
 
     public void initList(){
         DefaultListModel dadosLista = new DefaultListModel();
-        int qtdPacientes = nutricionista.retornaQuantPacientes(nutricionista);
-        for(int posicao = 0 ; posicao <= qtdPacientes; posicao++)
-            dadosLista.addElement(nutricionista.retornaPaciente(posicao, nutricionista));
+        int totalPacientes = nutricionista.retornaTotalPacientes();
+        for(int posicao = 0 ; posicao <= totalPacientes; posicao++)
+            dadosLista.addElement(nutricionista.retornaPaciente(posicao));
 
-        JList list = new JList(dadosLista);
+        this.list = new JList(dadosLista);
         //one list index can be selected:
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         list.addMouseListener(this);
@@ -85,7 +86,9 @@ public class WindowPosLogin extends MouseAdapter implements ActionListener {
 
     @Override
     public void mouseClicked(MouseEvent e){
-        if(e.getClickCount() == 2){
+        boolean checkVazio = nutricionista.retornaPaciente(
+                list.locationToIndex(e.getPoint())).equals("");
+        if(e.getClickCount() == 2 && !checkVazio){
             WindowDadosPaciente telaDadosPaciente = new WindowDadosPaciente(
                     this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
             this.remComponent();
