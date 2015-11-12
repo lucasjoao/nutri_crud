@@ -27,8 +27,9 @@ public class Nutricionista implements Logavel {
         return new Nutricionista("lucia", "luluzinha", "123", pacsDaNut);
     }
 
-    public void criarPac(String nome, int cpf, int rg, String email, String profissao, String login, String senha){
-        this.pacsDaNut[slot] = new Paciente(nome, cpf, rg, email, profissao, login, senha);
+    public void criarPac(String nome, int cpf, int rg, String email, String profissao, String login, String senha,
+                         double altura, double peso, double imc, int idade){
+        this.pacsDaNut[slot] = new Paciente(nome, cpf, rg, email, profissao, login, senha, altura, peso, imc, idade);
         slot++;
     }
 

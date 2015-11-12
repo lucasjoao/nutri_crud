@@ -16,7 +16,8 @@ public class Paciente {
 
     Paciente(){}
 
-    Paciente(String nome, int cpf, int rg, String email, String profissao, String login, String senha){
+    Paciente(String nome, int cpf, int rg, String email, String profissao, String login, String senha, double altura,
+             double peso, double imc, int idade){
         this.nome = nome;
         this.login = login;
         this.senha = senha;
@@ -24,6 +25,10 @@ public class Paciente {
         this.rg = rg;
         this.email = email;
         this.profissao = profissao;
+        this.altura = altura;
+        this.peso = peso;
+        this.imc = imc;
+        this.idade = idade;
     }
 
     Paciente(Dieta dietaPaciente, String nome, String login, String senha,
