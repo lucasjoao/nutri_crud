@@ -2,20 +2,20 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class WindowDadosPaciente implements ActionListener{
+public class WindowAddPac implements ActionListener {
 
+    private JLabel lblTitulo;
     private JFrame jframe;
     private JPanel jpanel;
     private Nutricionista nutricionista;
-    private JLabel lblTitulo;
-    private JButton btnLogout, btnVoltar;
     private int width, height;
+    private JButton btnLogout, btnVoltar;
 
-    WindowDadosPaciente(){}
+    WindowAddPac(){}
 
-    WindowDadosPaciente(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista){
+    WindowAddPac(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista){
         this.jframe = jframe;
-        jframe.setTitle("Tela de dados do paciente");
+        jframe.setTitle("Tela add paciente");
         jframe.setSize(width, height);
         jframe.setResizable(false);
         jframe.setLocationRelativeTo(null);
@@ -33,10 +33,10 @@ public class WindowDadosPaciente implements ActionListener{
 
     public void initComponent() {
         //make title lbl
-        this.lblTitulo = new JLabel("nome_paciente");
+        this.lblTitulo = new JLabel("infos paciente");
         lblTitulo.setSize(200, 32);
         lblTitulo.setFont(lblTitulo.getFont().deriveFont(24f));
-        lblTitulo.setLocation(((jpanel.getWidth()- lblTitulo.getWidth())/2), 16);
+        lblTitulo.setLocation(((jpanel.getWidth() - lblTitulo.getWidth()) / 2), 16);
         jpanel.add(lblTitulo);
 
         //make logout btn
@@ -79,4 +79,3 @@ public class WindowDadosPaciente implements ActionListener{
         }
     }
 }
-

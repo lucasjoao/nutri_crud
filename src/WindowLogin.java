@@ -22,8 +22,8 @@ public class WindowLogin implements ActionListener {
         jframe.setLocationRelativeTo(null);
 
         this.jpanel = jpanel;
-        this.jpanel.setSize(width,height);
-        this.jpanel.setLayout(null);
+        jpanel.setSize(width,height);
+        jpanel.setLayout(null);
 
         jframe.setContentPane(jpanel);
 

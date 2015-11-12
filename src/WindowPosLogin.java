@@ -11,7 +11,7 @@ public class WindowPosLogin extends MouseAdapter implements ActionListener {
     private JPanel jpanel;
     private Nutricionista nutricionista;
     private JScrollPane scrollPane;
-    private JButton btnLogout;
+    private JButton btnLogout, btnAdd;
     private int width, height;
 
     WindowPosLogin(){}
@@ -24,8 +24,8 @@ public class WindowPosLogin extends MouseAdapter implements ActionListener {
         jframe.setLocationRelativeTo(null);
 
         this.jpanel = jpanel;
-        this.jpanel.setSize(width, height);
-        this.jpanel.setLayout(null);
+        jpanel.setSize(width, height);
+        jpanel.setLayout(null);
 
         this.nutricionista = nutricionista;
         this.width = width;
@@ -62,17 +62,25 @@ public class WindowPosLogin extends MouseAdapter implements ActionListener {
         jpanel.add(lblTitulo);
 
         //make logout btn
-        this.btnLogout = new JButton("Exit");
+        this.btnLogout = new JButton("sair");
         btnLogout.setSize(72, 24);
         btnLogout.setLocation(jpanel.getWidth() / 4 * 3, 325);
         btnLogout.addActionListener(this);
         jpanel.add(btnLogout);
+
+        //make add btn
+        this.btnAdd = new JButton("+ paciente");
+        btnAdd.setSize(144, 24);
+        btnAdd.setLocation(((jpanel.getWidth() - btnAdd.getWidth())/2), 325);
+        btnAdd.addActionListener(this);
+        jpanel.add(btnAdd);
     }
 
     public void remComponent(){
         jpanel.remove(lblTitulo);
         jpanel.remove(scrollPane);
         jpanel.remove(btnLogout);
+        jpanel.remove(btnAdd);
     }
 
     @Override
@@ -88,12 +96,19 @@ public class WindowPosLogin extends MouseAdapter implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        if (event.getSource() == btnLogout){
+        if(event.getSource() == btnLogout){
             WindowLogin telaLogin = new WindowLogin(
                     this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
             this.remComponent();
             jpanel.repaint();
             telaLogin.initComponent();
+        }
+        else if(event.getSource() == btnAdd){
+            WindowAddPac telaAddPac= new WindowAddPac(
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
+            this.remComponent();
+            jpanel.repaint();
+            telaAddPac.initComponent();
         }
     }
 }
