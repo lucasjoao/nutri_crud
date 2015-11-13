@@ -3,6 +3,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 
 public class WindowAddPac implements ActionListener, FocusListener {
 
@@ -275,9 +277,13 @@ public class WindowAddPac implements ActionListener, FocusListener {
 
     @Override
     public void focusLost(FocusEvent focusEvent) {
+        DecimalFormat df = new DecimalFormat("##.##");
+        // dont round number:
+        df.setRoundingMode(RoundingMode.DOWN);
+
         double altura = Double.parseDouble(txtAlt.getText());
         double peso = Double.parseDouble(txtPeso.getText());
-        txtIMC.setText(String.valueOf(peso / ((altura)*(altura))));
-
+        double imc = peso / ((altura) * (altura));
+        txtIMC.setText(String.valueOf(df.format(imc)));
     }
 }
