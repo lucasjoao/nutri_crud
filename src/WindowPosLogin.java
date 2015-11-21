@@ -56,7 +56,7 @@ public class WindowPosLogin extends MouseAdapter implements ActionListener {
         jframe.setContentPane(jpanel);
 
         //make title lbl
-        this.lblTitulo = new JLabel("nome_software");
+        this.lblTitulo = new JLabel("Pacientes");
         lblTitulo.setSize(200, 32);
         lblTitulo.setFont(lblTitulo.getFont().deriveFont(24f));
         lblTitulo.setLocation(((jpanel.getWidth()- lblTitulo.getWidth())/2), 16);

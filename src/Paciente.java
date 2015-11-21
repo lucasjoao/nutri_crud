@@ -17,7 +17,7 @@ public class Paciente {
     Paciente(){}
 
     Paciente(String nome, int cpf, int rg, String email, String profissao, String login, String senha, double altura,
-             double peso, double imc, int idade){
+             double peso, int idade){
         this.nome = nome;
         this.login = login;
         this.senha = senha;
@@ -27,7 +27,6 @@ public class Paciente {
         this.profissao = profissao;
         this.altura = altura;
         this.peso = peso;
-        this.imc = imc;
         this.idade = idade;
     }
 
@@ -80,4 +79,97 @@ public class Paciente {
     public String getNome() {
         return this.nome;
     }
+
+    public Dieta getDietaPaciente() {
+        return dietaPaciente;
+    }
+
+    public void setDietaPaciente(Dieta dietaPaciente) {
+        this.dietaPaciente = dietaPaciente;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public int getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(int cpf) {
+        this.cpf = cpf;
+    }
+
+    public int getRg() {
+        return rg;
+    }
+
+    public void setRg(int rg) {
+        this.rg = rg;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public double getAltura() {
+        return altura;
+    }
+
+    public void setAltura(double altura) {
+        this.altura = altura;
+    }
+
+    public double getPeso() {
+        return peso;
+    }
+
+    public void setPeso(double peso) {
+        this.peso = peso;
+    }
+
+    public int getIdade() {
+        return idade;
+    }
+
+    public void setIdade(int idade) {
+        this.idade = idade;
+    }
+
+    public String getAlergiasDoencas() {
+        return alergiasDoencas;
+    }
+
+    public void setAlergiasDoencas(String alergiasDoencas) {
+        this.alergiasDoencas = alergiasDoencas;
+    }
+
+    public String getProfissao() {
+        return profissao;
+    }
+
+    public void setProfissao(String profissao) {
+        this.profissao = profissao;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 }
+

@@ -1,4 +1,6 @@
 import javax.swing.JOptionPane;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 
 public class Nutricionista implements Logavel {
 
@@ -28,8 +30,8 @@ public class Nutricionista implements Logavel {
     }
 
     public void criarPac(String nome, int cpf, int rg, String email, String profissao, String login, String senha,
-                         double altura, double peso, double imc, int idade){
-        this.pacsDaNut[slot] = new Paciente(nome, cpf, rg, email, profissao, login, senha, altura, peso, imc, idade);
+                         double altura, double peso, int idade){
+        this.pacsDaNut[slot] = new Paciente(nome, cpf, rg, email, profissao, login, senha, altura, peso, idade);
         slot++;
     }
 
@@ -44,6 +46,90 @@ public class Nutricionista implements Logavel {
         if(pacsDaNut[posicao] != null)
             return pacsDaNut[posicao].getNome();
         else
+            return "";
+    }
+
+    public int retornaCPFPaciente(int posicao){
+        if(pacsDaNut[posicao] != null)
+            return pacsDaNut[posicao].getCpf();
+        else
+            return 0 ;
+    }
+
+    public int retornaRGPaciente(int posicao){
+        if(pacsDaNut[posicao] != null)
+            return pacsDaNut[posicao].getRg();
+        else
+            return 0 ;
+    }
+
+    public String retornaEmailPaciente(int posicao){
+        if(pacsDaNut[posicao] != null)
+            return pacsDaNut[posicao].getEmail();
+        else
+            return "" ;
+    }
+
+    public double retornaAlturaPaciente(int posicao){
+        if(pacsDaNut[posicao] != null)
+            return pacsDaNut[posicao].getAltura();
+        else
+            return 0 ;
+    }
+
+    public double retornaPesoPaciente(int posicao){
+        if(pacsDaNut[posicao] != null)
+            return pacsDaNut[posicao].getPeso();
+        else
+            return 0 ;
+    }
+
+    public int retornaIdadePaciente(int posicao){
+        if(pacsDaNut[posicao] != null)
+            return pacsDaNut[posicao].getIdade();
+        else
+            return 0 ;
+    }
+
+    public String retornaDietsAlergsPaciente(int posicao){
+        if(pacsDaNut[posicao] != null)
+            return pacsDaNut[posicao].getAlergiasDoencas();
+        else
+            return "";
+    }
+
+    public String retornaLoginPaciente(int posicao){
+        if(pacsDaNut[posicao] != null)
+            return pacsDaNut[posicao].getLogin();
+        else
+            return "";
+    }
+
+    public String retornaSenhaPaciente(int posicao){
+        if(pacsDaNut[posicao] != null)
+            return pacsDaNut[posicao].getSenha();
+        else
+            return "";
+    }
+
+    public String retornaProfissaoPaciente(int posicao){
+        if(pacsDaNut[posicao] != null)
+            return pacsDaNut[posicao].getProfissao();
+        else
+            return "";
+    }
+
+    public String calculaImc(int posicao)
+    {
+        if (pacsDaNut[posicao] != null){
+            DecimalFormat df = new DecimalFormat("##.##");
+            df.setRoundingMode(RoundingMode.DOWN);
+
+            double altura = pacsDaNut[posicao].getAltura();
+            double peso = pacsDaNut[posicao].getPeso();
+            double imc = peso/(altura*altura);
+            return df.format(imc);
+        }else
             return "";
     }
 

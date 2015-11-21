@@ -3,20 +3,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 
 public class WindowAddPac implements ActionListener, FocusListener {
 
     private JLabel lblTitulo, lblNome, lblCpf, lblRg, lblEmail, lblProf, lblLogin,
-            lblSenha, lblAlt, lblPeso, lblIdade, lblIMC;
+            lblSenha, lblAlt, lblPeso, lblIdade, lblIMC, lblImc;
     private JTextField txtNome, txtCpf, txtRg, txtEmail, txtProf, txtLogin,
-            txtSenha, txtAlt, txtPeso, txtIdade, txtIMC;
+            txtSenha, txtAlt, txtPeso, txtIdade;
     private JFrame jframe;
     private JPanel jpanel;
     private Nutricionista nutricionista;
     private int width, height;
     private JButton btnLogout, btnVoltar, btnSalvar;
+    private int nroPac;
 
     WindowAddPac(){}
 
@@ -38,6 +37,24 @@ public class WindowAddPac implements ActionListener, FocusListener {
         this.height = height;
     }
 
+    WindowAddPac(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista, int nroPac){
+        this.jframe = jframe;
+        jframe.setTitle("Tela add paciente (1/2)");
+        jframe.setSize(width, height);
+        jframe.setResizable(false);
+        jframe.setLocationRelativeTo(null);
+
+        this.jpanel = jpanel;
+        jpanel.setSize(width, height);
+        jpanel.setLayout(null);
+
+        jframe.setContentPane(jpanel);
+
+        this.nutricionista = nutricionista;
+        this.width = width;
+        this.height = height;
+        this.nroPac = nroPac;
+    }
     public void initComponent() {
         //make title lbl
         this.lblTitulo = new JLabel("infos paciente");
@@ -184,11 +201,11 @@ public class WindowAddPac implements ActionListener, FocusListener {
         lblIMC.setLocation(60, 230);
         jpanel.add(lblIMC);
 
-        //make txt imc
-        this.txtIMC = new JTextField();
-        txtIMC.setSize(((jpanel.getWidth() / 2) - size ), size);
-        txtIMC.setLocation(145, 230);
-        jpanel.add(txtIMC);
+        //make lbl imc
+        this.lblImc = new JLabel();
+        lblImc.setSize(((jpanel.getWidth() / 2) - size ), size);
+        lblImc.setLocation(145, 230);
+        jpanel.add(lblImc);
 
         //make lbl age
         this.lblIdade = new JLabel("Idade: (int)");
@@ -201,6 +218,21 @@ public class WindowAddPac implements ActionListener, FocusListener {
         txtIdade.setSize(((jpanel.getWidth() / 2) - size ), size);
         txtIdade.setLocation(145, 250);
         jpanel.add(txtIdade);
+    }
+
+    public void preencherCampos(Nutricionista nutricionista, int nroPac){
+        txtNome.setText(nutricionista.retornaNomePaciente(nroPac));
+        txtCpf.setText(Integer.toString(nutricionista.retornaCPFPaciente(nroPac)));
+        txtRg.setText(Integer.toString(nutricionista.retornaRGPaciente(nroPac)));
+        txtEmail.setText(nutricionista.retornaEmailPaciente(nroPac));
+        txtProf.setText(nutricionista.retornaProfissaoPaciente(nroPac));
+        txtLogin.setText(nutricionista.retornaLoginPaciente(nroPac));
+        txtSenha.setText(String.valueOf(nutricionista.retornaSenhaPaciente(nroPac)));
+        txtAlt.setText(String.valueOf(nutricionista.retornaAlturaPaciente(nroPac)));
+        txtPeso.setText(String.valueOf(nutricionista.retornaPesoPaciente(nroPac)));
+        txtIdade.setText(Integer.toString(nutricionista.retornaIdadePaciente(nroPac)));
+        lblImc.setText(nutricionista.calculaImc(nroPac));
+
     }
 
     public void remComponent(){
@@ -225,7 +257,7 @@ public class WindowAddPac implements ActionListener, FocusListener {
         jpanel.remove(lblAlt);
         jpanel.remove(txtAlt);
         jpanel.remove(lblIMC);
-        jpanel.remove(txtIMC);
+        jpanel.remove(lblImc);
         jpanel.remove(lblPeso);
         jpanel.remove(txtPeso);
         jpanel.remove(lblIdade);
@@ -259,10 +291,9 @@ public class WindowAddPac implements ActionListener, FocusListener {
             String senha = txtSenha.getText();
             double altura = Double.parseDouble(txtAlt.getText());
             double peso = Double.parseDouble(txtPeso.getText());
-            double imc = Double.parseDouble(txtIMC.getText());
             int idade = Integer.parseInt(txtIdade.getText());
 
-            nutricionista.criarPac(nome,cpf,rg,email,profissao,login,senha,altura,peso,imc,idade);
+            nutricionista.criarPac(nome,cpf,rg,email,profissao,login,senha,altura,peso,idade);
 
             WindowAddDie telaAddDie = new WindowAddDie(
                     this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
@@ -277,13 +308,9 @@ public class WindowAddPac implements ActionListener, FocusListener {
 
     @Override
     public void focusLost(FocusEvent focusEvent) {
-        DecimalFormat df = new DecimalFormat("##.##");
-        // dont round number:
-        df.setRoundingMode(RoundingMode.DOWN);
-
         double altura = Double.parseDouble(txtAlt.getText());
         double peso = Double.parseDouble(txtPeso.getText());
-        double imc = peso / ((altura) * (altura));
-        txtIMC.setText(String.valueOf(df.format(imc)));
+        lblImc.setText(String.valueOf(peso / ((altura)*(altura))));
+
     }
 }
