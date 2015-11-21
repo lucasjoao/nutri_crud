@@ -102,7 +102,6 @@ public class WindowLogin implements ActionListener {
                         this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
                 this.remComponent();
                 jpanel.repaint();
-                telaPosLogin.initList();
                 telaPosLogin.initComponent();
             }
         }

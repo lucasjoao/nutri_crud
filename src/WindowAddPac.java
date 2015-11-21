@@ -274,13 +274,20 @@ public class WindowAddPac implements ActionListener, FocusListener {
             jpanel.repaint();
             telaLogin.initComponent();
         }
-        else if(event.getSource() == btnVoltar){
-            WindowPosLogin telaPosLogin = new WindowPosLogin(
+        else if(event.getSource() == btnVoltar && jframe.getTitle().equals("Add paciente")){
+            WindowListPac telaListPac = new WindowListPac(
                     this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
             this.remComponent();
             jpanel.repaint();
-            telaPosLogin.initList();
-            telaPosLogin.initComponent();
+            telaListPac.initList();
+            telaListPac.initComponent();
+        }
+        else if(event.getSource() == btnVoltar && jframe.getTitle().equals("Editar paciente")){
+            WindowDadosPaciente telaDadosPaciente = new WindowDadosPaciente(
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, nroPac);
+            this.remComponent();
+            jpanel.repaint();
+            telaDadosPaciente.initComponent();
         }
         else if(event.getSource() == btnSalvar){
             String nome = txtNome.getText();

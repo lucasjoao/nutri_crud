@@ -237,12 +237,12 @@ public class WindowDadosPaciente implements ActionListener{
             telaLogin.initComponent();
         }
         else if(event.getSource() == btnVoltar){
-            WindowPosLogin telaPosLogin = new WindowPosLogin(
+            WindowListPac telaListPac = new WindowListPac(
                     this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
             this.remComponent();
             jpanel.repaint();
-            telaPosLogin.initList();
-            telaPosLogin.initComponent();
+            telaListPac.initList();
+            telaListPac.initComponent();
         }
         else if(event.getSource() == btnEditar){
             WindowAddPac telaEditarPaciente = new WindowAddPac(
