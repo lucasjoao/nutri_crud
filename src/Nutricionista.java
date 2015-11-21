@@ -8,8 +8,8 @@ public class Nutricionista implements Logavel {
     private String login;
     private String senha;
     private Paciente[] pacsDaNut;
-    // if delete criarNome, then slot = 0
-    private int slot = 3;
+    // if delete criarNome, then nroPac = 0
+    private int nroPac = 3;
 
     Nutricionista(){}
 
@@ -31,8 +31,13 @@ public class Nutricionista implements Logavel {
 
     public void criarPac(String nome, int cpf, int rg, String email, String profissao, String login, String senha,
                          double altura, double peso, int idade){
-        this.pacsDaNut[slot] = new Paciente(nome, cpf, rg, email, profissao, login, senha, altura, peso, idade);
-        slot++;
+        this.pacsDaNut[nroPac] = new Paciente(nome, cpf, rg, email, profissao, login, senha, altura, peso, idade);
+        nroPac++;
+    }
+
+    public void editarPac(String nome, int cpf, int rg, String email, String profissao, String login, String senha,
+                          double altura, double peso, int idade, int nroPac){
+        this.pacsDaNut[nroPac] = new Paciente(nome, cpf, rg, email, profissao, login, senha, altura, peso, idade);
     }
 
     public int retornaTotalPacientes(){

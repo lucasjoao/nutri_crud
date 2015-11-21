@@ -19,7 +19,7 @@ public class WindowPosLogin extends MouseAdapter implements ActionListener {
 
     WindowPosLogin(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista){
         this.jframe = jframe;
-        jframe.setTitle("Tela pós-login");
+        jframe.setTitle("Pós-login");
         jframe.setSize(width, height);
         jframe.setResizable(false);
         jframe.setLocationRelativeTo(null);

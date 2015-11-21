@@ -20,7 +20,7 @@ public class WindowDadosPaciente implements ActionListener{
 
     WindowDadosPaciente(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista, int nroPac){
         this.jframe = jframe;
-        jframe.setTitle("Tela de dados do paciente");
+        jframe.setTitle("Dados do paciente");
         jframe.setSize(width, height);
         jframe.setResizable(false);
         jframe.setLocationRelativeTo(null);

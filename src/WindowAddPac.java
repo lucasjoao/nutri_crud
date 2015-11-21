@@ -21,7 +21,7 @@ public class WindowAddPac implements ActionListener, FocusListener {
 
     WindowAddPac(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista){
         this.jframe = jframe;
-        jframe.setTitle("Tela add paciente (1/2)");
+        jframe.setTitle("Add paciente");
         jframe.setSize(width, height);
         jframe.setResizable(false);
         jframe.setLocationRelativeTo(null);
@@ -39,7 +39,7 @@ public class WindowAddPac implements ActionListener, FocusListener {
 
     WindowAddPac(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista, int nroPac){
         this.jframe = jframe;
-        jframe.setTitle("Tela add paciente (1/2)");
+        jframe.setTitle("Editar paciente");
         jframe.setSize(width, height);
         jframe.setResizable(false);
         jframe.setLocationRelativeTo(null);
@@ -294,13 +294,25 @@ public class WindowAddPac implements ActionListener, FocusListener {
             double peso = Double.parseDouble(txtPeso.getText());
             int idade = Integer.parseInt(txtIdade.getText());
 
-            nutricionista.criarPac(nome,cpf,rg,email,profissao,login,senha,altura,peso,idade);
+            if (jframe.getTitle().equals("Add paciente")){
+                nutricionista.criarPac(nome, cpf, rg, email, profissao, login, senha, altura, peso, idade);
 
-            WindowAddDie telaAddDie = new WindowAddDie(
-                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
-            this.remComponent();
-            jpanel.repaint();
-            telaAddDie.initComponent();
+                /* unnecessary now
+                WindowAddDie telaAddDie = new WindowAddDie(
+                        this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
+                this.remComponent();
+                jpanel.repaint();
+                telaAddDie.initComponent();
+                */
+            } else {
+                nutricionista.editarPac(nome, cpf, rg, email, profissao, login, senha, altura, peso, idade, nroPac);
+
+                WindowDadosPaciente telaDadosPaciente = new WindowDadosPaciente(
+                        this.jframe, this.jpanel, this.width, this.height, this.nutricionista, nroPac);
+                this.remComponent();
+                jpanel.repaint();
+                telaDadosPaciente.initComponent();
+            }
         }
     }
 

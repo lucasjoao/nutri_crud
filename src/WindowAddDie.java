@@ -14,7 +14,7 @@ public class WindowAddDie implements ActionListener {
 
     WindowAddDie(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista){
         this.jframe = jframe;
-        jframe.setTitle("Tela add paciente (2/2)");
+        jframe.setTitle("Add paciente (2/2)");
         jframe.setSize(width, height);
         jframe.setResizable(false);
         jframe.setLocationRelativeTo(null);
