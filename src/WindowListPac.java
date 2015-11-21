@@ -31,18 +31,20 @@ public class WindowListPac extends MouseAdapter implements ActionListener {
         this.nutricionista = nutricionista;
         this.width = width;
         this.height = height;
+
     }
 
     public void initList(){
         DefaultListModel dadosLista = new DefaultListModel();
-        int totalPacientes = nutricionista.retornaTotalPacientes();
-        for(int posicao = 0 ; posicao < totalPacientes; posicao++)
+        int totalPac = nutricionista.retornaTotalPacientes();
+        for(int posicao = 0 ; posicao < totalPac; posicao++)
             dadosLista.addElement(nutricionista.retornaNomePaciente(posicao));
 
         this.list = new JList(dadosLista);
         //one list index can be selected:
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        list.addMouseListener(this);
+        if(totalPac != 0)
+            list.addMouseListener(this);
 
         this.scrollPane = new JScrollPane(list);
         scrollPane.setBounds(width/20, height/5, 9*width/10, 3*height/5);

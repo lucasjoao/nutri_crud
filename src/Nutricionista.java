@@ -39,6 +39,10 @@ public class Nutricionista implements Logavel {
         this.pacsDaNut.set(nroPac, new Paciente(nome, cpf, rg, email, profissao, login, senha, altura, peso, idade));
     }
 
+    public void excluirPac(int nroPac){
+        this.pacsDaNut.remove(nroPac);
+    }
+
     public int retornaTotalPacientes(){
         return this.pacsDaNut.size();
     }

@@ -13,7 +13,7 @@ public class WindowDadosPaciente implements ActionListener{
             lblProfissao, lblImc;
     private JLabel lblTtlNomePaciente, lblTtlCpf, lblTtlRg, lblTtlEmail, lblTtlAltura, lblTtlPeso, lblTtlIdade,
             lblTtlAlgDoenca, lblTtlProfissao, lblTtlImc;
-    private JButton btnLogout, btnVoltar, btnEditar;
+    private JButton btnLogout, btnVoltar, btnEditar, btnExcluir;
     private int width, height, nroPac;
 
     WindowDadosPaciente(){}
@@ -187,8 +187,8 @@ public class WindowDadosPaciente implements ActionListener{
 
         //make editar btn
         this.btnEditar = new JButton("Editar");
-        btnEditar.setSize(width/3, height/20);
-        btnEditar.setLocation(((width - btnEditar.getWidth())/2), 6*height/7);
+        btnEditar.setSize(width/5, height/20);
+        btnEditar.setLocation(2*width / 7, 6*height/7);
         btnEditar.addActionListener(this);
         jpanel.add(btnEditar);
 
@@ -198,6 +198,13 @@ public class WindowDadosPaciente implements ActionListener{
         btnVoltar.setLocation(width / 10, 6*height/7);
         btnVoltar.addActionListener(this);
         jpanel.add(btnVoltar);
+
+        //make excluir btn
+        this.btnExcluir = new JButton("Excluir");
+        btnExcluir.setSize(width/5, height/20);
+        btnExcluir.setLocation(width / 2, 6*height/7);
+        btnExcluir.addActionListener(this);
+        jpanel.add(btnExcluir);
     }
 
     public void remComponent(){
@@ -225,6 +232,7 @@ public class WindowDadosPaciente implements ActionListener{
         jpanel.remove(lblTtlAlgDoenca);
         jpanel.remove(lblTtlProfissao);
         jpanel.remove(lblTtlImc);
+        jpanel.remove(btnExcluir);
     }
 
     @Override
@@ -251,6 +259,21 @@ public class WindowDadosPaciente implements ActionListener{
             jpanel.repaint();
             telaEditarPaciente.initComponent();
             telaEditarPaciente.preencherCampos(nutricionista, nroPac);
+        }
+        else if(event.getSource() == btnExcluir){
+            String mensagem = "Você deseja mesmo excluir o paciente \n" + nutricionista.retornaNomePaciente(nroPac) + "?";
+            int decisao = JOptionPane.showConfirmDialog(null, mensagem, mensagem, JOptionPane.YES_NO_OPTION);
+
+            if(decisao == 0) {
+                nutricionista.excluirPac(nroPac);
+
+                WindowListPac telaListPac = new WindowListPac(
+                        this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
+                this.remComponent();
+                jpanel.repaint();
+                telaListPac.initList();
+                telaListPac.initComponent();
+            }
         }
     }
 }
