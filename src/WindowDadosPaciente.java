@@ -9,8 +9,10 @@ public class WindowDadosPaciente implements ActionListener{
     private JFrame jframe;
     private JPanel jpanel;
     private Nutricionista nutricionista;
-    private JLabel lblTitulo,lblNomePaciente, lblCpf, lblRg, lblEmail, lblAltura, lblPeso, lblIdade, lblAlergDoencs, lblProfissao, lblImc;
-    private JLabel lblNomePaciente1, lblCpf1, lblRg1, lblEmail1, lblAltura1, lblPeso1, lblIdade1, lblAlergDoencs1, lblProfissao1, lblImc1;
+    private JLabel lblTitulo, lblNomePaciente, lblCpf, lblRg, lblEmail, lblAltura, lblPeso, lblIdade, lblAlergDoencs,
+            lblProfissao, lblImc;
+    private JLabel lblTtlNomePaciente, lblTtlCpf, lblTtlRg, lblTtlEmail, lblTtlAltura, lblTtlPeso, lblTtlIdade,
+            lblTtlAlgDoenca, lblTtlProfissao, lblTtlImc;
     private JButton btnLogout, btnVoltar, btnEditar;
     private int width, height, nroPac;
 
@@ -44,7 +46,6 @@ public class WindowDadosPaciente implements ActionListener{
         lblTitulo.setLocation(((jpanel.getWidth()- lblTitulo.getWidth())/2),5 );
         jpanel.add(lblTitulo);
 
-
         //make lblNome
         int size = 18;
         this.lblNomePaciente = new JLabel(nutricionista.retornaNomePaciente(nroPac));
@@ -54,10 +55,10 @@ public class WindowDadosPaciente implements ActionListener{
         jpanel.add(lblNomePaciente);
 
         //make lblNome rótulo
-        this.lblNomePaciente1 = new JLabel("Nome: ");
-        lblNomePaciente1.setSize((jpanel.getWidth() - size), size);
-        lblNomePaciente1.setLocation(40, 56);
-        jpanel.add(lblNomePaciente1);
+        this.lblTtlNomePaciente = new JLabel("Nome: ");
+        lblTtlNomePaciente.setSize((jpanel.getWidth() - size), size);
+        lblTtlNomePaciente.setLocation(40, 56);
+        jpanel.add(lblTtlNomePaciente);
 
         //make lblCpf
         this.lblCpf = new JLabel(Integer.toString(nutricionista.retornaCPFPaciente(nroPac)));
@@ -67,10 +68,10 @@ public class WindowDadosPaciente implements ActionListener{
         jpanel.add(lblCpf);
 
         //make lblCpf rótulo
-        this.lblCpf1 = new JLabel("CPF: ");
-        lblCpf1.setSize((jpanel.getWidth() - size), size);
-        lblCpf1.setLocation(210, 56);
-        jpanel.add(lblCpf1);
+        this.lblTtlCpf = new JLabel("CPF: ");
+        lblTtlCpf.setSize((jpanel.getWidth() - size), size);
+        lblTtlCpf.setLocation(210, 56);
+        jpanel.add(lblTtlCpf);
 
         //make lblRg
         this.lblRg = new JLabel(Integer.toString(nutricionista.retornaRGPaciente(nroPac)));
@@ -80,10 +81,10 @@ public class WindowDadosPaciente implements ActionListener{
         jpanel.add(lblRg);
 
         //make lblRg rótulo
-        this.lblRg1 = new JLabel("RG: ");
-        lblRg1.setSize((jpanel.getWidth() - size), size);
-        lblRg1.setLocation(40,86);
-        jpanel.add(lblRg1);
+        this.lblTtlRg = new JLabel("RG: ");
+        lblTtlRg.setSize((jpanel.getWidth() - size), size);
+        lblTtlRg.setLocation(40,86);
+        jpanel.add(lblTtlRg);
 
         //make lblEmail
         this.lblEmail = new JLabel(nutricionista.retornaEmailPaciente(nroPac));
@@ -93,10 +94,10 @@ public class WindowDadosPaciente implements ActionListener{
         jpanel.add(lblEmail);
 
         //make lblEmail rótulo
-        this.lblEmail1 = new JLabel("Email: ");
-        lblEmail1.setSize((jpanel.getWidth() - size), size);
-        lblEmail1.setLocation(210, 86);
-        jpanel.add(lblEmail1);
+        this.lblTtlEmail = new JLabel("Email: ");
+        lblTtlEmail.setSize((jpanel.getWidth() - size), size);
+        lblTtlEmail.setLocation(210, 86);
+        jpanel.add(lblTtlEmail);
 
         //make lblAltura
         this.lblAltura = new JLabel(String.valueOf(nutricionista.retornaAlturaPaciente(nroPac)));
@@ -106,10 +107,10 @@ public class WindowDadosPaciente implements ActionListener{
         jpanel.add(lblAltura);
 
         //make lblAltura rótulo
-        this.lblAltura1 = new JLabel("Altura: ");
-        lblAltura1.setSize((jpanel.getWidth() - size), size);
-        lblAltura1.setLocation(40, 116);
-        jpanel.add(lblAltura1);
+        this.lblTtlAltura = new JLabel("Altura: ");
+        lblTtlAltura.setSize((jpanel.getWidth() - size), size);
+        lblTtlAltura.setLocation(40, 116);
+        jpanel.add(lblTtlAltura);
 
         //make lblPeso
         this.lblPeso = new JLabel(String.valueOf(nutricionista.retornaPesoPaciente(nroPac)));
@@ -119,10 +120,10 @@ public class WindowDadosPaciente implements ActionListener{
         jpanel.add(lblPeso);
 
         //make lblPeso rótulo
-        this.lblPeso1 = new JLabel("Peso: ");
-        lblPeso1.setSize((jpanel.getWidth() - size), size);
-        lblPeso1.setLocation(210, 116);
-        jpanel.add(lblPeso1);
+        this.lblTtlPeso = new JLabel("Peso: ");
+        lblTtlPeso.setSize((jpanel.getWidth() - size), size);
+        lblTtlPeso.setLocation(210, 116);
+        jpanel.add(lblTtlPeso);
 
         //make lblIdade
         this.lblIdade = new JLabel(Integer.toString(nutricionista.retornaIdadePaciente(nroPac)));
@@ -132,10 +133,10 @@ public class WindowDadosPaciente implements ActionListener{
         jpanel.add(lblIdade);
 
         //make lblIdade rótulo
-        this.lblIdade1 = new JLabel("Idade: ");
-        lblIdade1.setSize((jpanel.getWidth() - size), size);
-        lblIdade1.setLocation(40, 146);
-        jpanel.add(lblIdade1);
+        this.lblTtlIdade = new JLabel("Idade: ");
+        lblTtlIdade.setSize((jpanel.getWidth() - size), size);
+        lblTtlIdade.setLocation(40, 146);
+        jpanel.add(lblTtlIdade);
 
         //make lblAlergsDoencs
         this.lblAlergDoencs = new JLabel(nutricionista.retornaDietsAlergsPaciente(nroPac));
@@ -145,10 +146,10 @@ public class WindowDadosPaciente implements ActionListener{
         jpanel.add(lblAlergDoencs);
 
         //make lblAlergsDoencs rótulo
-        this.lblAlergDoencs1 = new JLabel("Alergias/doenças:");
-        lblAlergDoencs1.setSize((jpanel.getWidth() - size), size);
-        lblAlergDoencs1.setLocation(40, 176);
-        jpanel.add(lblAlergDoencs1);
+        this.lblTtlAlgDoenca = new JLabel("Alergias/doenças:");
+        lblTtlAlgDoenca.setSize((jpanel.getWidth() - size), size);
+        lblTtlAlgDoenca.setLocation(40, 176);
+        jpanel.add(lblTtlAlgDoenca);
 
         //make lblProfissao
         this.lblProfissao = new JLabel(nutricionista.retornaProfissaoPaciente(nroPac));
@@ -158,10 +159,10 @@ public class WindowDadosPaciente implements ActionListener{
         jpanel.add(lblProfissao);
 
         //make lblProfissao rótulo
-        this.lblProfissao1 = new JLabel("Profissão: ");
-        lblProfissao1.setSize((jpanel.getWidth() - size), size);
-        lblProfissao1.setLocation(210, 146);
-        jpanel.add(lblProfissao1);
+        this.lblTtlProfissao = new JLabel("Profissão: ");
+        lblTtlProfissao.setSize((jpanel.getWidth() - size), size);
+        lblTtlProfissao.setLocation(210, 146);
+        jpanel.add(lblTtlProfissao);
 
         //make lbImc
         this.lblImc = new JLabel((nutricionista.calculaImc(nroPac)));
@@ -172,10 +173,10 @@ public class WindowDadosPaciente implements ActionListener{
         jpanel.add(lblImc);
 
         //make lbImc rótulo
-        this.lblImc1 = new JLabel("IMC: ");
-        lblImc1.setSize((jpanel.getWidth() - size), size);
-        lblImc1.setLocation(40,206);
-        jpanel.add(lblImc1);
+        this.lblTtlImc = new JLabel("IMC: ");
+        lblTtlImc.setSize((jpanel.getWidth() - size), size);
+        lblTtlImc.setLocation(40,206);
+        jpanel.add(lblTtlImc);
 
         //make logout btn
         this.btnLogout = new JButton("sair");
@@ -186,11 +187,10 @@ public class WindowDadosPaciente implements ActionListener{
 
         //make editar btn
         this.btnEditar = new JButton("Editar");
-        btnEditar.setSize(72, 24);
+        btnEditar.setSize(144, 24);
         btnEditar.setLocation(((jpanel.getWidth() - btnEditar.getWidth())/2), 325);
         btnEditar.addActionListener(this);
         jpanel.add(btnEditar);
-
 
         //make voltar btn
         this.btnVoltar = new JButton("<---");
@@ -215,16 +215,16 @@ public class WindowDadosPaciente implements ActionListener{
         jpanel.remove(lblProfissao);
         jpanel.remove(lblImc);
         jpanel.remove(btnEditar);
-        jpanel.remove(lblNomePaciente1);
-        jpanel.remove(lblRg1);
-        jpanel.remove(lblCpf1);
-        jpanel.remove(lblEmail1);
-        jpanel.remove(lblAltura1);
-        jpanel.remove(lblPeso1);
-        jpanel.remove(lblIdade1);
-        jpanel.remove(lblAlergDoencs1);
-        jpanel.remove(lblProfissao1);
-        jpanel.remove(lblImc1);
+        jpanel.remove(lblTtlNomePaciente);
+        jpanel.remove(lblTtlRg);
+        jpanel.remove(lblTtlCpf);
+        jpanel.remove(lblTtlEmail);
+        jpanel.remove(lblTtlAltura);
+        jpanel.remove(lblTtlPeso);
+        jpanel.remove(lblTtlIdade);
+        jpanel.remove(lblTtlAlgDoenca);
+        jpanel.remove(lblTtlProfissao);
+        jpanel.remove(lblTtlImc);
     }
 
     @Override
@@ -243,8 +243,10 @@ public class WindowDadosPaciente implements ActionListener{
             jpanel.repaint();
             telaPosLogin.initList();
             telaPosLogin.initComponent();
-        } else if(event.getSource() == btnEditar){
-            WindowAddPac telaEditarPaciente = new WindowAddPac(this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.nroPac);
+        }
+        else if(event.getSource() == btnEditar){
+            WindowAddPac telaEditarPaciente = new WindowAddPac(
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.nroPac);
             this.remComponent();
             jpanel.repaint();
             telaEditarPaciente.initComponent();

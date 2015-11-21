@@ -7,7 +7,7 @@ import java.awt.event.FocusListener;
 public class WindowAddPac implements ActionListener, FocusListener {
 
     private JLabel lblTitulo, lblNome, lblCpf, lblRg, lblEmail, lblProf, lblLogin,
-            lblSenha, lblAlt, lblPeso, lblIdade, lblIMC, lblImc;
+            lblSenha, lblAlt, lblPeso, lblIdade, lblTtlImc, lblImc;
     private JTextField txtNome, txtCpf, txtRg, txtEmail, txtProf, txtLogin,
             txtSenha, txtAlt, txtPeso, txtIdade;
     private JFrame jframe;
@@ -55,6 +55,7 @@ public class WindowAddPac implements ActionListener, FocusListener {
         this.height = height;
         this.nroPac = nroPac;
     }
+
     public void initComponent() {
         //make title lbl
         this.lblTitulo = new JLabel("infos paciente");
@@ -196,10 +197,10 @@ public class WindowAddPac implements ActionListener, FocusListener {
         jpanel.add(txtPeso);
 
         //make lbl imc
-        this.lblIMC = new JLabel("IMC: (doub)");
-        lblIMC.setSize((jpanel.getWidth() - size), size);
-        lblIMC.setLocation(60, 230);
-        jpanel.add(lblIMC);
+        this.lblTtlImc = new JLabel("IMC: (doub)");
+        lblTtlImc.setSize((jpanel.getWidth() - size), size);
+        lblTtlImc.setLocation(60, 230);
+        jpanel.add(lblTtlImc);
 
         //make lbl imc
         this.lblImc = new JLabel();
@@ -232,7 +233,6 @@ public class WindowAddPac implements ActionListener, FocusListener {
         txtPeso.setText(String.valueOf(nutricionista.retornaPesoPaciente(nroPac)));
         txtIdade.setText(Integer.toString(nutricionista.retornaIdadePaciente(nroPac)));
         lblImc.setText(nutricionista.calculaImc(nroPac));
-
     }
 
     public void remComponent(){
@@ -256,7 +256,7 @@ public class WindowAddPac implements ActionListener, FocusListener {
         jpanel.remove(txtSenha);
         jpanel.remove(lblAlt);
         jpanel.remove(txtAlt);
-        jpanel.remove(lblIMC);
+        jpanel.remove(lblTtlImc);
         jpanel.remove(lblImc);
         jpanel.remove(lblPeso);
         jpanel.remove(txtPeso);
