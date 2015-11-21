@@ -119,18 +119,11 @@ public class Nutricionista implements Logavel {
             return "";
     }
 
-    public String calculaImc(int posicao){
-        if(pacsDaNut[posicao] != null){
-            DecimalFormat df = new DecimalFormat("##.##");
-            df.setRoundingMode(RoundingMode.DOWN);
+    public String calculaImc(double altura, double peso){
+        DecimalFormat df = new DecimalFormat("##.##");
+        df.setRoundingMode(RoundingMode.DOWN);
 
-            double altura = pacsDaNut[posicao].getAltura();
-            double peso = pacsDaNut[posicao].getPeso();
-            double imc = peso/(altura*altura);
-            return df.format(imc);
-        }
-        else
-            return "";
+        return df.format(peso / (altura * altura));
     }
 
     public boolean logar(String login, String senha) {

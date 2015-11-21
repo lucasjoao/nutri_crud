@@ -165,7 +165,8 @@ public class WindowDadosPaciente implements ActionListener{
         jpanel.add(lblTtlProfissao);
 
         //make lbImc
-        this.lblImc = new JLabel((nutricionista.calculaImc(nroPac)));
+        this.lblImc = new JLabel(nutricionista.calculaImc(
+                nutricionista.retornaAlturaPaciente(nroPac), nutricionista.retornaPesoPaciente(nroPac)));
         lblImc.setSize((jpanel.getWidth() - size), size);
         lblImc.setFont(lblImc.getFont().deriveFont(20f));
         lblImc.setLocation(70,206);

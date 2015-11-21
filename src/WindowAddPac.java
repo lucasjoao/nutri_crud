@@ -232,7 +232,8 @@ public class WindowAddPac implements ActionListener, FocusListener {
         txtAlt.setText(String.valueOf(nutricionista.retornaAlturaPaciente(nroPac)));
         txtPeso.setText(String.valueOf(nutricionista.retornaPesoPaciente(nroPac)));
         txtIdade.setText(Integer.toString(nutricionista.retornaIdadePaciente(nroPac)));
-        lblImc.setText(nutricionista.calculaImc(nroPac));
+        lblImc.setText(nutricionista.calculaImc(
+                nutricionista.retornaAlturaPaciente(nroPac), nutricionista.retornaPesoPaciente(nroPac)));
     }
 
     public void remComponent(){
@@ -310,7 +311,7 @@ public class WindowAddPac implements ActionListener, FocusListener {
     public void focusLost(FocusEvent focusEvent) {
         double altura = Double.parseDouble(txtAlt.getText());
         double peso = Double.parseDouble(txtPeso.getText());
-        lblImc.setText(String.valueOf(peso / ((altura)*(altura))));
+        lblImc.setText(nutricionista.calculaImc(altura, peso));
 
     }
 }
