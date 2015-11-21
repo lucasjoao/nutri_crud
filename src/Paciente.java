@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Paciente {
 
     private Dieta dietaPaciente;
@@ -50,8 +53,8 @@ public class Paciente {
 
     public Paciente criarLucas() {
         Alimento pera = new Alimento("Pera", 999);
-        Alimento[] alimentosPossiveis = new Alimento[1];
-        alimentosPossiveis[0] = pera;
+        List<Alimento> alimentosPossiveis = new ArrayList<>();
+        alimentosPossiveis.add(pera);
         Dieta dietaDoLucas = new Dieta(alimentosPossiveis);
         return new Paciente(dietaDoLucas,"lucas", "lulu", "123", 44444402, 5094137, "lucas@lucas.br", 1.85, 75.0, 19, "Alergia a Camarao e cenoura", "Vendedor", 0.94);
     }
@@ -60,8 +63,8 @@ public class Paciente {
 
     public Paciente criarFausto() {
         Alimento calzone = new Alimento("Calzone", 999);
-        Alimento[] alimentosPossiveis = new Alimento[1];
-        alimentosPossiveis[0] = calzone;
+        List<Alimento> alimentosPossiveis = new ArrayList<>();
+        alimentosPossiveis.add(calzone);
         Dieta dietaDoFausto = new Dieta(alimentosPossiveis);
         return new Paciente(dietaDoFausto,"fausto", "fafa", "123", 44444402, 5094137, "fausto@fausto.br", 1.85, 75.0, 19, "Alergia a Refrigerante e Comida", "Comprador", 0.94 );
     }
@@ -70,8 +73,8 @@ public class Paciente {
 
     public Paciente criarJoao() {
         Alimento alface = new Alimento("Alface", 999);
-        Alimento[] alimentosPossiveis = new Alimento[1];
-        alimentosPossiveis[0] = alface;
+        List<Alimento> alimentosPossiveis = new ArrayList<>();
+        alimentosPossiveis.add(alface);
         Dieta dietaDoJoao = new Dieta(alimentosPossiveis);
         return new Paciente(dietaDoJoao,"joao", "jojo", "123", 44444402, 5094137, "joao@joao.br", 1.85, 75.0, 19, "Alergia a lactose", "Padeiro", 0.94 );
     }

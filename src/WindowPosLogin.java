@@ -36,7 +36,7 @@ public class WindowPosLogin extends MouseAdapter implements ActionListener {
     public void initList(){
         DefaultListModel dadosLista = new DefaultListModel();
         int totalPacientes = nutricionista.retornaTotalPacientes();
-        for(int posicao = 0 ; posicao <= totalPacientes; posicao++)
+        for(int posicao = 0 ; posicao < totalPacientes; posicao++)
             dadosLista.addElement(nutricionista.retornaNomePaciente(posicao));
 
         this.list = new JList(dadosLista);
