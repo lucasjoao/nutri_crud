@@ -45,7 +45,7 @@ public class WindowPosLogin extends MouseAdapter implements ActionListener {
         list.addMouseListener(this);
 
         this.scrollPane = new JScrollPane(list);
-        scrollPane.setBounds(22, 50, 350, 250);
+        scrollPane.setBounds(width/20, height/5, 9*width/10, 3*height/5);
         //enable scroll with mouse wheel:
         scrollPane.setWheelScrollingEnabled(true);
         jpanel.add(scrollPane);
@@ -57,22 +57,22 @@ public class WindowPosLogin extends MouseAdapter implements ActionListener {
 
         //make title lbl
         this.lblTitulo = new JLabel("Pacientes");
-        lblTitulo.setSize(200, 32);
+        lblTitulo.setSize(width/3, height/10);
         lblTitulo.setFont(lblTitulo.getFont().deriveFont(24f));
-        lblTitulo.setLocation(((jpanel.getWidth()- lblTitulo.getWidth())/2), 16);
+        lblTitulo.setLocation(((width - lblTitulo.getWidth())/2), height/20);
         jpanel.add(lblTitulo);
 
         //make logout btn
         this.btnLogout = new JButton("sair");
-        btnLogout.setSize(72, 24);
-        btnLogout.setLocation(jpanel.getWidth() / 4 * 3, 325);
+        btnLogout.setSize(width/6, height/20);
+        btnLogout.setLocation(3*width / 4, 6*height/7);
         btnLogout.addActionListener(this);
         jpanel.add(btnLogout);
 
         //make add btn
         this.btnAdd = new JButton("+ paciente");
-        btnAdd.setSize(144, 24);
-        btnAdd.setLocation(((jpanel.getWidth() - btnAdd.getWidth())/2), 325);
+        btnAdd.setSize(width/3, height/20);
+        btnAdd.setLocation(((width - btnAdd.getWidth())/2), 6*height/7);
         btnAdd.addActionListener(this);
         jpanel.add(btnAdd);
     }

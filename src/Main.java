@@ -3,8 +3,8 @@ import javax.swing.*;
 public class Main {
     public static void main(String[] args) {
         //things necessary to start
-        int width = 400;
-        int height = 400;
+        int width = 470;
+        int height = 470;
         JFrame jframe = new JFrame();
         JPanel jpanel = new JPanel();
         Nutricionista nut = new Nutricionista();

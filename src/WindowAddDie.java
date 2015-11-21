@@ -33,29 +33,29 @@ public class WindowAddDie implements ActionListener {
     public void initComponent() {
         //make title lbl
         this.lblTitulo = new JLabel("infos dieta");
-        lblTitulo.setSize(200, 32);
+        lblTitulo.setSize(width/3, height/10);
         lblTitulo.setFont(lblTitulo.getFont().deriveFont(24f));
-        lblTitulo.setLocation(((jpanel.getWidth() - lblTitulo.getWidth()) / 2), 16);
+        lblTitulo.setLocation(((width - lblTitulo.getWidth())/2), height/20);
         jpanel.add(lblTitulo);
 
         //make logout btn
         this.btnLogout = new JButton("sair");
-        btnLogout.setSize(72, 24);
-        btnLogout.setLocation(jpanel.getWidth() / 4 * 3, 325);
+        btnLogout.setSize(width/6, height/20);
+        btnLogout.setLocation(3*width / 4, 6*height/7);
         btnLogout.addActionListener(this);
         jpanel.add(btnLogout);
 
         //make voltar btn
         this.btnVoltar = new JButton("<---");
-        btnVoltar.setSize(72, 24);
-        btnVoltar.setLocation(jpanel.getWidth() / 12, 325);
+        btnVoltar.setSize(width/6, height/20);
+        btnVoltar.setLocation(width / 10, 6*height/7);
         btnVoltar.addActionListener(this);
         jpanel.add(btnVoltar);
 
         //make salvar btn
-        this.btnSalvar = new JButton("Salvar (2/2)");
-        btnSalvar.setSize(144, 24);
-        btnSalvar.setLocation(((jpanel.getWidth() - btnSalvar.getWidth())/2), 325);
+        this.btnSalvar = new JButton("Salvar");
+        btnSalvar.setSize(width/3, height/20);
+        btnSalvar.setLocation(((width - btnSalvar.getWidth())/2), 6*height/7);
         btnSalvar.addActionListener(this);
         jpanel.add(btnSalvar);
     }

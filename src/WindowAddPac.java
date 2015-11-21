@@ -59,166 +59,166 @@ public class WindowAddPac implements ActionListener, FocusListener {
     public void initComponent() {
         //make title lbl
         this.lblTitulo = new JLabel("infos paciente");
-        lblTitulo.setSize(200, 32);
+        lblTitulo.setSize(width/3, height/10);
         lblTitulo.setFont(lblTitulo.getFont().deriveFont(24f));
-        lblTitulo.setLocation(((jpanel.getWidth() - lblTitulo.getWidth()) / 2), 16);
+        lblTitulo.setLocation(((width - lblTitulo.getWidth())/2), height/20);
         jpanel.add(lblTitulo);
-
-        //make logout btn
-        this.btnLogout = new JButton("sair");
-        btnLogout.setSize(72, 24);
-        btnLogout.setLocation(jpanel.getWidth() / 4 * 3, 325);
-        btnLogout.addActionListener(this);
-        jpanel.add(btnLogout);
-
-        //make voltar btn
-        this.btnVoltar = new JButton("<---");
-        btnVoltar.setSize(72, 24);
-        btnVoltar.setLocation(jpanel.getWidth() / 12, 325);
-        btnVoltar.addActionListener(this);
-        jpanel.add(btnVoltar);
-
-        //make salvar btn
-        this.btnSalvar = new JButton("Salvar (1/2)");
-        btnSalvar.setSize(144, 24);
-        btnSalvar.setLocation(((jpanel.getWidth() - btnSalvar.getWidth())/2), 325);
-        btnSalvar.addActionListener(this);
-        jpanel.add(btnSalvar);
 
         //make lbl name
         int size = 18;
         this.lblNome = new JLabel("Nome:");
-        lblNome.setSize((jpanel.getWidth() - size), size);
-        lblNome.setLocation(60, 50);
+        lblNome.setSize((width - height/22), height/22);
+        lblNome.setLocation(width/8, height/6);
         jpanel.add(lblNome);
 
         //make txt name
         this.txtNome = new JTextField();
-        txtNome.setSize(((jpanel.getWidth() / 2) - size ), size);
-        txtNome.setLocation(145, 50);
+        txtNome.setSize(((width / 2) - height/22), height/22);
+        txtNome.setLocation(width/3, height/6);
         jpanel.add(txtNome);
 
         //make lbl cpf
         this.lblCpf = new JLabel("CPF: (int)");
-        lblCpf.setSize((jpanel.getWidth() - size), size);
-        lblCpf.setLocation(60, 70);
+        lblCpf.setSize((width - height/22), height/22);
+        lblCpf.setLocation(width/8, (height/6 + height/22));
         jpanel.add(lblCpf);
 
         //make txt cpf
         this.txtCpf = new JTextField();
-        txtCpf.setSize(((jpanel.getWidth() / 2) - size ), size);
-        txtCpf.setLocation(145, 70);
+        txtCpf.setSize(((width / 2) - height/22 ), height/22);
+        txtCpf.setLocation(width/3, (height/6 + height/22));
         jpanel.add(txtCpf);
 
         //make lbl rg
         this.lblRg = new JLabel("RG: (int)");
-        lblRg.setSize((jpanel.getWidth() - size), size);
-        lblRg.setLocation(60, 90);
+        lblRg.setSize((width - height/22), height/22);
+        lblRg.setLocation(width/8, (height/6 + 2*height/22));
         jpanel.add(lblRg);
 
         //make txt rg
         this.txtRg = new JTextField();
-        txtRg.setSize(((jpanel.getWidth() / 2) - size ), size);
-        txtRg.setLocation(145, 90);
+        txtRg.setSize(((width / 2) - height/22 ), height/22);
+        txtRg.setLocation(width/3, (height/6 + 2*height/22));
         jpanel.add(txtRg);
 
         //make lbl email
         this.lblEmail = new JLabel("E-mail:");
-        lblEmail.setSize((jpanel.getWidth() - size), size);
-        lblEmail.setLocation(60, 110);
+        lblEmail.setSize((width - height/22), height/22);
+        lblEmail.setLocation(width/8, (height/6 + 3*height/22));
         jpanel.add(lblEmail);
 
         //make txt email
         this.txtEmail = new JTextField();
-        txtEmail.setSize(((jpanel.getWidth() / 2) - size ), size);
-        txtEmail.setLocation(145, 110);
+        txtEmail.setSize(((width / 2) - height/22 ), height/22);
+        txtEmail.setLocation(width/3, (height/6 + 3*height/22));
         jpanel.add(txtEmail);
 
         //make lbl job
         this.lblProf = new JLabel("Profissão:");
-        lblProf.setSize((jpanel.getWidth() - size), size);
-        lblProf.setLocation(60, 130);
+        lblProf.setSize((width - height/22), height/22);
+        lblProf.setLocation(width/8, (height/6 + 4*height/22));
         jpanel.add(lblProf);
 
         //make txt job
         this.txtProf = new JTextField();
-        txtProf.setSize(((jpanel.getWidth() / 2) - size ), size);
-        txtProf.setLocation(145, 130);
+        txtProf.setSize(((width / 2) - height/22 ), height/22);
+        txtProf.setLocation(width/3, (height/6 + 4*height/22));
         jpanel.add(txtProf);
 
         //make lbl login
         this.lblLogin = new JLabel("Login:");
-        lblLogin.setSize((jpanel.getWidth() - size), size);
-        lblLogin.setLocation(60, 150);
+        lblLogin.setSize((width - height/22), height/22);
+        lblLogin.setLocation(width/8, (height/6 + 5*height/22));
         jpanel.add(lblLogin);
 
         //make txt login
         this.txtLogin = new JTextField();
-        txtLogin.setSize(((jpanel.getWidth() / 2) - size ), size);
-        txtLogin.setLocation(145, 150);
+        txtLogin.setSize(((width / 2) - height/22 ), height/22);
+        txtLogin.setLocation(width/3, (height/6 + 5*height/22));
         jpanel.add(txtLogin);
 
         //make lbl password
         this.lblSenha = new JLabel("Senha:");
-        lblSenha.setSize((jpanel.getWidth() - size), size);
-        lblSenha.setLocation(60, 170);
+        lblSenha.setSize((width - height/22), height/22);
+        lblSenha.setLocation(width/8, (height/6 + 6*height/22));
         jpanel.add(lblSenha);
 
         //make txt password
         this.txtSenha = new JTextField();
-        txtSenha.setSize(((jpanel.getWidth() / 2) - size ), size);
-        txtSenha.setLocation(145, 170);
+        txtSenha.setSize(((width / 2) - height/22 ), height/22);
+        txtSenha.setLocation(width/3, (height/6 + 6*height/22));
         jpanel.add(txtSenha);
 
         //make lbl height
         this.lblAlt = new JLabel("Alt, m: (doub)");
-        lblAlt.setSize((jpanel.getWidth() - size), size);
-        lblAlt.setLocation(60, 190);
+        lblAlt.setSize((width - height/22), height/22);
+        lblAlt.setLocation(width/8, (height/6 + 7*height/22));
         jpanel.add(lblAlt);
 
         //make txt height
         this.txtAlt = new JTextField();
-        txtAlt.setSize(((jpanel.getWidth() / 2) - size ), size);
-        txtAlt.setLocation(145, 190);
+        txtAlt.setSize(((width / 2) - height/22 ), height/22);
+        txtAlt.setLocation(width/3, (height/6 + 7*height/22));
         txtAlt.addFocusListener(this);
         jpanel.add(txtAlt);
 
         //make lbl size
         this.lblPeso = new JLabel("Peso, kg: (doub)");
-        lblPeso.setSize((jpanel.getWidth() - size), size);
-        lblPeso.setLocation(60, 210);
+        lblPeso.setSize((width - height/22), height/22);
+        lblPeso.setLocation(width/8, (height/6 + 8*height/22));
         jpanel.add(lblPeso);
 
         //make txt size
         this.txtPeso = new JTextField();
-        txtPeso.setSize(((jpanel.getWidth() / 2) - size), size);
-        txtPeso.setLocation(145, 210);
+        txtPeso.setSize(((width / 2) - height/22), height/22);
+        txtPeso.setLocation(width/3, (height/6 + 8*height/22));
         txtPeso.addFocusListener(this);
         jpanel.add(txtPeso);
 
         //make lbl imc
         this.lblTtlImc = new JLabel("IMC: (doub)");
-        lblTtlImc.setSize((jpanel.getWidth() - size), size);
-        lblTtlImc.setLocation(60, 230);
+        lblTtlImc.setSize((width - height/22), height/22);
+        lblTtlImc.setLocation(width/8, (height/6 + 9*height/22));
         jpanel.add(lblTtlImc);
 
         //make lbl imc
         this.lblImc = new JLabel();
-        lblImc.setSize(((jpanel.getWidth() / 2) - size ), size);
-        lblImc.setLocation(145, 230);
+        lblImc.setSize(((width / 2) - height/22 ), height/22);
+        lblImc.setLocation(width/3, (height/6 + 9*height/22));
         jpanel.add(lblImc);
 
         //make lbl age
         this.lblIdade = new JLabel("Idade: (int)");
-        lblIdade.setSize((jpanel.getWidth() - size), size);
-        lblIdade.setLocation(60, 250);
+        lblIdade.setSize((width - height/22), height/22);
+        lblIdade.setLocation(width/8, (height/6 + 10*height/22));
         jpanel.add(lblIdade);
 
         //make txt age
         this.txtIdade = new JTextField();
-        txtIdade.setSize(((jpanel.getWidth() / 2) - size ), size);
-        txtIdade.setLocation(145, 250);
+        txtIdade.setSize(((width / 2) - height/22 ), height/22);
+        txtIdade.setLocation(width/3, (height/6 + 10*height/22));
         jpanel.add(txtIdade);
+
+        //make logout btn
+        this.btnLogout = new JButton("sair");
+        btnLogout.setSize(width/6, height/20);
+        btnLogout.setLocation(3*width / 4, 6*height/7);
+        btnLogout.addActionListener(this);
+        jpanel.add(btnLogout);
+
+        //make voltar btn
+        this.btnVoltar = new JButton("<---");
+        btnVoltar.setSize(width/6, height/20);
+        btnVoltar.setLocation(width / 10, 6*height/7);
+        btnVoltar.addActionListener(this);
+        jpanel.add(btnVoltar);
+
+        //make salvar btn
+        this.btnSalvar = new JButton("Salvar");
+        btnSalvar.setSize(width/3, height/20);
+        btnSalvar.setLocation(((width - btnSalvar.getWidth())/2), 6*height/7);
+        btnSalvar.addActionListener(this);
+        jpanel.add(btnSalvar);
     }
 
     public void preencherCampos(Nutricionista nutricionista, int nroPac){

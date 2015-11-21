@@ -35,47 +35,46 @@ public class WindowLogin implements ActionListener {
     public void initComponent(){
         //make title lbl
         this.lblTitulo = new JLabel("Login");
-        lblTitulo.setSize(80, 32);
+        lblTitulo.setSize(width/5, height/10);
         lblTitulo.setFont(lblTitulo.getFont().deriveFont(24f));
-        lblTitulo.setLocation((jpanel.getWidth()-lblTitulo.getWidth())/2, 16);
+        lblTitulo.setLocation(((width - lblTitulo.getWidth())/2), height/20);
         jpanel.add(lblTitulo);
 
         //make login lbl
-        int size = 18;
         this.lblLogin = new JLabel("Login:");
-        lblLogin.setSize((jpanel.getWidth()- size), size);
-        lblLogin.setLocation(80,120);
+        lblLogin.setSize(width/5, height/20);
+        lblLogin.setLocation(width/5,height/4);
         jpanel.add(lblLogin);
 
         //make login field
         this.txtLogin = new JTextField();
-        txtLogin.setSize(((jpanel.getWidth() / 2) - size ), size);
-        txtLogin.setLocation(145, 120);
+        txtLogin.setSize(width/3,height/25);
+        txtLogin.setLocation((width/3 + width/20),height/4);
         jpanel.add(txtLogin);
 
         //make password lbl
         this.lblSenha = new JLabel("Senha:");
-        lblSenha.setSize((jpanel.getWidth()- size), size);
-        lblSenha.setLocation(78,140);
+        lblSenha.setSize(width/5, height/20);
+        lblSenha.setLocation(width/5,(height/4 + height/20));
         jpanel.add(lblSenha);
 
         //make password field
         this.txtSenha = new JPasswordField(10);
-        txtSenha.setSize(((jpanel.getWidth() / 2) - size ), size);
-        txtSenha.setLocation(145,140);
+        txtSenha.setSize(width/3,height/25);
+        txtSenha.setLocation((width/3 + width/20),(height/4 + height/20));
         jpanel.add(txtSenha);
 
         //make login btn
         this.btnLogin = new JButton("Logar");
-        btnLogin.setSize(96, 24);
-        btnLogin.setLocation(jpanel.getWidth() /2 - btnLogin.getWidth(), 300);
+        btnLogin.setSize(width/4, height/20);
+        btnLogin.setLocation(width /2 - btnLogin.getWidth(), 4 * height/5);
         btnLogin.addActionListener(this);
         jpanel.add(btnLogin);
 
         //make cancel btn
         this.btnCancel = new JButton("Cancelar");
-        btnCancel.setSize(96, 24);
-        btnCancel.setLocation(jpanel.getWidth() /2 , 300);
+        btnCancel.setSize(width/4, height/20);
+        btnCancel.setLocation(width /2 , 4 * height/5);
         btnCancel.addActionListener(this);
         jpanel.add(btnCancel);
     }

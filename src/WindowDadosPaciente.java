@@ -38,12 +38,11 @@ public class WindowDadosPaciente implements ActionListener{
     }
 
     public void initComponent() {
-
         //make  lblTitulo
-        this.lblTitulo = new JLabel("Dados do paciente");
-        lblTitulo.setSize(230, 48);
+        this.lblTitulo = new JLabel(nutricionista.retornaNomePaciente(nroPac));
+        lblTitulo.setSize(width/3, height/10);
         lblTitulo.setFont(lblTitulo.getFont().deriveFont(24f));
-        lblTitulo.setLocation(((jpanel.getWidth()- lblTitulo.getWidth())/2),5 );
+        lblTitulo.setLocation(((width - lblTitulo.getWidth())/2), height/20);
         jpanel.add(lblTitulo);
 
         //make lblNome
@@ -54,7 +53,7 @@ public class WindowDadosPaciente implements ActionListener{
         lblNomePaciente.setLocation(80, 56);
         jpanel.add(lblNomePaciente);
 
-        //make lblNome rótulo
+        //make lblNome rotulo
         this.lblTtlNomePaciente = new JLabel("Nome: ");
         lblTtlNomePaciente.setSize((jpanel.getWidth() - size), size);
         lblTtlNomePaciente.setLocation(40, 56);
@@ -67,7 +66,7 @@ public class WindowDadosPaciente implements ActionListener{
         lblCpf.setLocation(250, 56);
         jpanel.add(lblCpf);
 
-        //make lblCpf rótulo
+        //make lblCpf rotulo
         this.lblTtlCpf = new JLabel("CPF: ");
         lblTtlCpf.setSize((jpanel.getWidth() - size), size);
         lblTtlCpf.setLocation(210, 56);
@@ -80,7 +79,7 @@ public class WindowDadosPaciente implements ActionListener{
         lblRg.setLocation(80,86);
         jpanel.add(lblRg);
 
-        //make lblRg rótulo
+        //make lblRg rotulo
         this.lblTtlRg = new JLabel("RG: ");
         lblTtlRg.setSize((jpanel.getWidth() - size), size);
         lblTtlRg.setLocation(40,86);
@@ -93,7 +92,7 @@ public class WindowDadosPaciente implements ActionListener{
         lblEmail.setForeground(Color.blue);
         jpanel.add(lblEmail);
 
-        //make lblEmail rótulo
+        //make lblEmail rotulo
         this.lblTtlEmail = new JLabel("Email: ");
         lblTtlEmail.setSize((jpanel.getWidth() - size), size);
         lblTtlEmail.setLocation(210, 86);
@@ -106,7 +105,7 @@ public class WindowDadosPaciente implements ActionListener{
         lblAltura.setForeground(Color.blue);
         jpanel.add(lblAltura);
 
-        //make lblAltura rótulo
+        //make lblAltura rotulo
         this.lblTtlAltura = new JLabel("Altura: ");
         lblTtlAltura.setSize((jpanel.getWidth() - size), size);
         lblTtlAltura.setLocation(40, 116);
@@ -119,7 +118,7 @@ public class WindowDadosPaciente implements ActionListener{
         lblPeso.setForeground(Color.blue);
         jpanel.add(lblPeso);
 
-        //make lblPeso rótulo
+        //make lblPeso rotulo
         this.lblTtlPeso = new JLabel("Peso: ");
         lblTtlPeso.setSize((jpanel.getWidth() - size), size);
         lblTtlPeso.setLocation(210, 116);
@@ -132,7 +131,7 @@ public class WindowDadosPaciente implements ActionListener{
         lblIdade.setForeground(Color.blue);
         jpanel.add(lblIdade);
 
-        //make lblIdade rótulo
+        //make lblIdade rotulo
         this.lblTtlIdade = new JLabel("Idade: ");
         lblTtlIdade.setSize((jpanel.getWidth() - size), size);
         lblTtlIdade.setLocation(40, 146);
@@ -145,7 +144,7 @@ public class WindowDadosPaciente implements ActionListener{
         lblAlergDoencs.setForeground(Color.blue);
         jpanel.add(lblAlergDoencs);
 
-        //make lblAlergsDoencs rótulo
+        //make lblAlergsDoencs rotulo
         this.lblTtlAlgDoenca = new JLabel("Alergias/doenças:");
         lblTtlAlgDoenca.setSize((jpanel.getWidth() - size), size);
         lblTtlAlgDoenca.setLocation(40, 176);
@@ -158,7 +157,7 @@ public class WindowDadosPaciente implements ActionListener{
         lblProfissao.setForeground(Color.blue);
         jpanel.add(lblProfissao);
 
-        //make lblProfissao rótulo
+        //make lblProfissao rotulo
         this.lblTtlProfissao = new JLabel("Profissão: ");
         lblTtlProfissao.setSize((jpanel.getWidth() - size), size);
         lblTtlProfissao.setLocation(210, 146);
@@ -173,7 +172,7 @@ public class WindowDadosPaciente implements ActionListener{
         lblImc.setForeground(Color.RED);
         jpanel.add(lblImc);
 
-        //make lbImc rótulo
+        //make lbImc rotulo
         this.lblTtlImc = new JLabel("IMC: ");
         lblTtlImc.setSize((jpanel.getWidth() - size), size);
         lblTtlImc.setLocation(40,206);
@@ -181,22 +180,22 @@ public class WindowDadosPaciente implements ActionListener{
 
         //make logout btn
         this.btnLogout = new JButton("sair");
-        btnLogout.setSize(72, 24);
-        btnLogout.setLocation(jpanel.getWidth() / 4 * 3, 325);
+        btnLogout.setSize(width/6, height/20);
+        btnLogout.setLocation(3*width / 4, 6*height/7);
         btnLogout.addActionListener(this);
         jpanel.add(btnLogout);
 
         //make editar btn
         this.btnEditar = new JButton("Editar");
-        btnEditar.setSize(144, 24);
-        btnEditar.setLocation(((jpanel.getWidth() - btnEditar.getWidth())/2), 325);
+        btnEditar.setSize(width/3, height/20);
+        btnEditar.setLocation(((width - btnEditar.getWidth())/2), 6*height/7);
         btnEditar.addActionListener(this);
         jpanel.add(btnEditar);
 
         //make voltar btn
         this.btnVoltar = new JButton("<---");
-        btnVoltar.setSize(72, 24);
-        btnVoltar.setLocation(jpanel.getWidth() / 12, 325);
+        btnVoltar.setSize(width/6, height/20);
+        btnVoltar.setLocation(width / 10, 6*height/7);
         btnVoltar.addActionListener(this);
         jpanel.add(btnVoltar);
     }
