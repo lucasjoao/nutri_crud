@@ -6,32 +6,35 @@ import java.util.List;
 
 public class Nutricionista implements Logavel {
 
-    private String nome;
     private String login;
     private String senha;
     private List<Paciente> pacsDaNut;
+    private List<Alimento> alisDaNut;
 
     Nutricionista(){}
 
-    Nutricionista(String nome, String login, String senha, List<Paciente> pacsDaNut) {
-        this.nome = nome;
+    Nutricionista(String login, String senha){
         this.login = login;
         this.senha = senha;
-        this.pacsDaNut = pacsDaNut;
-    }
 
-    public Nutricionista criarLucia() {
         Paciente pacAux = new Paciente();
-        List<Paciente> pacsDaNut = new ArrayList<>();
-        pacsDaNut.add(pacAux.criarLucas());
-        pacsDaNut.add(pacAux.criarFausto());
-        pacsDaNut.add(pacAux.criarJoao());
-        return new Nutricionista("lucia", "luluzinha", "123", pacsDaNut);
+        Alimento aliAux = new Alimento();
+
+        this.pacsDaNut = new ArrayList<>(pacAux.criarDefaults());
+        this.alisDaNut = new ArrayList<>(aliAux.criarDefaults());
     }
 
     public void criarPac(String nome, int cpf, int rg, String email, String profissao, String login, String senha,
                          double altura, double peso, int idade){
         this.pacsDaNut.add(new Paciente(nome, cpf, rg, email, profissao, login, senha, altura, peso, idade));
+    }
+
+    public void criarAli(String nome, String quantidade, double peso, double calrs){
+        this.alisDaNut.add(new Alimento(nome, quantidade, peso, calrs));
+    }
+
+    public void editarAli(String nome, String quantidade, double peso, double calrs, int nroPac){
+        this.alisDaNut.set(nroPac, new Alimento(nome, quantidade, peso, calrs));
     }
 
     public void editarPac(String nome, int cpf, int rg, String email, String profissao, String login, String senha,
@@ -43,8 +46,16 @@ public class Nutricionista implements Logavel {
         this.pacsDaNut.remove(nroPac);
     }
 
+    public void excluirAli(int nroPac){
+        this.alisDaNut.remove(nroPac);
+    }
+
     public int retornaTotalPacientes(){
         return this.pacsDaNut.size();
+    }
+
+    public int retornaTotalAlis(){
+        return this.alisDaNut.size();
     }
 
     public String retornaNomePaciente(int posicao){
@@ -52,6 +63,34 @@ public class Nutricionista implements Logavel {
             return pacsDaNut.get(posicao).getNome();
         else
             return "";
+    }
+
+    public String retornaNomeAli(int posicao){
+        if(alisDaNut.get(posicao) != null)
+            return alisDaNut.get(posicao).getNome();
+        else
+            return "";
+    }
+
+    public String retornaQuantAli(int posicao) {
+        if(alisDaNut.get(posicao) != null)
+            return alisDaNut.get(posicao).getQuantidade();
+        else
+            return "";
+    }
+
+    public double retornaClrsAli(int posicao){
+        if(alisDaNut.get(posicao) != null)
+            return alisDaNut.get(posicao).getCalorias();
+        else
+            return 0.0;
+    }
+
+    public double retornaPesoAli(int posicao){
+        if(alisDaNut.get(posicao) != null)
+            return alisDaNut.get(posicao).getPeso();
+        else
+            return 0.0;
     }
 
     public int retornaCPFPaciente(int posicao){

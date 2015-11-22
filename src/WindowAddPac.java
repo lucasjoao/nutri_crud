@@ -65,7 +65,6 @@ public class WindowAddPac implements ActionListener, FocusListener {
         jpanel.add(lblTitulo);
 
         //make lbl name
-        int size = 18;
         this.lblNome = new JLabel("Nome:");
         lblNome.setSize((width - height/22), height/22);
         lblNome.setLocation(width/8, height/6);

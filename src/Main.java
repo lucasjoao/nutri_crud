@@ -7,10 +7,10 @@ public class Main {
         int height = 470;
         JFrame jframe = new JFrame();
         JPanel jpanel = new JPanel();
-        Nutricionista nut = new Nutricionista();
+        Nutricionista lucia = new Nutricionista("luluzinha", "123");
 
         //first window
-        WindowLogin window = new WindowLogin(jframe, jpanel, width, height, nut.criarLucia());
+        WindowLogin window = new WindowLogin(jframe, jpanel, width, height, lucia);
         window.initComponent();
 
         jframe.setVisible(true);

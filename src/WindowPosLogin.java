@@ -103,5 +103,13 @@ public class WindowPosLogin implements ActionListener {
             telaListPac.initList();
             telaListPac .initComponent();
         }
+        else if(event.getSource() == btnAlim){
+            WindowListAli telaListAli = new WindowListAli(
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
+            this.remComponent();
+            jpanel.repaint();
+            telaListAli.initList();
+            telaListAli .initComponent();
+        }
     }
 }
