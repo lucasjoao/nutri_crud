@@ -10,7 +10,7 @@ public class WindowPosLogin implements ActionListener {
     private JFrame jframe;
     private JPanel jpanel;
     private Nutricionista nutricionista;
-    private JButton btnLogout, btnPac, btnAlim, btnCdp, btnDie;
+    private JButton btnLogout, btnPac, btnAlim, btnCard, btnDie;
     private int width, height;
 
     WindowPosLogin(){}
@@ -56,11 +56,11 @@ public class WindowPosLogin implements ActionListener {
         jpanel.add(btnAlim);
 
         //make cardapio btn
-        this.btnCdp = new JButton("Cardápios");
-        btnCdp.setSize(width/3, height/20);
-        btnCdp.setLocation(((width - btnCdp.getWidth())/2), (height/4 + 2*height/20));
-        btnCdp.addActionListener(this);
-        jpanel.add(btnCdp);
+        this.btnCard = new JButton("Cardápios");
+        btnCard.setSize(width/3, height/20);
+        btnCard.setLocation(((width - btnCard.getWidth())/2), (height/4 + 2*height/20));
+        btnCard.addActionListener(this);
+        jpanel.add(btnCard);
 
         //make dieta btn
         this.btnDie = new JButton("Dietas");
@@ -82,7 +82,7 @@ public class WindowPosLogin implements ActionListener {
         jpanel.remove(btnLogout);
         jpanel.remove(btnPac);
         jpanel.remove(btnAlim);
-        jpanel.remove(btnCdp);
+        jpanel.remove(btnCard);
         jpanel.remove(btnDie);
     }
 
@@ -110,6 +110,14 @@ public class WindowPosLogin implements ActionListener {
             jpanel.repaint();
             telaListAli.initList();
             telaListAli .initComponent();
+        }
+        else if(event.getSource() == btnCard){
+            WindowListCard telaListCard = new WindowListCard(
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
+            this.remComponent();
+            jpanel.repaint();
+            telaListCard.initList();
+            telaListCard .initComponent();
         }
     }
 }

@@ -4,7 +4,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class WindowListPac extends MouseAdapter implements ActionListener {
+public class WindowListCard extends MouseAdapter implements ActionListener {
 
     private JLabel lblTitulo;
     private JFrame jframe;
@@ -15,11 +15,11 @@ public class WindowListPac extends MouseAdapter implements ActionListener {
     private JButton btnLogout, btnAdd, btnVoltar;
     private int width, height;
 
-    WindowListPac(){}
+    WindowListCard(){}
 
-    WindowListPac(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista){
+    WindowListCard(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista){
         this.jframe = jframe;
-        jframe.setTitle("Pacientes");
+        jframe.setTitle("Cardápios");
         jframe.setSize(width, height);
         jframe.setResizable(false);
         jframe.setLocationRelativeTo(null);
@@ -31,19 +31,18 @@ public class WindowListPac extends MouseAdapter implements ActionListener {
         this.nutricionista = nutricionista;
         this.width = width;
         this.height = height;
-
     }
 
     public void initList(){
         DefaultListModel dadosLista = new DefaultListModel();
-        int totalPac = nutricionista.retornaTotalPacientes();
-        for(int posicao = 0 ; posicao < totalPac; posicao++)
-            dadosLista.addElement(nutricionista.retornaNomePaciente(posicao));
+        int totalCard = nutricionista.retornaTotalCards();
+        for(int posicao = 0 ; posicao < totalCard; posicao++)
+            dadosLista.addElement(nutricionista.retornaNomeCard(posicao));
 
         this.list = new JList(dadosLista);
         //one list index can be selected:
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        if(totalPac != 0)
+        if(totalCard != 0)
             list.addMouseListener(this);
 
         this.scrollPane = new JScrollPane(list);
@@ -58,7 +57,7 @@ public class WindowListPac extends MouseAdapter implements ActionListener {
         jframe.setContentPane(jpanel);
 
         //make title lbl
-        this.lblTitulo = new JLabel("Pacientes");
+        this.lblTitulo = new JLabel("Cardápios");
         lblTitulo.setSize(width/3, height/10);
         lblTitulo.setFont(lblTitulo.getFont().deriveFont(24f));
         lblTitulo.setLocation(((width - lblTitulo.getWidth())/2), height/20);
@@ -72,7 +71,7 @@ public class WindowListPac extends MouseAdapter implements ActionListener {
         jpanel.add(btnLogout);
 
         //make add btn
-        this.btnAdd = new JButton("+ paciente");
+        this.btnAdd = new JButton("+ cardápio");
         btnAdd.setSize(width/3, height/20);
         btnAdd.setLocation(((width - btnAdd.getWidth())/2), 6*height/7);
         btnAdd.addActionListener(this);
@@ -96,15 +95,16 @@ public class WindowListPac extends MouseAdapter implements ActionListener {
 
     @Override
     public void mouseClicked(MouseEvent e){
-        boolean checkVazio = nutricionista.retornaNomePaciente(
+        boolean checkVazio = nutricionista.retornaNomeCard(
                 list.locationToIndex(e.getPoint())).equals("");
         if(e.getClickCount() == 2 && !checkVazio){
-            WindowDadosPaciente telaDadosPaciente = new WindowDadosPaciente(
+            WindowDadosCard telaDadosCard = new WindowDadosCard(
                     this.jframe, this.jpanel, this.width, this.height, this.nutricionista,
                     list.locationToIndex(e.getPoint()));
             this.remComponent();
             jpanel.repaint();
-            telaDadosPaciente.initComponent();
+            telaDadosCard.initTable();
+            telaDadosCard.initComponent();
         }
     }
 
@@ -118,11 +118,13 @@ public class WindowListPac extends MouseAdapter implements ActionListener {
             telaLogin.initComponent();
         }
         else if(event.getSource() == btnAdd){
-            WindowAddPac telaAddPac= new WindowAddPac(
+            WindowAddCard telaAddCard= new WindowAddCard(
                     this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
             this.remComponent();
             jpanel.repaint();
-            telaAddPac.initComponent();
+            telaAddCard.initTable(telaAddCard.initTableModel());
+            telaAddCard.initComponent();
+            telaAddCard.initCombos();
         }
         else if(event.getSource() == btnVoltar){
             WindowPosLogin telaPosLogin = new WindowPosLogin(

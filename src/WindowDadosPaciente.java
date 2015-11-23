@@ -9,10 +9,10 @@ public class WindowDadosPaciente implements ActionListener{
     private JFrame jframe;
     private JPanel jpanel;
     private Nutricionista nutricionista;
-    private JLabel lblTitulo, lblNomePaciente, lblCpf, lblRg, lblEmail, lblAltura, lblPeso, lblIdade, lblAlergDoencs,
+    private JLabel lblTitulo, lblNomePaciente, lblCpf, lblRg, lblEmail, lblAltura, lblPeso, lblIdade,
             lblProfissao, lblImc;
     private JLabel lblTtlNomePaciente, lblTtlCpf, lblTtlRg, lblTtlEmail, lblTtlAltura, lblTtlPeso, lblTtlIdade,
-            lblTtlAlgDoenca, lblTtlProfissao, lblTtlImc;
+            lblTtlProfissao, lblTtlImc;
     private JButton btnLogout, btnVoltar, btnEditar, btnExcluir;
     private int width, height, nroPac;
 
@@ -137,19 +137,6 @@ public class WindowDadosPaciente implements ActionListener{
         lblTtlIdade.setLocation(40, 146);
         jpanel.add(lblTtlIdade);
 
-        //make lblAlergsDoencs
-        this.lblAlergDoencs = new JLabel(nutricionista.retornaDietsAlergsPaciente(nroPac));
-        lblAlergDoencs.setSize((jpanel.getWidth() - size), size);
-        lblAlergDoencs.setLocation(160, 176);
-        lblAlergDoencs.setForeground(Color.blue);
-        jpanel.add(lblAlergDoencs);
-
-        //make lblAlergsDoencs rotulo
-        this.lblTtlAlgDoenca = new JLabel("Alergias/doenças:");
-        lblTtlAlgDoenca.setSize((jpanel.getWidth() - size), size);
-        lblTtlAlgDoenca.setLocation(40, 176);
-        jpanel.add(lblTtlAlgDoenca);
-
         //make lblProfissao
         this.lblProfissao = new JLabel(nutricionista.retornaProfissaoPaciente(nroPac));
         lblProfissao.setSize((jpanel.getWidth() - size), size);
@@ -218,7 +205,6 @@ public class WindowDadosPaciente implements ActionListener{
         jpanel.remove(lblAltura);
         jpanel.remove(lblPeso);
         jpanel.remove(lblIdade);
-        jpanel.remove(lblAlergDoencs);
         jpanel.remove(lblProfissao);
         jpanel.remove(lblImc);
         jpanel.remove(btnEditar);
@@ -229,7 +215,6 @@ public class WindowDadosPaciente implements ActionListener{
         jpanel.remove(lblTtlAltura);
         jpanel.remove(lblTtlPeso);
         jpanel.remove(lblTtlIdade);
-        jpanel.remove(lblTtlAlgDoenca);
         jpanel.remove(lblTtlProfissao);
         jpanel.remove(lblTtlImc);
         jpanel.remove(btnExcluir);

@@ -19,7 +19,7 @@ public class WindowListAli extends MouseAdapter implements ActionListener {
 
     WindowListAli(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista){
         this.jframe = jframe;
-        jframe.setTitle("Pós-login");
+        jframe.setTitle("Alimentos");
         jframe.setSize(width, height);
         jframe.setResizable(false);
         jframe.setLocationRelativeTo(null);

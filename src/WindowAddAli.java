@@ -13,7 +13,7 @@ public class WindowAddAli implements ActionListener {
     private Nutricionista nutricionista;
     private int width, height;
     private JButton btnLogout, btnVoltar, btnSalvar;
-    private int nroPac;
+    private int nroAli;
 
     WindowAddAli(){}
 
@@ -35,7 +35,7 @@ public class WindowAddAli implements ActionListener {
         this.height = height;
     }
 
-    WindowAddAli(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista, int nroPac){
+    WindowAddAli(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista, int nroAli){
         this.jframe = jframe;
         jframe.setTitle("Editar alimento");
         jframe.setSize(width, height);
@@ -51,7 +51,7 @@ public class WindowAddAli implements ActionListener {
         this.nutricionista = nutricionista;
         this.width = width;
         this.height = height;
-        this.nroPac = nroPac;
+        this.nroAli = nroAli;
     }
 
     public void initComponent() {
@@ -132,11 +132,11 @@ public class WindowAddAli implements ActionListener {
         jpanel.add(btnSalvar);
     }
 
-    public void preencherCampos(Nutricionista nutricionista, int nroPac){
-        txtNomeAli.setText(nutricionista.retornaNomeAli(nroPac));
-        txtQuant.setText(nutricionista.retornaQuantAli(nroPac));
-        txtClrs.setText(String.valueOf(nutricionista.retornaClrsAli(nroPac)));
-        txtPeso.setText(String.valueOf(nutricionista.retornaPesoAli(nroPac)));
+    public void preencherCampos(Nutricionista nutricionista, int nroAli){
+        txtNomeAli.setText(nutricionista.retornaNomeAli(nroAli));
+        txtQuant.setText(nutricionista.retornaQuantAli(nroAli));
+        txtClrs.setText(String.valueOf(nutricionista.retornaClrsAli(nroAli)));
+        txtPeso.setText(String.valueOf(nutricionista.retornaPesoAli(nroAli)));
     }
 
     public void remComponent(){
@@ -173,7 +173,7 @@ public class WindowAddAli implements ActionListener {
         }
         else if(event.getSource() == btnVoltar && jframe.getTitle().equals("Editar alimento")){
             WindowDadosAli telaDadosAli = new WindowDadosAli(
-                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, nroPac);
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, nroAli);
             this.remComponent();
             jpanel.repaint();
             telaDadosAli.initComponent();
@@ -194,10 +194,10 @@ public class WindowAddAli implements ActionListener {
                 telaListAli.initList();
                 telaListAli.initComponent();
             } else {
-                nutricionista.editarAli(nome, quant, peso, calrs, nroPac);
+                nutricionista.editarAli(nome, quant, peso, calrs, nroAli);
 
                 WindowDadosAli telaDadosAli = new WindowDadosAli(
-                        this.jframe, this.jpanel, this.width, this.height, this.nutricionista, nroPac);
+                        this.jframe, this.jpanel, this.width, this.height, this.nutricionista, nroAli);
                 this.remComponent();
                 jpanel.repaint();
                 telaDadosAli.initComponent();

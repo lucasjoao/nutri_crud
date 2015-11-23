@@ -12,11 +12,11 @@ public class WindowDadosAli implements ActionListener{
     private JLabel lblTitulo, lblNomeAli, lblQuant, lblClrs, lblPeso;
     private JLabel lblTtlNomeAli, lblTtlQuant, lblTtlClrs, lblTtlPeso;
     private JButton btnLogout, btnVoltar, btnEditar, btnExcluir;
-    private int width, height, nroPac;
+    private int width, height, nroAli;
 
     WindowDadosAli(){}
 
-    WindowDadosAli(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista, int nroPac){
+    WindowDadosAli(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista, int nroAli){
         this.jframe = jframe;
         jframe.setTitle("Dados do alimento");
         jframe.setSize(width, height);
@@ -32,19 +32,19 @@ public class WindowDadosAli implements ActionListener{
         this.nutricionista = nutricionista;
         this.width = width;
         this.height = height;
-        this.nroPac = nroPac;
+        this.nroAli = nroAli;
     }
 
     public void initComponent() {
         //make  lblTitulo
-        this.lblTitulo = new JLabel(nutricionista.retornaNomeAli(nroPac));
+        this.lblTitulo = new JLabel(nutricionista.retornaNomeAli(nroAli));
         lblTitulo.setSize(width/3, height/10);
         lblTitulo.setFont(lblTitulo.getFont().deriveFont(24f));
         lblTitulo.setLocation(((width - lblTitulo.getWidth())/2), height/20);
         jpanel.add(lblTitulo);
 
         //make lblNome
-        this.lblNomeAli = new JLabel(nutricionista.retornaNomeAli(nroPac));
+        this.lblNomeAli = new JLabel(nutricionista.retornaNomeAli(nroAli));
         lblNomeAli.setSize(((width / 2) - height/22), height/22);
         lblNomeAli.setForeground(Color.blue);
         lblNomeAli.setLocation(width/3, height/6);
@@ -57,7 +57,7 @@ public class WindowDadosAli implements ActionListener{
         jpanel.add(lblTtlNomeAli);
 
         //make lblQuant
-        this.lblQuant = new JLabel(nutricionista.retornaQuantAli(nroPac));
+        this.lblQuant = new JLabel(nutricionista.retornaQuantAli(nroAli));
         lblQuant.setSize(((width / 2) - height / 22), height/22);
         lblQuant.setForeground(Color.BLUE);
         lblQuant.setLocation(width/3, (height/6 + height/22));
@@ -70,7 +70,7 @@ public class WindowDadosAli implements ActionListener{
         jpanel.add(lblTtlQuant);
 
         //make lbl Peso
-        this.lblPeso = new JLabel(String.valueOf(nutricionista.retornaPesoAli(nroPac)));
+        this.lblPeso = new JLabel(String.valueOf(nutricionista.retornaPesoAli(nroAli)));
         lblPeso.setSize(((width / 2) - height / 22), height / 22);
         lblPeso.setForeground(Color.blue);
         lblPeso.setLocation(width / 3, (height / 6 + 2 * height / 22));
@@ -83,7 +83,7 @@ public class WindowDadosAli implements ActionListener{
         jpanel.add(lblTtlPeso);
 
         //make lbl calories
-        this.lblClrs = new JLabel(String.valueOf(nutricionista.retornaClrsAli(nroPac)));
+        this.lblClrs = new JLabel(String.valueOf(nutricionista.retornaClrsAli(nroAli)));
         lblClrs.setSize(((width / 2) - height / 22), height / 22);
         lblClrs.setLocation(width / 3, (height / 6 + 3 * height / 22));
         lblClrs.setForeground(Color.blue);
@@ -159,18 +159,18 @@ public class WindowDadosAli implements ActionListener{
         }
         else if(event.getSource() == btnEditar){
             WindowAddAli telaEditarAli = new WindowAddAli(
-                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.nroPac);
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.nroAli);
             this.remComponent();
             jpanel.repaint();
             telaEditarAli.initComponent();
-            telaEditarAli.preencherCampos(nutricionista, nroPac);
+            telaEditarAli.preencherCampos(nutricionista, nroAli);
         }
         else if(event.getSource() == btnExcluir){
-            String mensagem = "Você deseja mesmo excluir o alimento \n" + nutricionista.retornaNomeAli(nroPac) + "?";
+            String mensagem = "Você deseja mesmo excluir o alimento \n" + nutricionista.retornaNomeAli(nroAli) + "?";
             int decisao = JOptionPane.showConfirmDialog(null, mensagem, mensagem, JOptionPane.YES_NO_OPTION);
 
             if(decisao == 0) {
-                nutricionista.excluirAli(nroPac);
+                nutricionista.excluirAli(nroAli);
 
                 WindowListAli telaListAli = new WindowListAli(
                         this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
