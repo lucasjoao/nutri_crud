@@ -94,30 +94,34 @@ public class WindowPosLogin implements ActionListener {
             this.remComponent();
             jpanel.repaint();
             telaLogin.initComponent();
-        }
-        else if(event.getSource() == btnPac){
+        } else if(event.getSource() == btnPac){
             WindowListPac telaListPac = new WindowListPac(
                     this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
             this.remComponent();
             jpanel.repaint();
             telaListPac.initList();
             telaListPac .initComponent();
-        }
-        else if(event.getSource() == btnAlim){
+        } else if(event.getSource() == btnAlim){
             WindowListAli telaListAli = new WindowListAli(
                     this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
             this.remComponent();
             jpanel.repaint();
             telaListAli.initList();
             telaListAli .initComponent();
-        }
-        else if(event.getSource() == btnCard){
+        } else if(event.getSource() == btnCard){
             WindowListCard telaListCard = new WindowListCard(
                     this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
             this.remComponent();
             jpanel.repaint();
             telaListCard.initList();
             telaListCard .initComponent();
+        } else if(event.getSource() == btnDie){
+            WindowListDie telaListDie = new WindowListDie(
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
+            this.remComponent();
+            jpanel.repaint();
+            telaListDie.initList();
+            telaListDie .initComponent();
         }
     }
 }

@@ -11,6 +11,7 @@ public class Nutricionista implements Logavel {
     private List<Paciente> pacsDaNut;
     private List<Alimento> alisDaNut;
     private List<Cardapio> cardsDaNut;
+    private List<Dieta> diesDaNut;
 
     Nutricionista(){}
 
@@ -21,10 +22,12 @@ public class Nutricionista implements Logavel {
         Paciente pacAux = new Paciente();
         Alimento aliAux = new Alimento();
         Cardapio cardAux = new Cardapio();
+        Dieta dieAux = new Dieta();
 
         this.pacsDaNut = new ArrayList<>(pacAux.criarDefaults());
         this.alisDaNut = new ArrayList<>(aliAux.criarDefaults());
         this.cardsDaNut = new ArrayList<>(cardAux.criarDefaults());
+        this.diesDaNut = new ArrayList<>(dieAux.criarDefaults());
     }
 
     public void criarPac(String nome, int cpf, int rg, String email, String profissao, String login, String senha,
@@ -77,6 +80,10 @@ public class Nutricionista implements Logavel {
         return this.cardsDaNut.size();
     }
 
+    public int retornaTotalDies(){
+        return this.diesDaNut.size();
+    }
+
     public String retornaNomePaciente(int posicao){
         if(pacsDaNut.get(posicao) != null)
             return pacsDaNut.get(posicao).getNome();
@@ -94,6 +101,13 @@ public class Nutricionista implements Logavel {
     public String retornaNomeCard(int posicao){
         if(cardsDaNut.get(posicao) != null)
             return cardsDaNut.get(posicao).getNome();
+        else
+            return "";
+    }
+
+    public String retornaNomeDie(int posicao){
+        if(diesDaNut.get(posicao) != null)
+            return diesDaNut.get(posicao).getNome();
         else
             return "";
     }
