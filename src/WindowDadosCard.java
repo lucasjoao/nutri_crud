@@ -198,7 +198,7 @@ public class WindowDadosCard implements ActionListener {
             telaEditarCard.preencherCampos(nutricionista, nroCard);
         }
         else if(event.getSource() == btnExcluir){
-            String mensagem = "Você deseja mesmo excluir o alimento \n" + nutricionista.retornaNomeCard(nroCard) + "?";
+            String mensagem = "Você deseja mesmo excluir o cardápio \n" + nutricionista.retornaNomeCard(nroCard) + "?";
             int decisao = JOptionPane.showConfirmDialog(null, mensagem, mensagem, JOptionPane.YES_NO_OPTION);
 
             if(decisao == 0) {

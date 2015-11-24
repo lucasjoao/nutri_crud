@@ -60,12 +60,16 @@ public class Nutricionista implements Logavel {
         this.pacsDaNut.remove(nroPac);
     }
 
-    public void excluirAli(int nroPac){
-        this.alisDaNut.remove(nroPac);
+    public void excluirAli(int nroAli){
+        this.alisDaNut.remove(nroAli);
     }
 
-    public void excluirCard(int nroPac){
-        this.cardsDaNut.remove(nroPac);
+    public void excluirCard(int nroCard){
+        this.cardsDaNut.remove(nroCard);
+    }
+
+    public void excluirDie(int nroDie){
+        this.diesDaNut.remove(nroDie);
     }
 
     public int retornaTotalPacientes(){

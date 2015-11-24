@@ -241,8 +241,7 @@ public class WindowDadosDie implements ActionListener {
             */
         }
         else if(event.getSource() == btnExcluir){
-            /* todo
-            String mensagem = "Você deseja mesmo excluir o alimento \n" + nutricionista.retornaNomeDie(nroDie) + "?";
+            String mensagem = "Você deseja mesmo excluir a dieta \n" + nutricionista.retornaNomeDie(nroDie) + "?";
             int decisao = JOptionPane.showConfirmDialog(null, mensagem, mensagem, JOptionPane.YES_NO_OPTION);
 
             if(decisao == 0) {
@@ -255,7 +254,6 @@ public class WindowDadosDie implements ActionListener {
                 telaListDie.initList();
                 telaListDie.initComponent();
             }
-            */
         }
     }
 }
