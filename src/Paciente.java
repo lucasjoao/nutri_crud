@@ -1,7 +1,8 @@
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Paciente {
+public class Paciente implements Logavel {
 
     private String nome;
     private String login;
@@ -80,6 +81,16 @@ public class Paciente {
 
     public String getProfissao() {
         return profissao;
+    }
+
+
+    public boolean logar(String login, String senha) {
+        if((login.equals(this.login)) && senha.equals(this.senha)){
+            JOptionPane.showMessageDialog(null, "Paciente logado com sucesso!");
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 

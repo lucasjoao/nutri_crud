@@ -10,7 +10,7 @@ public class Main {
         Nutricionista lucia = new Nutricionista("luluzinha", "123");
 
         //first window
-        WindowLogin window = new WindowLogin(jframe, jpanel, width, height, lucia);
+        WindowLogin window = new WindowLogin(jframe, jpanel, width, height, lucia, lucia.getPacsDaNut());
         window.initComponent();
 
         jframe.setVisible(true);

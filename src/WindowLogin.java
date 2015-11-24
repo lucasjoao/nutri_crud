@@ -1,8 +1,10 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import javax.swing.*;
 
 public class WindowLogin implements ActionListener {
+    private List<Paciente> pacsDaNut;
     private JFrame jframe;
     private JPanel jpanel;
     private Nutricionista nutricionista;
@@ -11,10 +13,11 @@ public class WindowLogin implements ActionListener {
     private JTextField txtLogin;
     private JPasswordField txtSenha;
     private int width, height;
+    private boolean logou = false;
 
     WindowLogin(){}
 
-    WindowLogin(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista){
+    WindowLogin(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista, List<Paciente> pacsDaNut){
         this.jframe = jframe;
         jframe.setTitle("Login");
         jframe.setSize(width, height);
@@ -28,6 +31,7 @@ public class WindowLogin implements ActionListener {
         jframe.setContentPane(jpanel);
 
         this.nutricionista = nutricionista;
+        this.pacsDaNut = pacsDaNut;
         this.width = width;
         this.height = height;
     }
@@ -103,6 +107,22 @@ public class WindowLogin implements ActionListener {
                 this.remComponent();
                 jpanel.repaint();
                 telaPosLogin.initComponent();
+            }
+            else{
+                for(Paciente paciente : pacsDaNut){
+                    if(paciente.logar(login,senha)){
+                        WindowDadosPaciente telaDadosPaciente = new WindowDadosPaciente(
+                                this.jframe, this.jpanel, this.width, this.height, this.nutricionista,
+                                pacsDaNut.indexOf(paciente));
+                        this.remComponent();
+                        jpanel.repaint();
+                        telaDadosPaciente.initComponent();
+                        this.logou = true;
+                        break;
+                    }
+                }
+                if(!logou)
+                    JOptionPane.showMessageDialog(null, "Login e/ou senha incorretos!");
             }
         }
     }

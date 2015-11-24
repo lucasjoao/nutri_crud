@@ -313,12 +313,15 @@ public class Nutricionista implements Logavel {
         return cardsDaNut;
     }
 
+    public List<Paciente> getPacsDaNut() {
+        return pacsDaNut;
+    }
+
     public boolean logar(String login, String senha) {
         if((login.equals(this.login)) && senha.equals(this.senha)){
             JOptionPane.showMessageDialog(null, "Nutricionista logado com sucesso!");
             return true;
         } else {
-            JOptionPane.showMessageDialog(null, "Login e/ou senha incorretos!");
             return false;
         }
     }
