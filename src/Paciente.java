@@ -14,11 +14,12 @@ public class Paciente implements Logavel {
     private double peso;
     private int idade;
     private String profissao;
+    private Dieta dieta;
 
     Paciente(){}
 
     Paciente(String nome, int cpf, int rg, String email, String profissao, String login, String senha, double altura,
-             double peso, int idade){
+             double peso, int idade, Dieta dieta){
         this.nome = nome;
         this.login = login;
         this.senha = senha;
@@ -29,17 +30,20 @@ public class Paciente implements Logavel {
         this.altura = altura;
         this.peso = peso;
         this.idade = idade;
+        this.dieta = dieta;
     }
 
     public List<Paciente> criarDefaults(){
         List<Paciente> pacsDefault = new ArrayList<>();
+        Dieta dietaAux = new Dieta();
+        List<Dieta> dietasAux = dietaAux.criarDefaults();
 
         pacsDefault.add(new Paciente("lucas", 44444402, 5094137,
-                "lucas@lucas.br", "Vendedor", "lulu", "123", 1.85, 75.0, 19));
+                "lucas@lucas.br", "Vendedor", "lulu", "123", 1.85, 75.0, 19, dietasAux.get(0)));
         pacsDefault.add(new Paciente("fausto", 44444402, 5094137,
-                "fausto@fausto.br", "Comprador", "fafa", "123", 1.85, 75.0, 19));
+                "fausto@fausto.br", "Comprador", "fafa", "123", 1.85, 75.0, 19, dietasAux.get(1)));
         pacsDefault.add(new Paciente("joao", 44444402, 5094137,
-                "joao@joao.br", "Padeiro", "jojo", "123", 1.85, 75.0, 19));
+                "joao@joao.br", "Padeiro", "jojo", "123", 1.85, 75.0, 19, dietasAux.get(0)));
         return pacsDefault;
     }
 
@@ -83,6 +87,9 @@ public class Paciente implements Logavel {
         return profissao;
     }
 
+    public Dieta getDieta() {
+        return dieta;
+    }
 
     public boolean logar(String login, String senha) {
         if((login.equals(this.login)) && senha.equals(this.senha)){

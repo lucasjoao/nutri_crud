@@ -31,8 +31,8 @@ public class Nutricionista implements Logavel {
     }
 
     public void criarPac(String nome, int cpf, int rg, String email, String profissao, String login, String senha,
-                         double altura, double peso, int idade){
-        this.pacsDaNut.add(new Paciente(nome, cpf, rg, email, profissao, login, senha, altura, peso, idade));
+                         double altura, double peso, int idade, Dieta dieta){
+        this.pacsDaNut.add(new Paciente(nome, cpf, rg, email, profissao, login, senha, altura, peso, idade, dieta));
     }
 
     public void criarAli(String nome, String quantidade, double peso, double calrs){
@@ -54,8 +54,8 @@ public class Nutricionista implements Logavel {
     }
 
     public void editarPac(String nome, int cpf, int rg, String email, String profissao, String login, String senha,
-                          double altura, double peso, int idade, int nroPac){
-        this.pacsDaNut.set(nroPac, new Paciente(nome, cpf, rg, email, profissao, login, senha, altura, peso, idade));
+                          double altura, double peso, int idade, Dieta dieta, int nroPac){
+        this.pacsDaNut.set(nroPac, new Paciente(nome, cpf, rg, email, profissao, login, senha, altura, peso, idade, dieta));
     }
 
     public void editarCard(String nome, List<Alimento> alimentos, int nroCard){
@@ -212,6 +212,13 @@ public class Nutricionista implements Logavel {
             return "";
     }
 
+    public String retornaDiePaciente(int posicao){
+        if(pacsDaNut.get(posicao) != null)
+            return pacsDaNut.get(posicao).getDieta().getNome();
+        else
+            return "";
+    }
+
     public String calculaImc(double altura, double peso){
         DecimalFormat df = new DecimalFormat("##.##");
         df.setRoundingMode(RoundingMode.DOWN);
@@ -315,6 +322,10 @@ public class Nutricionista implements Logavel {
 
     public List<Paciente> getPacsDaNut() {
         return pacsDaNut;
+    }
+
+    public List<Dieta> getDiesDaNut() {
+        return diesDaNut;
     }
 
     public boolean logar(String login, String senha) {

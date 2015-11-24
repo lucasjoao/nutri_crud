@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -9,7 +10,7 @@ public class WindowAddPac implements ActionListener, FocusListener {
 
     private List<Paciente> pacsDaNut;
     private JLabel lblTitulo, lblNome, lblCpf, lblRg, lblEmail, lblProf, lblLogin,
-            lblSenha, lblAlt, lblPeso, lblIdade, lblTtlImc, lblImc;
+            lblSenha, lblAlt, lblPeso, lblIdade, lblTtlImc, lblImc, lblDie;
     private JTextField txtNome, txtCpf, txtRg, txtEmail, txtProf, txtLogin,
             txtSenha, txtAlt, txtPeso, txtIdade;
     private JFrame jframe;
@@ -18,6 +19,7 @@ public class WindowAddPac implements ActionListener, FocusListener {
     private int width, height;
     private JButton btnLogout, btnVoltar, btnSalvar;
     private int nroPac;
+    private JComboBox addDie;
 
     WindowAddPac(){}
 
@@ -224,6 +226,30 @@ public class WindowAddPac implements ActionListener, FocusListener {
         jpanel.add(btnSalvar);
     }
 
+    public void initCombos(){
+        //mk lbl addDie
+        this.lblDie = new JLabel("Dieta:");
+        lblDie.setSize((width - height/22), height/22);
+        lblDie.setLocation(width/8, (height/6 + 11*height/22));
+        jpanel.add(lblDie);
+
+
+        //mk cb addDie
+        DefaultComboBoxModel dadosAddDie = new DefaultComboBoxModel();
+
+        for(Dieta dieta : nutricionista.getDiesDaNut())
+            dadosAddDie.addElement(dieta.getNome());
+
+        dadosAddDie.setSelectedItem("Dietas");
+
+        this.addDie = new JComboBox(dadosAddDie);
+        addDie.setSize(width/3, height/20);
+        addDie.setLocation(width/3, (height/6 + 11*height/22));
+        addDie.setBackground(Color.WHITE);
+        addDie.addActionListener(this);
+        jpanel.add(addDie);
+    }
+
     public void preencherCampos(Nutricionista nutricionista, int nroPac){
         txtNome.setText(nutricionista.retornaNomePaciente(nroPac));
         txtCpf.setText(Integer.toString(nutricionista.retornaCPFPaciente(nroPac)));
@@ -237,6 +263,7 @@ public class WindowAddPac implements ActionListener, FocusListener {
         txtIdade.setText(Integer.toString(nutricionista.retornaIdadePaciente(nroPac)));
         lblImc.setText(nutricionista.calculaImc(
                 nutricionista.retornaAlturaPaciente(nroPac), nutricionista.retornaPesoPaciente(nroPac)));
+        addDie.setSelectedItem(nutricionista.retornaDiePaciente(nroPac));
     }
 
     public void remComponent(){
@@ -266,6 +293,18 @@ public class WindowAddPac implements ActionListener, FocusListener {
         jpanel.remove(txtPeso);
         jpanel.remove(lblIdade);
         jpanel.remove(txtIdade);
+        jpanel.remove(addDie);
+        jpanel.remove(lblDie);
+    }
+
+    public Dieta dietaDoNome(Object nome){
+        Dieta dietaProv = null;
+        for(Dieta dieta : nutricionista.getDiesDaNut()) {
+            if(nome.equals(dieta.getNome())){
+                dietaProv = dieta;
+            }
+        }
+        return dietaProv;
     }
 
     @Override
@@ -303,9 +342,11 @@ public class WindowAddPac implements ActionListener, FocusListener {
             double altura = Double.parseDouble(txtAlt.getText());
             double peso = Double.parseDouble(txtPeso.getText());
             int idade = Integer.parseInt(txtIdade.getText());
+            Dieta dieta = this.dietaDoNome(addDie.getSelectedItem());
+
 
             if (jframe.getTitle().equals("Add paciente")){
-                nutricionista.criarPac(nome, cpf, rg, email, profissao, login, senha, altura, peso, idade);
+                nutricionista.criarPac(nome, cpf, rg, email, profissao, login, senha, altura, peso, idade, dieta);
 
                 WindowListPac telaListPac = new WindowListPac(
                         this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut);
@@ -315,7 +356,7 @@ public class WindowAddPac implements ActionListener, FocusListener {
                 telaListPac.initComponent();
 
             } else {
-                nutricionista.editarPac(nome, cpf, rg, email, profissao, login, senha, altura, peso, idade, nroPac);
+                nutricionista.editarPac(nome, cpf, rg, email, profissao, login, senha, altura, peso, idade, dieta, nroPac);
 
                 WindowDadosPaciente telaDadosPaciente = new WindowDadosPaciente(
                         this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut, nroPac, true);

@@ -126,6 +126,7 @@ public class WindowListPac extends MouseAdapter implements ActionListener {
             this.remComponent();
             jpanel.repaint();
             telaAddPac.initComponent();
+            telaAddPac.initCombos();
         }
         else if(event.getSource() == btnVoltar){
             WindowPosLogin telaPosLogin = new WindowPosLogin(

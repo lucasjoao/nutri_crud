@@ -12,9 +12,9 @@ public class WindowDadosPaciente implements ActionListener{
     private JPanel jpanel;
     private Nutricionista nutricionista;
     private JLabel lblTitulo, lblNomePaciente, lblCpf, lblRg, lblEmail, lblAltura, lblPeso, lblIdade,
-            lblProfissao, lblImc;
+            lblProfissao, lblImc, lblDie;
     private JLabel lblTtlNomePaciente, lblTtlCpf, lblTtlRg, lblTtlEmail, lblTtlAltura, lblTtlPeso, lblTtlIdade,
-            lblTtlProfissao, lblTtlImc;
+            lblTtlProfissao, lblTtlImc, lblTtlDie;
     private JButton btnLogout, btnVoltar, btnEditar, btnExcluir;
     private int width, height, nroPac;
     private boolean root;
@@ -171,6 +171,18 @@ public class WindowDadosPaciente implements ActionListener{
         lblTtlImc.setLocation(40,206);
         jpanel.add(lblTtlImc);
 
+        //mk lblDie rótulo
+        this.lblTtlDie = new JLabel("Dieta:");
+        lblTtlDie.setSize((width - height/22), height/22);
+        lblTtlDie.setLocation(width/8, (height/6 + 11*height/22));
+        jpanel.add(lblTtlDie);
+
+        //mk lblDie
+        this.lblDie = new JLabel(nutricionista.retornaDiePaciente(nroPac));
+        lblDie.setSize(width/3, height/20);
+        lblDie.setLocation(width/3, (height/6 + 11*height/22));
+        jpanel.add(lblDie);
+
         //make logout btn
         this.btnLogout = new JButton("sair");
         btnLogout.setSize(width/6, height/20);
@@ -223,6 +235,8 @@ public class WindowDadosPaciente implements ActionListener{
         jpanel.remove(lblTtlProfissao);
         jpanel.remove(lblTtlImc);
         jpanel.remove(btnLogout);
+        jpanel.remove(lblTtlDie);
+        jpanel.remove(lblDie);
         if(this.root) {
             jpanel.remove(btnExcluir);
             jpanel.remove(btnEditar);
@@ -253,6 +267,7 @@ public class WindowDadosPaciente implements ActionListener{
             this.remComponent();
             jpanel.repaint();
             telaEditarPaciente.initComponent();
+            telaEditarPaciente.initCombos();
             telaEditarPaciente.preencherCampos(nutricionista, nroPac);
         }
         else if(event.getSource() == btnExcluir){
