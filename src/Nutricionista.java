@@ -62,6 +62,12 @@ public class Nutricionista implements Logavel {
         this.cardsDaNut.set(nroCard, new Cardapio(nome, alimentos));
     }
 
+    public void editarDie(String nome, List<Cardapio> cardsDmg, List<Cardapio> cardsSeg, List<Cardapio> cardsTer,
+                          List<Cardapio> cardsQua, List<Cardapio> cardsQui, List<Cardapio> cardsSex,
+                          List<Cardapio> cardsSab, int nroDie){
+        this.diesDaNut.set(nroDie, new Dieta(nome, cardsDmg, cardsSeg, cardsTer, cardsQua, cardsQui, cardsSex, cardsSab));
+    }
+
     public void excluirPac(int nroPac){
         this.pacsDaNut.remove(nroPac);
     }

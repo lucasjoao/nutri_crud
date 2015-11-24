@@ -10,7 +10,7 @@ import java.util.*;
 import java.util.List;
 
 public class WindowAddDie extends MouseAdapter implements ActionListener {
-    private JLabel lblTitulo, lblNomeCard, lblClrsTotal, lblClrs, lblInstr, lblInstrDel;
+    private JLabel lblTitulo, lblNomeDie, lblClrsTotal, lblClrs, lblInstr, lblInstrDel;
     private JFrame jframe;
     private JPanel jpanel;
     private Nutricionista nutricionista;
@@ -20,10 +20,12 @@ public class WindowAddDie extends MouseAdapter implements ActionListener {
     private JScrollPane scrollPane;
     private JTable table;
     private JComboBox add;
-    private JTextField txtNomeCard;
+    private JTextField txtNomeDie;
     private int nroDie;
     private int nroLinha = 0;
     private Object itemSelecionado;
+    // primeira execucao na edicao pega clrs do que está salvo no cardápio, depois vai calculando a cada +/- cardapio:
+    private int gambiarra = 0;
 
     WindowAddDie(){}
 
@@ -43,6 +45,25 @@ public class WindowAddDie extends MouseAdapter implements ActionListener {
         this.nutricionista = nutricionista;
         this.width = width;
         this.height = height;
+    }
+
+    WindowAddDie(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista, int nroDie){
+        this.jframe = jframe;
+        jframe.setTitle("Editar dieta");
+        jframe.setSize(width, height);
+        jframe.setResizable(false);
+        jframe.setLocationRelativeTo(null);
+
+        this.jpanel = jpanel;
+        jpanel.setSize(width, height);
+        jpanel.setLayout(null);
+
+        jframe.setContentPane(jpanel);
+
+        this.nutricionista = nutricionista;
+        this.width = width;
+        this.height = height;
+        this.nroDie = nroDie;
     }
 
     public DefaultTableModel initTableModel(){
@@ -157,16 +178,16 @@ public class WindowAddDie extends MouseAdapter implements ActionListener {
         jpanel.add(lblInstrDel);
 
         //make txt Nome
-        this.txtNomeCard = new JTextField();
-        txtNomeCard.setSize(((width / 2) - height/22), height/22);
-        txtNomeCard.setLocation(width/3, 7 * height/10);
-        jpanel.add(txtNomeCard);
+        this.txtNomeDie = new JTextField();
+        txtNomeDie.setSize(((width / 2) - height/22), height/22);
+        txtNomeDie.setLocation(width/3, 7 * height/10);
+        jpanel.add(txtNomeDie);
 
         //make lbl Nome
-        this.lblNomeCard = new JLabel("Nome: ");
-        lblNomeCard.setSize((width - height / 22), height / 22);
-        lblNomeCard.setLocation(width / 8, 7 * height/10);
-        jpanel.add(lblNomeCard);
+        this.lblNomeDie = new JLabel("Nome: ");
+        lblNomeDie.setSize((width - height / 22), height / 22);
+        lblNomeDie.setLocation(width / 8, 7 * height/10);
+        jpanel.add(lblNomeDie);
 
         //make lbl total calories
         this.lblClrsTotal = new JLabel();
@@ -208,8 +229,8 @@ public class WindowAddDie extends MouseAdapter implements ActionListener {
         jpanel.remove(btnLogout);
         jpanel.remove(btnVoltar);
         jpanel.remove(btnSalvar);
-        jpanel.remove(txtNomeCard);
-        jpanel.remove(lblNomeCard);
+        jpanel.remove(txtNomeDie);
+        jpanel.remove(lblNomeDie);
         jpanel.remove(lblClrs);
         jpanel.remove(lblClrsTotal);
         jpanel.remove(add);
@@ -255,6 +276,12 @@ public class WindowAddDie extends MouseAdapter implements ActionListener {
         return totalClrs;
     }
 
+    public void preencherCampos(Nutricionista nutricionista, int nroDie){
+        txtNomeDie.setText(nutricionista.retornaNomeDie(nroDie));
+        if(gambiarra == 0)
+            lblClrsTotal.setText(String.valueOf(nutricionista.calculaTotalClrsDie(nroDie)));
+    }
+
     @Override
     public void mouseClicked(MouseEvent e){
         this.table = (JTable)e.getSource();
@@ -264,6 +291,7 @@ public class WindowAddDie extends MouseAdapter implements ActionListener {
             int decisao = JOptionPane.showConfirmDialog(null, mensagem, mensagem, JOptionPane.YES_NO_OPTION);
 
             if(decisao == 0){
+                this.gambiarra++;
                 this.remComponent();
                 jpanel.repaint();
                 this.initTable(this.retiraInfoTabela(table.getSelectedRow(), table.getSelectedColumn()));
@@ -276,6 +304,9 @@ public class WindowAddDie extends MouseAdapter implements ActionListener {
 
                 this.initComponent();
                 lblClrsTotal.setText(String.valueOf(this.calculaClrsTotal()));
+
+                if(jframe.getTitle().equals("Editar dieta"))
+                    this.preencherCampos(nutricionista, nroDie);
             }
         }
     }
@@ -306,7 +337,7 @@ public class WindowAddDie extends MouseAdapter implements ActionListener {
             telaDadosDie.initComponent();
         }
         else if(event.getSource() == btnSalvar){
-            String nome = txtNomeCard.getText();
+            String nome = txtNomeDie.getText();
             List<Cardapio> dmg = new ArrayList<>();
             List<Cardapio> seg = new ArrayList<>();
             List<Cardapio> ter = new ArrayList<>();
@@ -350,8 +381,19 @@ public class WindowAddDie extends MouseAdapter implements ActionListener {
                 telaListDie.initList();
                 telaListDie.initComponent();
             }
+            else {
+                nutricionista.editarDie(nome, dmg, seg, ter, qua, qui, sex, sab, nroDie);
+
+                WindowDadosDie telaDadosDie = new WindowDadosDie(
+                        this.jframe, this.jpanel, this.width, this.height, this.nutricionista, nroDie);
+                this.remComponent();
+                jpanel.repaint();
+                telaDadosDie.initTable();
+                telaDadosDie.initComponent();
+            }
         }
         else if(event.getSource() == add && lblInstr.getText().equals("Add o cardápio:")){
+            gambiarra++;
             this.itemSelecionado = add.getSelectedItem();
             this.remComponent();
             jpanel.repaint();
@@ -359,6 +401,8 @@ public class WindowAddDie extends MouseAdapter implements ActionListener {
             this.initComponent();
             lblClrsTotal.setText(String.valueOf(this.calculaClrsTotal()));
             this.initComboDia();
+            if(jframe.getTitle().equals("Editar dieta"))
+                this.preencherCampos(nutricionista, nroDie);
         }
         else if(event.getSource() == add && lblInstr.getText().equals("Add o dia:")){
             this.remComponent();
@@ -367,6 +411,8 @@ public class WindowAddDie extends MouseAdapter implements ActionListener {
             this.initComponent();
             lblClrsTotal.setText(String.valueOf(this.calculaClrsTotal()));
             this.initComboCard();
+            if(jframe.getTitle().equals("Editar dieta"))
+                this.preencherCampos(nutricionista, nroDie);
         }
     }
 }

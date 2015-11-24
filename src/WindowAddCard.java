@@ -18,7 +18,6 @@ public class WindowAddCard extends MouseAdapter implements ActionListener {
     private JPanel jpanel;
     private JTable table;
     private DefaultTableModel dadosTable;
-
     private JScrollPane scrollPane;
     private Nutricionista nutricionista;
     private int width, height;

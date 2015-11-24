@@ -229,16 +229,14 @@ public class WindowDadosDie implements ActionListener {
             telaListDie.initComponent();
         }
         else if(event.getSource() == btnEditar){
-            /* todo
             WindowAddDie telaEditarDie = new WindowAddDie(
                     this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.nroDie);
             this.remComponent();
             jpanel.repaint();
             telaEditarDie.initTable(telaEditarDie.copiarTableModel(dadosTable));
             telaEditarDie.initComponent();
-            telaEditarDie.initCombos();
+            telaEditarDie.initComboCard();
             telaEditarDie.preencherCampos(nutricionista, nroDie);
-            */
         }
         else if(event.getSource() == btnExcluir){
             String mensagem = "Você deseja mesmo excluir a dieta \n" + nutricionista.retornaNomeDie(nroDie) + "?";
