@@ -3,6 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
 
 public class WindowPosLogin implements ActionListener {
 
@@ -12,10 +13,11 @@ public class WindowPosLogin implements ActionListener {
     private Nutricionista nutricionista;
     private JButton btnLogout, btnPac, btnAlim, btnCard, btnDie;
     private int width, height;
+    private List<Paciente> pacsDaNut;
 
     WindowPosLogin(){}
 
-    WindowPosLogin(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista){
+    WindowPosLogin(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista, List<Paciente> pacsDaNut){
         this.jframe = jframe;
         jframe.setTitle("Pós-login");
         jframe.setSize(width, height);
@@ -29,6 +31,7 @@ public class WindowPosLogin implements ActionListener {
         jframe.setContentPane(jpanel);
 
         this.nutricionista = nutricionista;
+        this.pacsDaNut = pacsDaNut;
         this.width = width;
         this.height = height;
     }
@@ -90,34 +93,34 @@ public class WindowPosLogin implements ActionListener {
     public void actionPerformed(ActionEvent event) {
         if(event.getSource() == btnLogout){
             WindowLogin telaLogin = new WindowLogin(
-                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut);
             this.remComponent();
             jpanel.repaint();
             telaLogin.initComponent();
         } else if(event.getSource() == btnPac){
             WindowListPac telaListPac = new WindowListPac(
-                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut);
             this.remComponent();
             jpanel.repaint();
             telaListPac.initList();
             telaListPac .initComponent();
         } else if(event.getSource() == btnAlim){
             WindowListAli telaListAli = new WindowListAli(
-                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut);
             this.remComponent();
             jpanel.repaint();
             telaListAli.initList();
             telaListAli .initComponent();
         } else if(event.getSource() == btnCard){
             WindowListCard telaListCard = new WindowListCard(
-                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut);
             this.remComponent();
             jpanel.repaint();
             telaListCard.initList();
             telaListCard .initComponent();
         } else if(event.getSource() == btnDie){
             WindowListDie telaListDie = new WindowListDie(
-                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut);
             this.remComponent();
             jpanel.repaint();
             telaListDie.initList();

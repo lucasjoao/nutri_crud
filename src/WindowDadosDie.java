@@ -4,6 +4,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.*;
+import java.util.List;
 
 public class WindowDadosDie implements ActionListener {
 
@@ -17,10 +19,11 @@ public class WindowDadosDie implements ActionListener {
     private JButton btnLogout, btnVoltar, btnEditar, btnExcluir;
     private int width, height, nroDie;
     private DefaultTableModel dadosTable;
+    private List<Paciente> pacsDaNut;
 
     WindowDadosDie(){}
 
-    WindowDadosDie(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista, int nroDie){
+    WindowDadosDie(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista, List<Paciente> pacsDaNut, int nroDie){
         this.jframe = jframe;
         jframe.setTitle("Dados da dieta");
         jframe.setSize(width, height);
@@ -32,6 +35,7 @@ public class WindowDadosDie implements ActionListener {
         jpanel.setLayout(null);
 
         this.nutricionista = nutricionista;
+        this.pacsDaNut = pacsDaNut;
         this.width = width;
         this.height = height;
         this.nroDie = nroDie;
@@ -215,14 +219,14 @@ public class WindowDadosDie implements ActionListener {
     public void actionPerformed(ActionEvent event) {
         if(event.getSource() == btnLogout){
             WindowLogin telaLogin = new WindowLogin(
-                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut);
             this.remComponent();
             jpanel.repaint();
             telaLogin.initComponent();
         }
         else if(event.getSource() == btnVoltar) {
             WindowListDie telaListDie = new WindowListDie(
-                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut);
             this.remComponent();
             jpanel.repaint();
             telaListDie.initList();
@@ -230,7 +234,7 @@ public class WindowDadosDie implements ActionListener {
         }
         else if(event.getSource() == btnEditar){
             WindowAddDie telaEditarDie = new WindowAddDie(
-                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.nroDie);
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut, this.nroDie);
             this.remComponent();
             jpanel.repaint();
             telaEditarDie.initTable(telaEditarDie.copiarTableModel(dadosTable));
@@ -246,7 +250,7 @@ public class WindowDadosDie implements ActionListener {
                 nutricionista.excluirDie(nroDie);
 
                 WindowListDie telaListDie = new WindowListDie(
-                        this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
+                        this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut);
                 this.remComponent();
                 jpanel.repaint();
                 telaListDie.initList();

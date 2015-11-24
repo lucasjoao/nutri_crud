@@ -3,9 +3,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.util.List;
 
 public class WindowAddAli implements ActionListener {
 
+    private List<Paciente> pacsDaNut;
     private JLabel lblTitulo, lblNomeAli, lblQuant, lblClrs, lblPeso;
     private JTextField txtNomeAli, txtQuant, txtClrs, txtPeso;
     private JFrame jframe;
@@ -17,7 +19,7 @@ public class WindowAddAli implements ActionListener {
 
     WindowAddAli(){}
 
-    WindowAddAli(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista){
+    WindowAddAli(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista, List<Paciente> pacsDaNut){
         this.jframe = jframe;
         jframe.setTitle("Add alimento");
         jframe.setSize(width, height);
@@ -31,11 +33,12 @@ public class WindowAddAli implements ActionListener {
         jframe.setContentPane(jpanel);
 
         this.nutricionista = nutricionista;
+        this.pacsDaNut = pacsDaNut;
         this.width = width;
         this.height = height;
     }
 
-    WindowAddAli(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista, int nroAli){
+    WindowAddAli(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista, List<Paciente> pacsDaNut, int nroAli){
         this.jframe = jframe;
         jframe.setTitle("Editar alimento");
         jframe.setSize(width, height);
@@ -49,6 +52,7 @@ public class WindowAddAli implements ActionListener {
         jframe.setContentPane(jpanel);
 
         this.nutricionista = nutricionista;
+        this.pacsDaNut = pacsDaNut;
         this.width = width;
         this.height = height;
         this.nroAli = nroAli;
@@ -158,14 +162,14 @@ public class WindowAddAli implements ActionListener {
     public void actionPerformed(ActionEvent event) {
         if(event.getSource() == btnLogout){
             WindowLogin telaLogin = new WindowLogin(
-                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut);
             this.remComponent();
             jpanel.repaint();
             telaLogin.initComponent();
         }
         else if(event.getSource() == btnVoltar && jframe.getTitle().equals("Add alimento")){
             WindowListAli telaListAli = new WindowListAli(
-                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut);
             this.remComponent();
             jpanel.repaint();
             telaListAli.initList();
@@ -173,7 +177,7 @@ public class WindowAddAli implements ActionListener {
         }
         else if(event.getSource() == btnVoltar && jframe.getTitle().equals("Editar alimento")){
             WindowDadosAli telaDadosAli = new WindowDadosAli(
-                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, nroAli);
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut, nroAli);
             this.remComponent();
             jpanel.repaint();
             telaDadosAli.initComponent();
@@ -188,7 +192,7 @@ public class WindowAddAli implements ActionListener {
                 nutricionista.criarAli(nome, quant, peso, calrs);
 
                 WindowListAli telaListAli = new WindowListAli(
-                        this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
+                        this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut);
                 this.remComponent();
                 jpanel.repaint();
                 telaListAli.initList();
@@ -197,7 +201,7 @@ public class WindowAddAli implements ActionListener {
                 nutricionista.editarAli(nome, quant, peso, calrs, nroAli);
 
                 WindowDadosAli telaDadosAli = new WindowDadosAli(
-                        this.jframe, this.jpanel, this.width, this.height, this.nutricionista, nroAli);
+                        this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut, nroAli);
                 this.remComponent();
                 jpanel.repaint();
                 telaDadosAli.initComponent();

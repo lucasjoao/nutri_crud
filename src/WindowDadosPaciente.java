@@ -3,9 +3,11 @@ import javax.swing.*;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 public class WindowDadosPaciente implements ActionListener{
 
+    private List<Paciente> pacsDaNut;
     private JFrame jframe;
     private JPanel jpanel;
     private Nutricionista nutricionista;
@@ -18,7 +20,7 @@ public class WindowDadosPaciente implements ActionListener{
 
     WindowDadosPaciente(){}
 
-    WindowDadosPaciente(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista, int nroPac){
+    WindowDadosPaciente(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista, List<Paciente> pacsDaNut, int nroPac){
         this.jframe = jframe;
         jframe.setTitle("Dados do paciente");
         jframe.setSize(width, height);
@@ -32,6 +34,7 @@ public class WindowDadosPaciente implements ActionListener{
         jframe.setContentPane(jpanel);
 
         this.nutricionista = nutricionista;
+        this.pacsDaNut = pacsDaNut;
         this.width = width;
         this.height = height;
         this.nroPac = nroPac;
@@ -224,14 +227,14 @@ public class WindowDadosPaciente implements ActionListener{
     public void actionPerformed(ActionEvent event) {
         if(event.getSource() == btnLogout){
             WindowLogin telaLogin = new WindowLogin(
-                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut);
             this.remComponent();
             jpanel.repaint();
             telaLogin.initComponent();
         }
         else if(event.getSource() == btnVoltar){
             WindowListPac telaListPac = new WindowListPac(
-                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut);
             this.remComponent();
             jpanel.repaint();
             telaListPac.initList();
@@ -239,7 +242,7 @@ public class WindowDadosPaciente implements ActionListener{
         }
         else if(event.getSource() == btnEditar){
             WindowAddPac telaEditarPaciente = new WindowAddPac(
-                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.nroPac);
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut, this.nroPac);
             this.remComponent();
             jpanel.repaint();
             telaEditarPaciente.initComponent();
@@ -253,7 +256,7 @@ public class WindowDadosPaciente implements ActionListener{
                 nutricionista.excluirPac(nroPac);
 
                 WindowListPac telaListPac = new WindowListPac(
-                        this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
+                        this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut);
                 this.remComponent();
                 jpanel.repaint();
                 telaListPac.initList();

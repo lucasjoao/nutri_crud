@@ -3,9 +3,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
 
 public class WindowListPac extends MouseAdapter implements ActionListener {
 
+    private List<Paciente> pacsDaNut;
     private JLabel lblTitulo;
     private JFrame jframe;
     private JPanel jpanel;
@@ -17,7 +19,7 @@ public class WindowListPac extends MouseAdapter implements ActionListener {
 
     WindowListPac(){}
 
-    WindowListPac(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista){
+    WindowListPac(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista, List<Paciente> pacsDaNut){
         this.jframe = jframe;
         jframe.setTitle("Pacientes");
         jframe.setSize(width, height);
@@ -29,6 +31,7 @@ public class WindowListPac extends MouseAdapter implements ActionListener {
         jpanel.setLayout(null);
 
         this.nutricionista = nutricionista;
+        this.pacsDaNut = pacsDaNut;
         this.width = width;
         this.height = height;
 
@@ -100,7 +103,7 @@ public class WindowListPac extends MouseAdapter implements ActionListener {
                 list.locationToIndex(e.getPoint())).equals("");
         if(e.getClickCount() == 2 && !checkVazio){
             WindowDadosPaciente telaDadosPaciente = new WindowDadosPaciente(
-                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista,
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut,
                     list.locationToIndex(e.getPoint()));
             this.remComponent();
             jpanel.repaint();
@@ -112,21 +115,21 @@ public class WindowListPac extends MouseAdapter implements ActionListener {
     public void actionPerformed(ActionEvent event) {
         if(event.getSource() == btnLogout){
             WindowLogin telaLogin = new WindowLogin(
-                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut);
             this.remComponent();
             jpanel.repaint();
             telaLogin.initComponent();
         }
         else if(event.getSource() == btnAdd){
             WindowAddPac telaAddPac= new WindowAddPac(
-                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut);
             this.remComponent();
             jpanel.repaint();
             telaAddPac.initComponent();
         }
         else if(event.getSource() == btnVoltar){
             WindowPosLogin telaPosLogin = new WindowPosLogin(
-                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut);
             this.remComponent();
             jpanel.repaint();
             telaPosLogin.initComponent();

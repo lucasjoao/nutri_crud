@@ -3,9 +3,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
 
 public class WindowListDie extends MouseAdapter implements ActionListener{
 
+    private List<Paciente> pacsDaNut;
     private JLabel lblTitulo;
     private JFrame jframe;
     private JPanel jpanel;
@@ -17,7 +19,7 @@ public class WindowListDie extends MouseAdapter implements ActionListener{
 
     WindowListDie(){}
 
-    WindowListDie(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista){
+    WindowListDie(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista, List<Paciente> pacsDaNut){
         this.jframe = jframe;
         jframe.setTitle("Dietas");
         jframe.setSize(width, height);
@@ -29,6 +31,7 @@ public class WindowListDie extends MouseAdapter implements ActionListener{
         jpanel.setLayout(null);
 
         this.nutricionista = nutricionista;
+        this.pacsDaNut = pacsDaNut;
         this.width = width;
         this.height = height;
     }
@@ -99,7 +102,7 @@ public class WindowListDie extends MouseAdapter implements ActionListener{
                 list.locationToIndex(e.getPoint())).equals("");
         if(e.getClickCount() == 2 && !checkVazio){
             WindowDadosDie telaDadosDie = new WindowDadosDie(
-                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista,
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut,
                     list.locationToIndex(e.getPoint()));
             this.remComponent();
             jpanel.repaint();
@@ -112,14 +115,14 @@ public class WindowListDie extends MouseAdapter implements ActionListener{
     public void actionPerformed(ActionEvent event) {
         if(event.getSource() == btnLogout){
             WindowLogin telaLogin = new WindowLogin(
-                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut);
             this.remComponent();
             jpanel.repaint();
             telaLogin.initComponent();
         }
         else if(event.getSource() == btnAdd){
             WindowAddDie telaAddDie= new WindowAddDie(
-                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut);
             this.remComponent();
             jpanel.repaint();
             telaAddDie.initTable(telaAddDie.initTableModel());
@@ -128,7 +131,7 @@ public class WindowListDie extends MouseAdapter implements ActionListener{
         }
         else if(event.getSource() == btnVoltar){
             WindowPosLogin telaPosLogin = new WindowPosLogin(
-                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut);
             this.remComponent();
             jpanel.repaint();
             telaPosLogin.initComponent();

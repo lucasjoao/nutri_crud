@@ -3,9 +3,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.util.List;
 
 public class WindowAddPac implements ActionListener, FocusListener {
 
+    private List<Paciente> pacsDaNut;
     private JLabel lblTitulo, lblNome, lblCpf, lblRg, lblEmail, lblProf, lblLogin,
             lblSenha, lblAlt, lblPeso, lblIdade, lblTtlImc, lblImc;
     private JTextField txtNome, txtCpf, txtRg, txtEmail, txtProf, txtLogin,
@@ -19,7 +21,7 @@ public class WindowAddPac implements ActionListener, FocusListener {
 
     WindowAddPac(){}
 
-    WindowAddPac(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista){
+    WindowAddPac(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista, List<Paciente> pacsDaNut){
         this.jframe = jframe;
         jframe.setTitle("Add paciente");
         jframe.setSize(width, height);
@@ -33,11 +35,12 @@ public class WindowAddPac implements ActionListener, FocusListener {
         jframe.setContentPane(jpanel);
 
         this.nutricionista = nutricionista;
+        this.pacsDaNut = pacsDaNut;
         this.width = width;
         this.height = height;
     }
 
-    WindowAddPac(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista, int nroPac){
+    WindowAddPac(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista, List<Paciente> pacsDaNut, int nroPac){
         this.jframe = jframe;
         jframe.setTitle("Editar paciente");
         jframe.setSize(width, height);
@@ -51,6 +54,7 @@ public class WindowAddPac implements ActionListener, FocusListener {
         jframe.setContentPane(jpanel);
 
         this.nutricionista = nutricionista;
+        this.pacsDaNut = pacsDaNut;
         this.width = width;
         this.height = height;
         this.nroPac = nroPac;
@@ -268,14 +272,14 @@ public class WindowAddPac implements ActionListener, FocusListener {
     public void actionPerformed(ActionEvent event) {
         if(event.getSource() == btnLogout){
             WindowLogin telaLogin = new WindowLogin(
-                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut);
             this.remComponent();
             jpanel.repaint();
             telaLogin.initComponent();
         }
         else if(event.getSource() == btnVoltar && jframe.getTitle().equals("Add paciente")){
             WindowListPac telaListPac = new WindowListPac(
-                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut);
             this.remComponent();
             jpanel.repaint();
             telaListPac.initList();
@@ -283,7 +287,7 @@ public class WindowAddPac implements ActionListener, FocusListener {
         }
         else if(event.getSource() == btnVoltar && jframe.getTitle().equals("Editar paciente")){
             WindowDadosPaciente telaDadosPaciente = new WindowDadosPaciente(
-                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, nroPac);
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut, nroPac);
             this.remComponent();
             jpanel.repaint();
             telaDadosPaciente.initComponent();
@@ -303,18 +307,18 @@ public class WindowAddPac implements ActionListener, FocusListener {
             if (jframe.getTitle().equals("Add paciente")){
                 nutricionista.criarPac(nome, cpf, rg, email, profissao, login, senha, altura, peso, idade);
 
-                /* unnecessary now
-                WindowAddDie telaAddDie = new WindowAddDie(
-                        this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
+                WindowListPac telaListPac = new WindowListPac(
+                        this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut);
                 this.remComponent();
                 jpanel.repaint();
-                telaAddDie.initComponent();
-                */
+                telaListPac.initList();
+                telaListPac.initComponent();
+
             } else {
                 nutricionista.editarPac(nome, cpf, rg, email, profissao, login, senha, altura, peso, idade, nroPac);
 
                 WindowDadosPaciente telaDadosPaciente = new WindowDadosPaciente(
-                        this.jframe, this.jpanel, this.width, this.height, this.nutricionista, nroPac);
+                        this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut, nroPac);
                 this.remComponent();
                 jpanel.repaint();
                 telaDadosPaciente.initComponent();

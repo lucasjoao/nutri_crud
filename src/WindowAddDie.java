@@ -10,6 +10,7 @@ import java.util.*;
 import java.util.List;
 
 public class WindowAddDie extends MouseAdapter implements ActionListener {
+    private List<Paciente> pacsDaNut;
     private JLabel lblTitulo, lblNomeDie, lblClrsTotal, lblClrs, lblInstr, lblInstrDel;
     private JFrame jframe;
     private JPanel jpanel;
@@ -29,7 +30,7 @@ public class WindowAddDie extends MouseAdapter implements ActionListener {
 
     WindowAddDie(){}
 
-    WindowAddDie(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista){
+    WindowAddDie(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista, List<Paciente> pacsDaNut){
         this.jframe = jframe;
         jframe.setTitle("Add dieta");
         jframe.setSize(width, height);
@@ -43,11 +44,12 @@ public class WindowAddDie extends MouseAdapter implements ActionListener {
         jframe.setContentPane(jpanel);
 
         this.nutricionista = nutricionista;
+        this.pacsDaNut = pacsDaNut;
         this.width = width;
         this.height = height;
     }
 
-    WindowAddDie(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista, int nroDie){
+    WindowAddDie(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista, List<Paciente> pacsDaNut, int nroDie){
         this.jframe = jframe;
         jframe.setTitle("Editar dieta");
         jframe.setSize(width, height);
@@ -61,6 +63,7 @@ public class WindowAddDie extends MouseAdapter implements ActionListener {
         jframe.setContentPane(jpanel);
 
         this.nutricionista = nutricionista;
+        this.pacsDaNut = pacsDaNut;
         this.width = width;
         this.height = height;
         this.nroDie = nroDie;
@@ -315,14 +318,14 @@ public class WindowAddDie extends MouseAdapter implements ActionListener {
     public void actionPerformed(ActionEvent event) {
         if(event.getSource() == btnLogout){
             WindowLogin telaLogin = new WindowLogin(
-                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut);
             this.remComponent();
             jpanel.repaint();
             telaLogin.initComponent();
         }
         else if(event.getSource() == btnVoltar && jframe.getTitle().equals("Add dieta")){
             WindowListDie telaListDie = new WindowListDie(
-                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut);
             this.remComponent();
             jpanel.repaint();
             telaListDie.initList();
@@ -330,7 +333,7 @@ public class WindowAddDie extends MouseAdapter implements ActionListener {
         }
         else if(event.getSource() == btnVoltar && jframe.getTitle().equals("Editar dieta")){
             WindowDadosDie telaDadosDie = new WindowDadosDie(
-                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, nroDie);
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut, nroDie);
             this.remComponent();
             jpanel.repaint();
             telaDadosDie.initTable();
@@ -375,7 +378,7 @@ public class WindowAddDie extends MouseAdapter implements ActionListener {
                 nutricionista.criarDie(nome, dmg, seg, ter, qua, qui, sex, sab);
 
                 WindowListDie telaListDie = new WindowListDie(
-                        this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
+                        this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut);
                 this.remComponent();
                 jpanel.repaint();
                 telaListDie.initList();
@@ -385,7 +388,7 @@ public class WindowAddDie extends MouseAdapter implements ActionListener {
                 nutricionista.editarDie(nome, dmg, seg, ter, qua, qui, sex, sab, nroDie);
 
                 WindowDadosDie telaDadosDie = new WindowDadosDie(
-                        this.jframe, this.jpanel, this.width, this.height, this.nutricionista, nroDie);
+                        this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut, nroDie);
                 this.remComponent();
                 jpanel.repaint();
                 telaDadosDie.initTable();

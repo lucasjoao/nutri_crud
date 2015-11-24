@@ -103,7 +103,7 @@ public class WindowLogin implements ActionListener {
             String senha = new String(senhaMask);
             if(nutricionista.logar(login, senha)){
                 WindowPosLogin telaPosLogin = new WindowPosLogin(
-                        this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
+                        this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut);
                 this.remComponent();
                 jpanel.repaint();
                 telaPosLogin.initComponent();
@@ -112,7 +112,7 @@ public class WindowLogin implements ActionListener {
                 for(Paciente paciente : pacsDaNut){
                     if(paciente.logar(login,senha)){
                         WindowDadosPaciente telaDadosPaciente = new WindowDadosPaciente(
-                                this.jframe, this.jpanel, this.width, this.height, this.nutricionista,
+                                this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut,
                                 pacsDaNut.indexOf(paciente));
                         this.remComponent();
                         jpanel.repaint();
