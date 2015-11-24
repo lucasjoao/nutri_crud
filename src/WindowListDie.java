@@ -95,7 +95,6 @@ public class WindowListDie extends MouseAdapter implements ActionListener{
 
     @Override
     public void mouseClicked(MouseEvent e){
-        /* todo
         boolean checkVazio = nutricionista.retornaNomeDie(
                 list.locationToIndex(e.getPoint())).equals("");
         if(e.getClickCount() == 2 && !checkVazio){
@@ -107,7 +106,6 @@ public class WindowListDie extends MouseAdapter implements ActionListener{
             telaDadosDie.initTable();
             telaDadosDie.initComponent();
         }
-        */
     }
 
     @Override

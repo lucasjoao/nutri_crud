@@ -205,7 +205,7 @@ public class WindowAddCard extends MouseAdapter implements ActionListener {
     public void preencherCampos(Nutricionista nutricionista, int nroCard){
         txtNomeCard.setText(nutricionista.retornaNomeCard(nroCard));
         if(gambiarra == 0)
-            lblClrsTotal.setText(String.valueOf(nutricionista.calculaTotalClrs(nroCard)));
+            lblClrsTotal.setText(String.valueOf(nutricionista.calculaTotalClrsCard(nroCard)));
     }
 
     public DefaultTableModel pegaInfosAlimento(Object nome){

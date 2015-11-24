@@ -210,11 +210,74 @@ public class Nutricionista implements Logavel {
             return null;
     }
 
-    public double calculaTotalClrs(int posicao){
+    public List<Cardapio> retornaCardsDmg(int posicao) {
+        if(diesDaNut.get(posicao) != null)
+            return diesDaNut.get(posicao).getDmg();
+        else
+            return null;
+    }
+
+    public List<Cardapio> retornaCardsSeg(int posicao) {
+        if(diesDaNut.get(posicao) != null)
+            return diesDaNut.get(posicao).getSeg();
+        else
+            return null;
+    }
+
+    public List<Cardapio> retornaCardsTer(int posicao) {
+        if(diesDaNut.get(posicao) != null)
+            return diesDaNut.get(posicao).getTer();
+        else
+            return null;
+    }
+
+    public List<Cardapio> retornaCardsQua(int posicao) {
+        if(diesDaNut.get(posicao) != null)
+            return diesDaNut.get(posicao).getQua();
+        else
+            return null;
+    }
+
+    public List<Cardapio> retornaCardsQui(int posicao) {
+        if(diesDaNut.get(posicao) != null)
+            return diesDaNut.get(posicao).getQui();
+        else
+            return null;
+    }
+
+    public List<Cardapio> retornaCardsSex(int posicao) {
+        if(diesDaNut.get(posicao) != null)
+            return diesDaNut.get(posicao).getSex();
+        else
+            return null;
+    }
+
+    public List<Cardapio> retornaCardsSab(int posicao) {
+        if(diesDaNut.get(posicao) != null)
+            return diesDaNut.get(posicao).getSab();
+        else
+            return null;
+    }
+
+    public double calculaTotalClrsCard(int posicao){
         if(cardsDaNut.get(posicao) != null)
             return cardsDaNut.get(posicao).totalClrs();
         else
             return 0.0;
+    }
+
+    public double calculaTotalClrsDie(int posicao){
+        if(diesDaNut.get(posicao) != null)
+            return diesDaNut.get(posicao).totalClrs();
+        else
+            return 0.0;
+    }
+
+    public int calculaMaiorList(int posicao){
+        if(diesDaNut.get(posicao) != null)
+            return diesDaNut.get(posicao).tamMaiorLista();
+        else
+            return 0;
     }
 
     public List<Alimento> getAlisDaNut() {

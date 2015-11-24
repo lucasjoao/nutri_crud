@@ -4,28 +4,25 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
 
-public class WindowDadosCard implements ActionListener {
+public class WindowDadosDie implements ActionListener {
 
     private JFrame jframe;
     private JPanel jpanel;
     private Nutricionista nutricionista;
     private JScrollPane scrollPane;
     private JTable table;
-    private JLabel lblTitulo, lblNomeCard, lblClrs;
-    private JLabel lblTtlNomeCard, lblTtlClrs;
+    private JLabel lblTitulo, lblNomeDie, lblClrs;
+    private JLabel lblTtlNomeDie, lblTtlClrs;
     private JButton btnLogout, btnVoltar, btnEditar, btnExcluir;
-    private int width, height, nroCard;
+    private int width, height, nroDie;
     private DefaultTableModel dadosTable;
 
-    WindowDadosCard(){}
+    WindowDadosDie(){}
 
-    WindowDadosCard(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista, int nroCard){
+    WindowDadosDie(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista, int nroDie){
         this.jframe = jframe;
-        jframe.setTitle("Dados do cardápio");
+        jframe.setTitle("Dados da dieta");
         jframe.setSize(width, height);
         jframe.setResizable(false);
         jframe.setLocationRelativeTo(null);
@@ -37,29 +34,22 @@ public class WindowDadosCard implements ActionListener {
         this.nutricionista = nutricionista;
         this.width = width;
         this.height = height;
-        this.nroCard = nroCard;
+        this.nroDie = nroDie;
     }
 
     public void initTable(){
         this.dadosTable = new DefaultTableModel();
 
-        //mk columns
-        dadosTable.addColumn("Nome");
-        dadosTable.addColumn("Quantidade");
-        dadosTable.addColumn("Peso (g ou ml)");
-        dadosTable.addColumn("Calorias");
+        dadosTable.addColumn("Domingo");
+        dadosTable.addColumn("Segunda");
+        dadosTable.addColumn("Terça");
+        dadosTable.addColumn("Quarta");
+        dadosTable.addColumn("Quinta");
+        dadosTable.addColumn("Sexta");
+        dadosTable.addColumn("Sábado");
 
-        //mk rows
-        for(Alimento alimento : nutricionista.retornaAlisCard(nroCard)){
-            String nome = alimento.getNome();
-            String quant = alimento.getQuantidade();
-            double peso = alimento.getPeso();
-            double clrs = alimento.getCalorias();
-
-            Object[] dadosProv = {nome, quant, peso, clrs};
-
-            dadosTable.addRow(dadosProv);
-        }
+        dadosTable.setRowCount(nutricionista.calculaMaiorList(nroDie));
+        this.fazCelulas();
 
         //mk alignment
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
@@ -96,27 +86,27 @@ public class WindowDadosCard implements ActionListener {
         jframe.setContentPane(jpanel);
 
         //make  lblTitulo
-        this.lblTitulo = new JLabel(nutricionista.retornaNomeCard(nroCard));
+        this.lblTitulo = new JLabel(nutricionista.retornaNomeDie(nroDie));
         lblTitulo.setSize(width/3, height/10);
         lblTitulo.setFont(lblTitulo.getFont().deriveFont(24f));
         lblTitulo.setLocation(((width - lblTitulo.getWidth())/2), height/20);
         jpanel.add(lblTitulo);
 
         //make lblNome
-        this.lblNomeCard = new JLabel(nutricionista.retornaNomeCard(nroCard));
-        lblNomeCard.setSize(((width / 2) - height/22), height/22);
-        lblNomeCard.setForeground(Color.blue);
-        lblNomeCard.setLocation(width/3, height/6);
-        jpanel.add(lblNomeCard);
+        this.lblNomeDie = new JLabel(nutricionista.retornaNomeDie(nroDie));
+        lblNomeDie.setSize(((width / 2) - height/22), height/22);
+        lblNomeDie.setForeground(Color.blue);
+        lblNomeDie.setLocation(width/3, height/6);
+        jpanel.add(lblNomeDie);
 
         //make lblNome rotulo
-        this.lblTtlNomeCard = new JLabel("Nome: ");
-        lblTtlNomeCard.setSize((width - height/22), height/22);
-        lblTtlNomeCard.setLocation(width/8, height/6);
-        jpanel.add(lblTtlNomeCard);
+        this.lblTtlNomeDie = new JLabel("Nome: ");
+        lblTtlNomeDie.setSize((width - height/22), height/22);
+        lblTtlNomeDie.setLocation(width/8, height/6);
+        jpanel.add(lblTtlNomeDie);
 
         //make lbl calories
-        this.lblClrs = new JLabel(String.valueOf(nutricionista.calculaTotalClrsCard(nroCard)));
+        this.lblClrs = new JLabel(String.valueOf(nutricionista.calculaTotalClrsDie(nroDie)));
         lblClrs.setSize(((width / 2) - height / 22), height / 22);
         lblClrs.setLocation(width / 2, 5 * height/7);
         lblClrs.setForeground(Color.blue);
@@ -163,11 +153,62 @@ public class WindowDadosCard implements ActionListener {
         jpanel.remove(btnVoltar);
         jpanel.remove(btnEditar);
         jpanel.remove(btnExcluir);
-        jpanel.remove(lblTtlNomeCard);
-        jpanel.remove(lblNomeCard);
+        jpanel.remove(lblTtlNomeDie);
+        jpanel.remove(lblNomeDie);
         jpanel.remove(scrollPane);
         jpanel.remove(lblClrs);
         jpanel.remove(lblTtlClrs);
+    }
+
+    public void fazCelulas(){
+        int a = 0;
+        for(Cardapio cardapio : nutricionista.retornaCardsDmg(nroDie)){
+            String nome = cardapio.getNome();
+            dadosTable.setValueAt(nome, a, 0);
+            a++;
+        }
+
+        int b = 0;
+        for(Cardapio cardapio : nutricionista.retornaCardsSeg(nroDie)){
+            String nome = cardapio.getNome();
+            dadosTable.setValueAt(nome, b, 1);
+            b++;
+        }
+
+        int c = 0;
+        for(Cardapio cardapio : nutricionista.retornaCardsTer(nroDie)){
+            String nome = cardapio.getNome();
+            dadosTable.setValueAt(nome, c, 2);
+            c++;
+        }
+
+        int d = 0;
+        for(Cardapio cardapio : nutricionista.retornaCardsQua(nroDie)){
+            String nome = cardapio.getNome();
+            dadosTable.setValueAt(nome, d, 3);
+            d++;
+        }
+
+        int e = 0;
+        for(Cardapio cardapio : nutricionista.retornaCardsQui(nroDie)){
+            String nome = cardapio.getNome();
+            dadosTable.setValueAt(nome, e, 4);
+            e++;
+        }
+
+        int f = 0;
+        for(Cardapio cardapio : nutricionista.retornaCardsSex(nroDie)){
+            String nome = cardapio.getNome();
+            dadosTable.setValueAt(nome, f, 5);
+            f++;
+        }
+
+        int g = 0;
+        for(Cardapio cardapio : nutricionista.retornaCardsSab(nroDie)){
+            String nome = cardapio.getNome();
+            dadosTable.setValueAt(nome, g, 6);
+            g++;
+        }
     }
 
     @Override
@@ -180,37 +221,41 @@ public class WindowDadosCard implements ActionListener {
             telaLogin.initComponent();
         }
         else if(event.getSource() == btnVoltar) {
-            WindowListCard telaListCard = new WindowListCard(
+            WindowListDie telaListDie = new WindowListDie(
                     this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
             this.remComponent();
             jpanel.repaint();
-            telaListCard.initList();
-            telaListCard.initComponent();
+            telaListDie.initList();
+            telaListDie.initComponent();
         }
         else if(event.getSource() == btnEditar){
-            WindowAddCard telaEditarCard = new WindowAddCard(
-                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.nroCard);
+            /* todo
+            WindowAddDie telaEditarDie = new WindowAddDie(
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.nroDie);
             this.remComponent();
             jpanel.repaint();
-            telaEditarCard.initTable(telaEditarCard.copiarTableModel(dadosTable));
-            telaEditarCard.initComponent();
-            telaEditarCard.initCombos();
-            telaEditarCard.preencherCampos(nutricionista, nroCard);
+            telaEditarDie.initTable(telaEditarDie.copiarTableModel(dadosTable));
+            telaEditarDie.initComponent();
+            telaEditarDie.initCombos();
+            telaEditarDie.preencherCampos(nutricionista, nroDie);
+            */
         }
         else if(event.getSource() == btnExcluir){
-            String mensagem = "Você deseja mesmo excluir o alimento \n" + nutricionista.retornaNomeCard(nroCard) + "?";
+            /* todo
+            String mensagem = "Você deseja mesmo excluir o alimento \n" + nutricionista.retornaNomeDie(nroDie) + "?";
             int decisao = JOptionPane.showConfirmDialog(null, mensagem, mensagem, JOptionPane.YES_NO_OPTION);
 
             if(decisao == 0) {
-                nutricionista.excluirCard(nroCard);
+                nutricionista.excluirDie(nroDie);
 
-                WindowListCard telaListCard = new WindowListCard(
+                WindowListDie telaListDie = new WindowListDie(
                         this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
                 this.remComponent();
                 jpanel.repaint();
-                telaListCard.initList();
-                telaListCard.initComponent();
+                telaListDie.initList();
+                telaListDie.initComponent();
             }
+            */
         }
     }
 }

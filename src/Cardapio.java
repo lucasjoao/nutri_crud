@@ -42,4 +42,8 @@ public class Cardapio {
     public List<Alimento> getAlimentos() {
         return alimentos;
     }
+
+    public double getClrs() {
+        return clrs;
+    }
 }
