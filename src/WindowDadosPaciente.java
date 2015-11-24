@@ -17,10 +17,12 @@ public class WindowDadosPaciente implements ActionListener{
             lblTtlProfissao, lblTtlImc;
     private JButton btnLogout, btnVoltar, btnEditar, btnExcluir;
     private int width, height, nroPac;
+    private boolean root;
 
     WindowDadosPaciente(){}
 
-    WindowDadosPaciente(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista, List<Paciente> pacsDaNut, int nroPac){
+    WindowDadosPaciente(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista,
+                        List<Paciente> pacsDaNut, int nroPac, boolean root){
         this.jframe = jframe;
         jframe.setTitle("Dados do paciente");
         jframe.setSize(width, height);
@@ -35,6 +37,7 @@ public class WindowDadosPaciente implements ActionListener{
 
         this.nutricionista = nutricionista;
         this.pacsDaNut = pacsDaNut;
+        this.root = root;
         this.width = width;
         this.height = height;
         this.nroPac = nroPac;
@@ -175,26 +178,28 @@ public class WindowDadosPaciente implements ActionListener{
         btnLogout.addActionListener(this);
         jpanel.add(btnLogout);
 
-        //make editar btn
-        this.btnEditar = new JButton("Editar");
-        btnEditar.setSize(width/5, height/20);
-        btnEditar.setLocation(2*width / 7, 6*height/7);
-        btnEditar.addActionListener(this);
-        jpanel.add(btnEditar);
+        if(this.root) {
+            //make editar btn
+            this.btnEditar = new JButton("Editar");
+            btnEditar.setSize(width / 5, height / 20);
+            btnEditar.setLocation(2 * width / 7, 6 * height / 7);
+            btnEditar.addActionListener(this);
+            jpanel.add(btnEditar);
 
-        //make voltar btn
-        this.btnVoltar = new JButton("<---");
-        btnVoltar.setSize(width/6, height/20);
-        btnVoltar.setLocation(width / 10, 6*height/7);
-        btnVoltar.addActionListener(this);
-        jpanel.add(btnVoltar);
+            //make voltar btn
+            this.btnVoltar = new JButton("<---");
+            btnVoltar.setSize(width / 6, height / 20);
+            btnVoltar.setLocation(width / 10, 6 * height / 7);
+            btnVoltar.addActionListener(this);
+            jpanel.add(btnVoltar);
 
-        //make excluir btn
-        this.btnExcluir = new JButton("Excluir");
-        btnExcluir.setSize(width/5, height/20);
-        btnExcluir.setLocation(width / 2, 6*height/7);
-        btnExcluir.addActionListener(this);
-        jpanel.add(btnExcluir);
+            //make excluir btn
+            this.btnExcluir = new JButton("Excluir");
+            btnExcluir.setSize(width / 5, height / 20);
+            btnExcluir.setLocation(width / 2, 6 * height / 7);
+            btnExcluir.addActionListener(this);
+            jpanel.add(btnExcluir);
+        }
     }
 
     public void remComponent(){
@@ -203,14 +208,11 @@ public class WindowDadosPaciente implements ActionListener{
         jpanel.remove(lblRg);
         jpanel.remove(lblCpf);
         jpanel.remove(lblEmail);
-        jpanel.remove(btnLogout);
-        jpanel.remove(btnVoltar);
         jpanel.remove(lblAltura);
         jpanel.remove(lblPeso);
         jpanel.remove(lblIdade);
         jpanel.remove(lblProfissao);
         jpanel.remove(lblImc);
-        jpanel.remove(btnEditar);
         jpanel.remove(lblTtlNomePaciente);
         jpanel.remove(lblTtlRg);
         jpanel.remove(lblTtlCpf);
@@ -220,7 +222,12 @@ public class WindowDadosPaciente implements ActionListener{
         jpanel.remove(lblTtlIdade);
         jpanel.remove(lblTtlProfissao);
         jpanel.remove(lblTtlImc);
-        jpanel.remove(btnExcluir);
+        jpanel.remove(btnLogout);
+        if(this.root) {
+            jpanel.remove(btnExcluir);
+            jpanel.remove(btnEditar);
+            jpanel.remove(btnVoltar);
+        }
     }
 
     @Override

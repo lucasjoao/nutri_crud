@@ -104,7 +104,7 @@ public class WindowListPac extends MouseAdapter implements ActionListener {
         if(e.getClickCount() == 2 && !checkVazio){
             WindowDadosPaciente telaDadosPaciente = new WindowDadosPaciente(
                     this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut,
-                    list.locationToIndex(e.getPoint()));
+                    list.locationToIndex(e.getPoint()), true);
             this.remComponent();
             jpanel.repaint();
             telaDadosPaciente.initComponent();

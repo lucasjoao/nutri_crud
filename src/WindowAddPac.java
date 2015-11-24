@@ -287,7 +287,7 @@ public class WindowAddPac implements ActionListener, FocusListener {
         }
         else if(event.getSource() == btnVoltar && jframe.getTitle().equals("Editar paciente")){
             WindowDadosPaciente telaDadosPaciente = new WindowDadosPaciente(
-                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut, nroPac);
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut, nroPac, true);
             this.remComponent();
             jpanel.repaint();
             telaDadosPaciente.initComponent();
@@ -318,7 +318,7 @@ public class WindowAddPac implements ActionListener, FocusListener {
                 nutricionista.editarPac(nome, cpf, rg, email, profissao, login, senha, altura, peso, idade, nroPac);
 
                 WindowDadosPaciente telaDadosPaciente = new WindowDadosPaciente(
-                        this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut, nroPac);
+                        this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut, nroPac, true);
                 this.remComponent();
                 jpanel.repaint();
                 telaDadosPaciente.initComponent();

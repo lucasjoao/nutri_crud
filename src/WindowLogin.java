@@ -113,7 +113,7 @@ public class WindowLogin implements ActionListener {
                     if(paciente.logar(login,senha)){
                         WindowDadosPaciente telaDadosPaciente = new WindowDadosPaciente(
                                 this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut,
-                                pacsDaNut.indexOf(paciente));
+                                pacsDaNut.indexOf(paciente), false);
                         this.remComponent();
                         jpanel.repaint();
                         telaDadosPaciente.initComponent();
