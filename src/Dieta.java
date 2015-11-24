@@ -77,34 +77,6 @@ public class Dieta {
         return totalClrs;
     }
 
-    public void colocaDmg(Cardapio card){
-        this.dmg.add(card);
-    }
-
-    public void colocaSeg(Cardapio card){
-        this.seg.add(card);
-    }
-
-    public void colocaTer(Cardapio card){
-        this.ter.add(card);
-    }
-
-    public void colocaQua(Cardapio card){
-        this.qua.add(card);
-    }
-
-    public void colocaQui(Cardapio card){
-        this.qui.add(card);
-    }
-
-    public void colocaSex(Cardapio card){
-        this.sex.add(card);
-    }
-
-    public void colocaSab(Cardapio card){
-        this.sab.add(card);
-    }
-
     public String getNome() {
         return nome;
     }

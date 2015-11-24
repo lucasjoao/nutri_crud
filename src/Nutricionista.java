@@ -43,6 +43,12 @@ public class Nutricionista implements Logavel {
         this.cardsDaNut.add(new Cardapio(nome, alimentos));
     }
 
+    public void criarDie(String nome, List<Cardapio> cardsDmg, List<Cardapio> cardsSeg, List<Cardapio> cardsTer,
+                         List<Cardapio> cardsQua, List<Cardapio> cardsQui, List<Cardapio> cardsSex,
+                         List<Cardapio> cardsSab){
+        this.diesDaNut.add(new Dieta(nome, cardsDmg, cardsSeg, cardsTer, cardsQua, cardsQui, cardsSex, cardsSab));
+    }
+
     public void editarAli(String nome, String quantidade, double peso, double calrs, int nroPac){
         this.alisDaNut.set(nroPac, new Alimento(nome, quantidade, peso, calrs));
     }
@@ -284,8 +290,21 @@ public class Nutricionista implements Logavel {
             return 0;
     }
 
+    public double calculaClrsCard(Object nome){
+        double clrsCard = 0.0;
+        for(Cardapio cardapio : this.cardsDaNut){
+            if(cardapio.getNome().equals(nome))
+                clrsCard = cardapio.getClrs();
+        }
+        return clrsCard;
+    }
+
     public List<Alimento> getAlisDaNut() {
         return alisDaNut;
+    }
+
+    public List<Cardapio> getCardsDaNut() {
+        return cardsDaNut;
     }
 
     public boolean logar(String login, String senha) {

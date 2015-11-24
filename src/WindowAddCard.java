@@ -18,12 +18,13 @@ public class WindowAddCard extends MouseAdapter implements ActionListener {
     private JPanel jpanel;
     private JTable table;
     private DefaultTableModel dadosTable;
+
     private JScrollPane scrollPane;
     private Nutricionista nutricionista;
     private int width, height;
     private JButton btnLogout, btnVoltar, btnSalvar;
     private int nroCard;
-    private String nomeCard;
+    // primeira execucao na edicao pega clrs do que está salvo no cardápio, depois vai calculando a cada +/- cardapio:
     private int gambiarra = 0;
 
     WindowAddCard(){}
@@ -223,15 +224,7 @@ public class WindowAddCard extends MouseAdapter implements ActionListener {
         return dadosTable;
     }
 
-    public DefaultTableModel retiraInfosTabela(Object nome){
-        int linha = 0;
-        for(int i = 0; i < this.dadosTable.getRowCount() - 1; i++){
-            if(nome.equals(dadosTable.getValueAt(i, 0))){
-                linha = i;
-                break;
-            }
-        }
-
+    public DefaultTableModel retiraInfosTabela(int linha){
         dadosTable.removeRow(linha);
         return dadosTable;
     }
@@ -268,7 +261,7 @@ public class WindowAddCard extends MouseAdapter implements ActionListener {
                 gambiarra++;
                 this.remComponent();
                 jpanel.repaint();
-                this.initTable(this.retiraInfosTabela(dadosTable.getValueAt(table.getSelectedRow(),0)));
+                this.initTable(this.retiraInfosTabela(table.getSelectedRow()));
                 this.initComponent();
                 lblClrsTotal.setText(String.valueOf(this.calculaClrsTotal()));
                 this.initCombos();

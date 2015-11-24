@@ -118,15 +118,13 @@ public class WindowListDie extends MouseAdapter implements ActionListener{
             telaLogin.initComponent();
         }
         else if(event.getSource() == btnAdd){
-            /* todo
             WindowAddDie telaAddDie= new WindowAddDie(
                     this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
             this.remComponent();
             jpanel.repaint();
             telaAddDie.initTable(telaAddDie.initTableModel());
             telaAddDie.initComponent();
-            telaAddDie.initCombos();
-            */
+            telaAddDie.initComboCard();
         }
         else if(event.getSource() == btnVoltar){
             WindowPosLogin telaPosLogin = new WindowPosLogin(
