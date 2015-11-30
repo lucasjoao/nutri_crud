@@ -45,21 +45,18 @@ public class WindowLogin implements ActionListener {
         lblTitulo.setFont(lblTitulo.getFont().deriveFont(31f));
         lblTitulo.setLocation(((width - lblTitulo.getWidth())/2), height/20);
         jpanel.add(lblTitulo);
-        //jpanel.setComponentZOrder(lblTitulo, 3);
 
         //make login lbl
         this.lblLogin = new JLabel("Login:");
         lblLogin.setSize(width/5, height/20);
         lblLogin.setLocation(width/5,height/4);
         jpanel.add(lblLogin);
-        //jpanel.setComponentZOrder(lblLogin, 3);
 
         //make login field
         this.txtLogin = new JTextField();
         txtLogin.setSize(width/3,height/25);
         txtLogin.setLocation((width/3 + width/20),height/4);
         jpanel.add(txtLogin);
-        //jpanel.setComponentZOrder(txtLogin, 3);
 
         //make password lbl
         this.lblSenha = new JLabel("Senha:");
@@ -92,7 +89,6 @@ public class WindowLogin implements ActionListener {
         lblImg.setBounds(0,0,470,470);
         lblImg.setLayout(null);
         jpanel.add(lblImg);
-        //jpanel.setComponentZOrder(lblImg, 0);
     }
 
     public void remComponent(){

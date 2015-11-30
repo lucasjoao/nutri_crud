@@ -96,7 +96,6 @@ public class WindowListDie extends MouseAdapter implements ActionListener{
         lblImg.setBounds(0,0,470,470);
         lblImg.setLayout(null);
         jpanel.add(lblImg);
-        //jpanel.setComponentZOrder(lblImg, 0);
     }
 
     public void remComponent(){
