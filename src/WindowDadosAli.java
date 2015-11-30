@@ -1,13 +1,10 @@
 import javax.swing.*;
-
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 
 public class WindowDadosAli implements ActionListener{
 
-    private List<Paciente> pacsDaNut;
     private JFrame jframe;
     private JPanel jpanel;
     private Nutricionista nutricionista;
@@ -15,8 +12,6 @@ public class WindowDadosAli implements ActionListener{
     private JLabel lblTtlNomeAli, lblTtlQuant, lblTtlClrs, lblTtlPeso;
     private JButton btnLogout, btnVoltar, btnEditar, btnExcluir;
     private int width, height, nroAli;
-
-    WindowDadosAli(){}
 
     WindowDadosAli(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista, int nroAli){
         this.jframe = jframe;
@@ -32,7 +27,6 @@ public class WindowDadosAli implements ActionListener{
         jframe.setContentPane(jpanel);
 
         this.nutricionista = nutricionista;
-        this.pacsDaNut = nutricionista.getPacsDaNut();
         this.width = width;
         this.height = height;
         this.nroAli = nroAli;

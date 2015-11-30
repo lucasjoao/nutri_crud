@@ -1,13 +1,9 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.util.List;
 
 public class WindowAddAli implements ActionListener {
 
-    private List<Paciente> pacsDaNut;
     private JLabel lblTitulo, lblNomeAli, lblQuant, lblClrs, lblPeso;
     private JTextField txtNomeAli, txtQuant, txtClrs, txtPeso;
     private JFrame jframe;
@@ -16,8 +12,6 @@ public class WindowAddAli implements ActionListener {
     private int width, height;
     private JButton btnLogout, btnVoltar, btnSalvar;
     private int nroAli;
-
-    WindowAddAli(){}
 
     WindowAddAli(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista){
         this.jframe = jframe;
@@ -33,7 +27,6 @@ public class WindowAddAli implements ActionListener {
         jframe.setContentPane(jpanel);
 
         this.nutricionista = nutricionista;
-        this.pacsDaNut = nutricionista.getPacsDaNut();
         this.width = width;
         this.height = height;
     }
@@ -52,7 +45,6 @@ public class WindowAddAli implements ActionListener {
         jframe.setContentPane(jpanel);
 
         this.nutricionista = nutricionista;
-        this.pacsDaNut = nutricionista.getPacsDaNut();
         this.width = width;
         this.height = height;
         this.nroAli = nroAli;

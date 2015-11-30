@@ -4,25 +4,18 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
 
 public class WindowDadosCard implements ActionListener {
 
-    private List<Paciente> pacsDaNut;
     private JFrame jframe;
     private JPanel jpanel;
     private Nutricionista nutricionista;
     private JScrollPane scrollPane;
-    private JTable table;
     private JLabel lblTitulo, lblNomeCard, lblClrs;
     private JLabel lblTtlNomeCard, lblTtlClrs;
     private JButton btnLogout, btnVoltar, btnEditar, btnExcluir;
     private int width, height, nroCard;
     private DefaultTableModel dadosTable;
-
-    WindowDadosCard(){}
 
     WindowDadosCard(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista, int nroCard){
         this.jframe = jframe;
@@ -36,7 +29,6 @@ public class WindowDadosCard implements ActionListener {
         jpanel.setLayout(null);
 
         this.nutricionista = nutricionista;
-        this.pacsDaNut = nutricionista.getPacsDaNut();
         this.width = width;
         this.height = height;
         this.nroCard = nroCard;
@@ -68,7 +60,7 @@ public class WindowDadosCard implements ActionListener {
         centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
 
         //mk table
-        this.table = new JTable(dadosTable) {
+        JTable table = new JTable(dadosTable) {
             @Override
             public boolean isCellEditable(int row, int column){
                 return false;

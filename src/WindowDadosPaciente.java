@@ -3,11 +3,9 @@ import javax.swing.*;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 
 public class WindowDadosPaciente implements ActionListener{
 
-    private List<Paciente> pacsDaNut;
     private JFrame jframe;
     private JPanel jpanel;
     private Nutricionista nutricionista;
@@ -18,8 +16,6 @@ public class WindowDadosPaciente implements ActionListener{
     private JButton btnLogout, btnVoltar, btnEditar, btnExcluir, btnDie;
     private int width, height, nroPac;
     private boolean root;
-
-    WindowDadosPaciente(){}
 
     WindowDadosPaciente(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista,
                         int nroPac, boolean root){
@@ -36,7 +32,6 @@ public class WindowDadosPaciente implements ActionListener{
         jframe.setContentPane(jpanel);
 
         this.nutricionista = nutricionista;
-        this.pacsDaNut = nutricionista.getPacsDaNut();
         this.root = root;
         this.width = width;
         this.height = height;

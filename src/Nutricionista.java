@@ -233,55 +233,6 @@ public class Nutricionista implements Logavel {
             return null;
     }
 
-    public List<Cardapio> retornaCardsDmg(int posicao) {
-        if(diesDaNut.get(posicao) != null)
-            return diesDaNut.get(posicao).getDmg();
-        else
-            return null;
-    }
-
-    public List<Cardapio> retornaCardsSeg(int posicao) {
-        if(diesDaNut.get(posicao) != null)
-            return diesDaNut.get(posicao).getSeg();
-        else
-            return null;
-    }
-
-    public List<Cardapio> retornaCardsTer(int posicao) {
-        if(diesDaNut.get(posicao) != null)
-            return diesDaNut.get(posicao).getTer();
-        else
-            return null;
-    }
-
-    public List<Cardapio> retornaCardsQua(int posicao) {
-        if(diesDaNut.get(posicao) != null)
-            return diesDaNut.get(posicao).getQua();
-        else
-            return null;
-    }
-
-    public List<Cardapio> retornaCardsQui(int posicao) {
-        if(diesDaNut.get(posicao) != null)
-            return diesDaNut.get(posicao).getQui();
-        else
-            return null;
-    }
-
-    public List<Cardapio> retornaCardsSex(int posicao) {
-        if(diesDaNut.get(posicao) != null)
-            return diesDaNut.get(posicao).getSex();
-        else
-            return null;
-    }
-
-    public List<Cardapio> retornaCardsSab(int posicao) {
-        if(diesDaNut.get(posicao) != null)
-            return diesDaNut.get(posicao).getSab();
-        else
-            return null;
-    }
-
     public double calculaTotalClrsCard(int posicao){
         if(cardsDaNut.get(posicao) != null)
             return cardsDaNut.get(posicao).totalClrs();
@@ -314,10 +265,6 @@ public class Nutricionista implements Logavel {
 
     public List<Alimento> getAlisDaNut() {
         return alisDaNut;
-    }
-
-    public Paciente getPaciente(int i){
-        return pacsDaNut.get(i);
     }
 
     public List<Cardapio> getCardsDaNut() {

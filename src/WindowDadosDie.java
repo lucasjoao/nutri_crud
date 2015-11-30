@@ -5,7 +5,6 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.*;
 import java.util.List;
 
 public class WindowDadosDie implements ActionListener {
@@ -15,7 +14,6 @@ public class WindowDadosDie implements ActionListener {
     private Nutricionista nutricionista;
     private Dieta dieta;
     private JScrollPane scrollPane;
-    private JTable table;
     private JLabel lblTitulo, lblNomeDie, lblClrs;
     private JLabel lblTtlNomeDie, lblTtlClrs;
     private JButton btnLogout, btnVoltar, btnEditar, btnExcluir;
@@ -23,8 +21,6 @@ public class WindowDadosDie implements ActionListener {
     private DefaultTableModel dadosTable;
     private List<Paciente> pacsDaNut;
     private boolean root;
-
-    WindowDadosDie(){}
 
     WindowDadosDie(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista, int nroDie, boolean root){
         this.jframe = jframe;
@@ -65,7 +61,7 @@ public class WindowDadosDie implements ActionListener {
         centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
 
         //mk table
-        this.table = new JTable(dadosTable) {
+        JTable table = new JTable(dadosTable) {
             @Override
             public boolean isCellEditable(int row, int column){
                 return false;

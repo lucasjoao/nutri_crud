@@ -10,7 +10,7 @@ import java.util.*;
 import java.util.List;
 
 public class WindowAddDie extends MouseAdapter implements ActionListener {
-    private List<Paciente> pacsDaNut;
+
     private JLabel lblTitulo, lblNomeDie, lblClrsTotal, lblClrs, lblInstr, lblInstrDel;
     private JFrame jframe;
     private JPanel jpanel;
@@ -28,8 +28,6 @@ public class WindowAddDie extends MouseAdapter implements ActionListener {
     // primeira execucao na edicao pega clrs do que está salvo no cardápio, depois vai calculando a cada +/- cardapio:
     private int gambiarra = 0;
 
-    WindowAddDie(){}
-
     WindowAddDie(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista){
         this.jframe = jframe;
         jframe.setTitle("Add dieta");
@@ -44,7 +42,6 @@ public class WindowAddDie extends MouseAdapter implements ActionListener {
         jframe.setContentPane(jpanel);
 
         this.nutricionista = nutricionista;
-        this.pacsDaNut = nutricionista.getPacsDaNut();
         this.width = width;
         this.height = height;
     }
@@ -63,7 +60,6 @@ public class WindowAddDie extends MouseAdapter implements ActionListener {
         jframe.setContentPane(jpanel);
 
         this.nutricionista = nutricionista;
-        this.pacsDaNut = nutricionista.getPacsDaNut();
         this.width = width;
         this.height = height;
         this.nroDie = nroDie;

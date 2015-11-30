@@ -4,11 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.List;
 
 public class WindowListPac extends MouseAdapter implements ActionListener {
 
-    private List<Paciente> pacsDaNut;
     private JLabel lblTitulo;
     private JFrame jframe;
     private JPanel jpanel;
@@ -18,8 +16,6 @@ public class WindowListPac extends MouseAdapter implements ActionListener {
     private JButton btnLogout, btnAdd, btnVoltar;
     private int width, height;
     private JLabel lblImg;
-
-    WindowListPac(){}
 
     WindowListPac(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista){
         this.jframe = jframe;
@@ -33,7 +29,6 @@ public class WindowListPac extends MouseAdapter implements ActionListener {
         jpanel.setLayout(null);
 
         this.nutricionista = nutricionista;
-        this.pacsDaNut = nutricionista.getPacsDaNut();
         this.width = width;
         this.height = height;
 

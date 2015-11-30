@@ -11,7 +11,6 @@ import java.util.List;
 
 public class WindowAddCard extends MouseAdapter implements ActionListener {
 
-    private List<Paciente> pacsDaNut;
     private JLabel lblTitulo, lblNomeCard, lblClrs, lblInstr, lblClrsTotal;
     private JTextField txtNomeCard;
     private JComboBox addCard;
@@ -27,8 +26,6 @@ public class WindowAddCard extends MouseAdapter implements ActionListener {
     // primeira execucao na edicao pega clrs do que está salvo no cardápio, depois vai calculando a cada +/- cardapio:
     private int gambiarra = 0;
 
-    WindowAddCard(){}
-
     WindowAddCard(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista){
         this.jframe = jframe;
         jframe.setTitle("Add cardápio");
@@ -41,7 +38,6 @@ public class WindowAddCard extends MouseAdapter implements ActionListener {
         jpanel.setLayout(null);
 
         this.nutricionista = nutricionista;
-        this.pacsDaNut = nutricionista.getPacsDaNut();
         this.width = width;
         this.height = height;
     }
@@ -60,7 +56,6 @@ public class WindowAddCard extends MouseAdapter implements ActionListener {
         jframe.setContentPane(jpanel);
 
         this.nutricionista = nutricionista;
-        this.pacsDaNut = nutricionista.getPacsDaNut();
         this.width = width;
         this.height = height;
         this.nroCard = nroCard;

@@ -4,11 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.util.List;
 
 public class WindowAddPac implements ActionListener, FocusListener {
 
-    private List<Paciente> pacsDaNut;
     private JLabel lblTitulo, lblNome, lblCpf, lblRg, lblEmail, lblProf, lblLogin,
             lblSenha, lblAlt, lblPeso, lblIdade, lblTtlImc, lblImc, lblDie;
     private JTextField txtNome, txtCpf, txtRg, txtEmail, txtProf, txtLogin,
@@ -20,8 +18,6 @@ public class WindowAddPac implements ActionListener, FocusListener {
     private JButton btnLogout, btnVoltar, btnSalvar;
     private int nroPac;
     private JComboBox addDie;
-
-    WindowAddPac(){}
 
     WindowAddPac(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista){
         this.jframe = jframe;
@@ -37,7 +33,6 @@ public class WindowAddPac implements ActionListener, FocusListener {
         jframe.setContentPane(jpanel);
 
         this.nutricionista = nutricionista;
-        this.pacsDaNut = nutricionista.getPacsDaNut();
         this.width = width;
         this.height = height;
     }
@@ -56,7 +51,6 @@ public class WindowAddPac implements ActionListener, FocusListener {
         jframe.setContentPane(jpanel);
 
         this.nutricionista = nutricionista;
-        this.pacsDaNut = nutricionista.getPacsDaNut();
         this.width = width;
         this.height = height;
         this.nroPac = nroPac;
