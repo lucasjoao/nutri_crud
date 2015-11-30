@@ -333,7 +333,7 @@ public class WindowAddDie extends MouseAdapter implements ActionListener {
         }
         else if(event.getSource() == btnVoltar && jframe.getTitle().equals("Editar dieta")){
             WindowDadosDie telaDadosDie = new WindowDadosDie(
-                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, nroDie);
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, nroDie, true);
             this.remComponent();
             jpanel.repaint();
             telaDadosDie.initTable();
@@ -388,7 +388,7 @@ public class WindowAddDie extends MouseAdapter implements ActionListener {
                 nutricionista.editarDie(nome, dmg, seg, ter, qua, qui, sex, sab, nroDie);
 
                 WindowDadosDie telaDadosDie = new WindowDadosDie(
-                        this.jframe, this.jpanel, this.width, this.height, this.nutricionista, nroDie);
+                        this.jframe, this.jpanel, this.width, this.height, this.nutricionista, nroDie, true);
                 this.remComponent();
                 jpanel.repaint();
                 telaDadosDie.initTable();

@@ -115,7 +115,7 @@ public class WindowListDie extends MouseAdapter implements ActionListener{
         if(e.getClickCount() == 2 && !checkVazio){
             WindowDadosDie telaDadosDie = new WindowDadosDie(
                     this.jframe, this.jpanel, this.width, this.height, this.nutricionista,
-                    list.locationToIndex(e.getPoint()));
+                    list.locationToIndex(e.getPoint()), true);
             this.remComponent();
             jpanel.repaint();
             telaDadosDie.initTable();

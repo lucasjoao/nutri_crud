@@ -41,10 +41,6 @@ public class WindowDadosPaciente implements ActionListener{
         this.width = width;
         this.height = height;
         this.nroPac = nroPac;
-        
-        
-    
-        
     }
 
     public void initComponent() {
@@ -184,7 +180,7 @@ public class WindowDadosPaciente implements ActionListener{
         //mk btnDie
         this.btnDie = new JButton(nutricionista.retornaDiePaciente(nroPac));
         btnDie.setSize(width/3, height/20);
-        btnDie.setLocation(width/3, (height/6 + 11*height/22));
+        btnDie.setLocation(width / 3, (height / 6 + 11 * height / 22));
         btnDie.addActionListener(this);
         jpanel.add(btnDie);
 
@@ -291,26 +287,32 @@ public class WindowDadosPaciente implements ActionListener{
             }
         }
         else if(event.getSource() == btnDie){
-            // quando chamar dadosdie...
-            //uma string recebe a dieta do paciente de acordo com o numero no array de pacientes da nutricionista
-            String nomeDieta = nutricionista.retornaDiePaciente(nroPac);
             int nroDieta = 0;
-            //a variavel numero da dieta inica-se com zero, a lista de dietas da nutricionista é varrida ate encontrar uma com o mesmo nome da dieta do paciente
-            for (int i = 0; i < nutricionista.getDiesDaNut().size(); i++) {
-                // se o nome for igual ele para o for e o numero da dieta que é igual
-                if (nutricionista.getDiesDaNut().get(i).getNome().equals(nomeDieta)) {
-                    nroDieta = i;
-                    break;
-                
+
+            for(Dieta dieta : nutricionista.getDiesDaNut()) {
+                if (dieta.getNome().equals(nutricionista.retornaDiePaciente(nroPac))) {
+                    nroDieta = nutricionista.getDiesDaNut().indexOf(dieta);
                 }
             }
-            WindowDadosDie telaDadosDie = new WindowDadosDie(
-                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista,
-                    nroDieta, false);
-            this.remComponent();
-            jpanel.repaint();
-            telaDadosDie.initTable();
-            telaDadosDie.initComponent();
+
+            if(this.root){
+                WindowDadosDie telaDadosDie = new WindowDadosDie(
+                        this.jframe, this.jpanel, this.width, this.height, this.nutricionista,
+                        nroDieta, true);
+                this.remComponent();
+                jpanel.repaint();
+                telaDadosDie.initTable();
+                telaDadosDie.initComponent();
+            }
+            else {
+                WindowDadosDie telaDadosDie = new WindowDadosDie(
+                        this.jframe, this.jpanel, this.width, this.height, this.nutricionista,
+                        nroDieta, false);
+                this.remComponent();
+                jpanel.repaint();
+                telaDadosDie.initTable();
+                telaDadosDie.initComponent();
+            }
         }
     }
 }

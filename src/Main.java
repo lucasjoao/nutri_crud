@@ -16,7 +16,4 @@ public class Main {
         jframe.setVisible(true);
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-
-    public int y = 0;
-
 }

@@ -24,10 +24,9 @@ public class WindowDadosDie implements ActionListener {
     private List<Paciente> pacsDaNut;
     private boolean root;
 
+    WindowDadosDie(){}
 
-    WindowDadosDie(JFrame jframe2, JPanel jpanel2, int width2, int height2, Nutricionista nutricionista2, int nroDieta, boolean root){}
-
-    WindowDadosDie(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista, int nroDie){
+    WindowDadosDie(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista, int nroDie, boolean root){
         this.jframe = jframe;
         jframe.setTitle("Dados da dieta");
         jframe.setSize(width, height);
@@ -135,7 +134,8 @@ public class WindowDadosDie implements ActionListener {
             btnEditar.setLocation(2*width / 7, 6*height/7);
             btnEditar.addActionListener(this);
             jpanel.add(btnEditar);
-            System.out.println("" + root);
+
+
           //make excluir btn
             this.btnExcluir = new JButton("Excluir");
             btnExcluir.setSize(width/5, height/20);
@@ -165,8 +165,6 @@ public class WindowDadosDie implements ActionListener {
         jpanel.remove(lblTitulo);
         jpanel.remove(btnLogout);
         jpanel.remove(btnVoltar);
-        jpanel.remove(btnEditar);
-        jpanel.remove(btnExcluir);
         jpanel.remove(lblTtlNomeDie);
         jpanel.remove(lblNomeDie);
         jpanel.remove(scrollPane);
@@ -174,7 +172,6 @@ public class WindowDadosDie implements ActionListener {
         jpanel.remove(lblTtlClrs);
 
         if(this.root){
-
             jpanel.remove(btnEditar);
             jpanel.remove(btnExcluir);
         }
@@ -241,32 +238,27 @@ public class WindowDadosDie implements ActionListener {
             telaLogin.initComponent();
         }
         else if(event.getSource() == btnVoltar) {
-       if(this.root){
-            WindowListDie telaListDie = new WindowListDie(
-                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
-            this.remComponent();
-            jpanel.repaint();
-            telaListDie.initList();
-            telaListDie.initComponent();}
-       else{
-          Paciente paciente = null;
-
-           for(int i = 0; i <= nutricionista.getPacsDaNut().size(); i++){
-
-            if (nutricionista.getPacsDaNut().get(i).getDieta().equals(this.dieta)) {
-                 paciente = nutricionista.getPaciente(i);
-                break;
-
-            }
-
-           WindowDadosPaciente telaDadosPaciente = new WindowDadosPaciente(
-                   this.jframe, this.jpanel, this.width, this.height, this.nutricionista,
-                   pacsDaNut.indexOf(paciente), false);
-           this.remComponent();
-           jpanel.repaint();
-           telaDadosPaciente.initComponent();
+           if(this.root){
+                WindowListDie telaListDie = new WindowListDie(
+                        this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
+                this.remComponent();
+                jpanel.repaint();
+                telaListDie.initList();
+                telaListDie.initComponent();
            }
-       }
+           else{
+                for(Paciente paciente : pacsDaNut){
+                    if (paciente.getDieta().getNome().equals(this.dieta.getNome())) {
+                        WindowDadosPaciente telaDadosPaciente = new WindowDadosPaciente(
+                                this.jframe, this.jpanel, this.width, this.height, this.nutricionista,
+                                pacsDaNut.indexOf(paciente), false);
+                        this.remComponent();
+                        jpanel.repaint();
+                        telaDadosPaciente.initComponent();
+                        break;
+                    }
+                }
+           }
         }
         else if(event.getSource() == btnEditar){
             WindowAddDie telaEditarDie = new WindowAddDie(
