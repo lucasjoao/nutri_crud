@@ -38,11 +38,11 @@ public class Paciente implements Logavel {
         Dieta dietaAux = new Dieta();
         List<Dieta> dietasAux = dietaAux.criarDefaults();
 
-        pacsDefault.add(new Paciente("lucas", 44444402, 5094137,
+        pacsDefault.add(new Paciente("Lucas João", 44444402, 5094137,
                 "lucas@lucas.br", "Vendedor", "lulu", "123", 1.85, 75.0, 19, dietasAux.get(0)));
-        pacsDefault.add(new Paciente("fausto", 44444402, 5094137,
+        pacsDefault.add(new Paciente("Fausto Silva", 44444402, 5094137,
                 "fausto@fausto.br", "Comprador", "fafa", "123", 1.85, 75.0, 19, dietasAux.get(1)));
-        pacsDefault.add(new Paciente("joao", 44444402, 5094137,
+        pacsDefault.add(new Paciente("José", 44444402, 5094137,
                 "joao@joao.br", "Padeiro", "jojo", "123", 1.85, 75.0, 19, dietasAux.get(0)));
         return pacsDefault;
     }

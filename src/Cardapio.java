@@ -20,8 +20,8 @@ public class Cardapio {
         List<Alimento> listAliAux = new ArrayList<>(aliAux.criarDefaults());
         listAliAux.remove(0);
 
-        cardsDefaults.add(new Cardapio("saudavel", aliAux.criarDefaults()));
-        cardsDefaults.add(new Cardapio("projeto verão", listAliAux));
+        cardsDefaults.add(new Cardapio("Saudável", aliAux.criarDefaults()));
+        cardsDefaults.add(new Cardapio("Projeto Verão", listAliAux));
 
         return cardsDefaults;
     }

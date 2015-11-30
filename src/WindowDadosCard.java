@@ -24,7 +24,7 @@ public class WindowDadosCard implements ActionListener {
 
     WindowDadosCard(){}
 
-    WindowDadosCard(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista, List<Paciente> pacsDaNut, int nroCard){
+    WindowDadosCard(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista, int nroCard){
         this.jframe = jframe;
         jframe.setTitle("Dados do cardápio");
         jframe.setSize(width, height);
@@ -36,7 +36,7 @@ public class WindowDadosCard implements ActionListener {
         jpanel.setLayout(null);
 
         this.nutricionista = nutricionista;
-        this.pacsDaNut = pacsDaNut;
+        this.pacsDaNut = nutricionista.getPacsDaNut();
         this.width = width;
         this.height = height;
         this.nroCard = nroCard;
@@ -176,14 +176,14 @@ public class WindowDadosCard implements ActionListener {
     public void actionPerformed(ActionEvent event) {
         if(event.getSource() == btnLogout){
             WindowLogin telaLogin = new WindowLogin(
-                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut);
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
             this.remComponent();
             jpanel.repaint();
             telaLogin.initComponent();
         }
         else if(event.getSource() == btnVoltar) {
             WindowListCard telaListCard = new WindowListCard(
-                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut);
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
             this.remComponent();
             jpanel.repaint();
             telaListCard.initList();
@@ -191,7 +191,7 @@ public class WindowDadosCard implements ActionListener {
         }
         else if(event.getSource() == btnEditar){
             WindowAddCard telaEditarCard = new WindowAddCard(
-                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut, this.nroCard);
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.nroCard);
             this.remComponent();
             jpanel.repaint();
             telaEditarCard.initTable(telaEditarCard.copiarTableModel(dadosTable));
@@ -207,7 +207,7 @@ public class WindowDadosCard implements ActionListener {
                 nutricionista.excluirCard(nroCard);
 
                 WindowListCard telaListCard = new WindowListCard(
-                        this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut);
+                        this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
                 this.remComponent();
                 jpanel.repaint();
                 telaListCard.initList();

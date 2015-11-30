@@ -1,4 +1,5 @@
 import javax.swing.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -16,12 +17,13 @@ public class WindowListPac extends MouseAdapter implements ActionListener {
     private JList list;
     private JButton btnLogout, btnAdd, btnVoltar;
     private int width, height;
+    private JLabel lblImg;
 
     WindowListPac(){}
 
-    WindowListPac(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista, List<Paciente> pacsDaNut){
+    WindowListPac(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista){
         this.jframe = jframe;
-        jframe.setTitle("Pacientes");
+        jframe.setTitle("Nutri+ Pacientes");
         jframe.setSize(width, height);
         jframe.setResizable(false);
         jframe.setLocationRelativeTo(null);
@@ -31,7 +33,7 @@ public class WindowListPac extends MouseAdapter implements ActionListener {
         jpanel.setLayout(null);
 
         this.nutricionista = nutricionista;
-        this.pacsDaNut = pacsDaNut;
+        this.pacsDaNut = nutricionista.getPacsDaNut();
         this.width = width;
         this.height = height;
 
@@ -62,7 +64,7 @@ public class WindowListPac extends MouseAdapter implements ActionListener {
 
         //make title lbl
         this.lblTitulo = new JLabel("Pacientes");
-        lblTitulo.setSize(width/3, height/10);
+        lblTitulo.setSize(width/4, height/4);
         lblTitulo.setFont(lblTitulo.getFont().deriveFont(24f));
         lblTitulo.setLocation(((width - lblTitulo.getWidth())/2), height/20);
         jpanel.add(lblTitulo);
@@ -87,9 +89,17 @@ public class WindowListPac extends MouseAdapter implements ActionListener {
         btnVoltar.setLocation(width / 10, 6*height/7);
         btnVoltar.addActionListener(this);
         jpanel.add(btnVoltar);
+
+        //make lbl imagem
+        this.lblImg = new JLabel(new ImageIcon("frutinhas.jpg"));
+        lblImg.setBounds(0,0,470,470);
+        lblImg.setLayout(null);
+        jpanel.add(lblImg);
+        //jpanel.setComponentZOrder(lblImg, 0);
     }
 
     public void remComponent(){
+        jpanel.remove(lblImg);
         jpanel.remove(lblTitulo);
         jpanel.remove(scrollPane);
         jpanel.remove(btnLogout);
@@ -103,7 +113,7 @@ public class WindowListPac extends MouseAdapter implements ActionListener {
                 list.locationToIndex(e.getPoint())).equals("");
         if(e.getClickCount() == 2 && !checkVazio){
             WindowDadosPaciente telaDadosPaciente = new WindowDadosPaciente(
-                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut,
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista,
                     list.locationToIndex(e.getPoint()), true);
             this.remComponent();
             jpanel.repaint();
@@ -115,14 +125,14 @@ public class WindowListPac extends MouseAdapter implements ActionListener {
     public void actionPerformed(ActionEvent event) {
         if(event.getSource() == btnLogout){
             WindowLogin telaLogin = new WindowLogin(
-                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut);
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
             this.remComponent();
             jpanel.repaint();
             telaLogin.initComponent();
         }
         else if(event.getSource() == btnAdd){
             WindowAddPac telaAddPac= new WindowAddPac(
-                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut);
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
             this.remComponent();
             jpanel.repaint();
             telaAddPac.initComponent();
@@ -130,7 +140,7 @@ public class WindowListPac extends MouseAdapter implements ActionListener {
         }
         else if(event.getSource() == btnVoltar){
             WindowPosLogin telaPosLogin = new WindowPosLogin(
-                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut);
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
             this.remComponent();
             jpanel.repaint();
             telaPosLogin.initComponent();

@@ -30,9 +30,9 @@ public class Dieta {
         listCardAux.remove(0);
         List<Cardapio> listCardVazio = new ArrayList<>();
 
-        diesDefaults.add(new Dieta("dieta fausto 2016", listCardVazio, listCardVazio, listCardAux,
+        diesDefaults.add(new Dieta("Dieta Fausto 2016", listCardVazio, listCardVazio, listCardAux,
                 listCardVazio, cardAux.criarDefaults(), listCardVazio, listCardAux));
-        diesDefaults.add(new Dieta("faustinho", listCardAux, listCardVazio, listCardVazio, cardAux.criarDefaults(),
+        diesDefaults.add(new Dieta("Dieta 2", listCardAux, listCardVazio, listCardVazio, cardAux.criarDefaults(),
                 listCardVazio, listCardAux, listCardVazio));
 
         return diesDefaults;

@@ -12,6 +12,7 @@ public class WindowDadosDie implements ActionListener {
     private JFrame jframe;
     private JPanel jpanel;
     private Nutricionista nutricionista;
+    private Dieta dieta;
     private JScrollPane scrollPane;
     private JTable table;
     private JLabel lblTitulo, lblNomeDie, lblClrs;
@@ -21,9 +22,10 @@ public class WindowDadosDie implements ActionListener {
     private DefaultTableModel dadosTable;
     private List<Paciente> pacsDaNut;
 
+
     WindowDadosDie(){}
 
-    WindowDadosDie(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista, List<Paciente> pacsDaNut, int nroDie){
+    WindowDadosDie(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista, int nroDie){
         this.jframe = jframe;
         jframe.setTitle("Dados da dieta");
         jframe.setSize(width, height);
@@ -35,7 +37,8 @@ public class WindowDadosDie implements ActionListener {
         jpanel.setLayout(null);
 
         this.nutricionista = nutricionista;
-        this.pacsDaNut = pacsDaNut;
+        this.dieta = nutricionista.getDiesDaNut().get(nroDie);
+        this.pacsDaNut = nutricionista.getPacsDaNut();
         this.width = width;
         this.height = height;
         this.nroDie = nroDie;
@@ -90,14 +93,14 @@ public class WindowDadosDie implements ActionListener {
         jframe.setContentPane(jpanel);
 
         //make  lblTitulo
-        this.lblTitulo = new JLabel(nutricionista.retornaNomeDie(nroDie));
+        this.lblTitulo = new JLabel(this.dieta.getNome());
         lblTitulo.setSize(width/3, height/10);
         lblTitulo.setFont(lblTitulo.getFont().deriveFont(24f));
         lblTitulo.setLocation(((width - lblTitulo.getWidth())/2), height/20);
         jpanel.add(lblTitulo);
 
         //make lblNome
-        this.lblNomeDie = new JLabel(nutricionista.retornaNomeDie(nroDie));
+        this.lblNomeDie = new JLabel(this.dieta.getNome());
         lblNomeDie.setSize(((width / 2) - height/22), height/22);
         lblNomeDie.setForeground(Color.blue);
         lblNomeDie.setLocation(width/3, height/6);
@@ -110,7 +113,7 @@ public class WindowDadosDie implements ActionListener {
         jpanel.add(lblTtlNomeDie);
 
         //make lbl calories
-        this.lblClrs = new JLabel(String.valueOf(nutricionista.calculaTotalClrsDie(nroDie)));
+        this.lblClrs = new JLabel(String.valueOf(dieta.totalClrs()));
         lblClrs.setSize(((width / 2) - height / 22), height / 22);
         lblClrs.setLocation(width / 2, 5 * height/7);
         lblClrs.setForeground(Color.blue);
@@ -166,49 +169,49 @@ public class WindowDadosDie implements ActionListener {
 
     public void fazCelulas(){
         int a = 0;
-        for(Cardapio cardapio : nutricionista.retornaCardsDmg(nroDie)){
+        for(Cardapio cardapio : dieta.getDmg()){
             String nome = cardapio.getNome();
             dadosTable.setValueAt(nome, a, 0);
             a++;
         }
 
         int b = 0;
-        for(Cardapio cardapio : nutricionista.retornaCardsSeg(nroDie)){
+        for(Cardapio cardapio : dieta.getSeg()){
             String nome = cardapio.getNome();
             dadosTable.setValueAt(nome, b, 1);
             b++;
         }
 
         int c = 0;
-        for(Cardapio cardapio : nutricionista.retornaCardsTer(nroDie)){
+        for(Cardapio cardapio : dieta.getTer()){
             String nome = cardapio.getNome();
             dadosTable.setValueAt(nome, c, 2);
             c++;
         }
 
         int d = 0;
-        for(Cardapio cardapio : nutricionista.retornaCardsQua(nroDie)){
+        for(Cardapio cardapio : dieta.getQua()){
             String nome = cardapio.getNome();
             dadosTable.setValueAt(nome, d, 3);
             d++;
         }
 
         int e = 0;
-        for(Cardapio cardapio : nutricionista.retornaCardsQui(nroDie)){
+        for(Cardapio cardapio : dieta.getQui()){
             String nome = cardapio.getNome();
             dadosTable.setValueAt(nome, e, 4);
             e++;
         }
 
         int f = 0;
-        for(Cardapio cardapio : nutricionista.retornaCardsSex(nroDie)){
+        for(Cardapio cardapio : dieta.getSex()){
             String nome = cardapio.getNome();
             dadosTable.setValueAt(nome, f, 5);
             f++;
         }
 
         int g = 0;
-        for(Cardapio cardapio : nutricionista.retornaCardsSab(nroDie)){
+        for(Cardapio cardapio : dieta.getSab()){
             String nome = cardapio.getNome();
             dadosTable.setValueAt(nome, g, 6);
             g++;
@@ -219,14 +222,15 @@ public class WindowDadosDie implements ActionListener {
     public void actionPerformed(ActionEvent event) {
         if(event.getSource() == btnLogout){
             WindowLogin telaLogin = new WindowLogin(
-                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut);
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
             this.remComponent();
             jpanel.repaint();
             telaLogin.initComponent();
         }
         else if(event.getSource() == btnVoltar) {
+
             WindowListDie telaListDie = new WindowListDie(
-                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut);
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
             this.remComponent();
             jpanel.repaint();
             telaListDie.initList();
@@ -234,7 +238,7 @@ public class WindowDadosDie implements ActionListener {
         }
         else if(event.getSource() == btnEditar){
             WindowAddDie telaEditarDie = new WindowAddDie(
-                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut, this.nroDie);
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.nroDie);
             this.remComponent();
             jpanel.repaint();
             telaEditarDie.initTable(telaEditarDie.copiarTableModel(dadosTable));
@@ -250,7 +254,7 @@ public class WindowDadosDie implements ActionListener {
                 nutricionista.excluirDie(nroDie);
 
                 WindowListDie telaListDie = new WindowListDie(
-                        this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut);
+                        this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
                 this.remComponent();
                 jpanel.repaint();
                 telaListDie.initList();

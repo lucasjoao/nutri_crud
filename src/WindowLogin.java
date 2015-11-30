@@ -8,7 +8,7 @@ public class WindowLogin implements ActionListener {
     private JFrame jframe;
     private JPanel jpanel;
     private Nutricionista nutricionista;
-    private JLabel lblTitulo, lblLogin, lblSenha;
+    private JLabel lblTitulo, lblLogin, lblSenha, lblImg;
     private JButton btnCancel, btnLogin;
     private JTextField txtLogin;
     private JPasswordField txtSenha;
@@ -17,9 +17,9 @@ public class WindowLogin implements ActionListener {
 
     WindowLogin(){}
 
-    WindowLogin(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista, List<Paciente> pacsDaNut){
+    WindowLogin(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista) {
         this.jframe = jframe;
-        jframe.setTitle("Login");
+        jframe.setTitle("Nutri+ Login");
         jframe.setSize(width, height);
         jframe.setResizable(false);
         jframe.setLocationRelativeTo(null);
@@ -31,30 +31,35 @@ public class WindowLogin implements ActionListener {
         jframe.setContentPane(jpanel);
 
         this.nutricionista = nutricionista;
-        this.pacsDaNut = pacsDaNut;
+        this.pacsDaNut = nutricionista.getPacsDaNut();
         this.width = width;
         this.height = height;
     }
 
     public void initComponent(){
+
+
         //make title lbl
-        this.lblTitulo = new JLabel("Login");
+        this.lblTitulo = new JLabel("Nutri+");
         lblTitulo.setSize(width/5, height/10);
-        lblTitulo.setFont(lblTitulo.getFont().deriveFont(24f));
+        lblTitulo.setFont(lblTitulo.getFont().deriveFont(31f));
         lblTitulo.setLocation(((width - lblTitulo.getWidth())/2), height/20);
         jpanel.add(lblTitulo);
+        //jpanel.setComponentZOrder(lblTitulo, 3);
 
         //make login lbl
         this.lblLogin = new JLabel("Login:");
         lblLogin.setSize(width/5, height/20);
         lblLogin.setLocation(width/5,height/4);
         jpanel.add(lblLogin);
+        //jpanel.setComponentZOrder(lblLogin, 3);
 
         //make login field
         this.txtLogin = new JTextField();
         txtLogin.setSize(width/3,height/25);
         txtLogin.setLocation((width/3 + width/20),height/4);
         jpanel.add(txtLogin);
+        //jpanel.setComponentZOrder(txtLogin, 3);
 
         //make password lbl
         this.lblSenha = new JLabel("Senha:");
@@ -81,6 +86,13 @@ public class WindowLogin implements ActionListener {
         btnCancel.setLocation(width /2 , 4 * height/5);
         btnCancel.addActionListener(this);
         jpanel.add(btnCancel);
+
+      //make lbl imagem
+        this.lblImg = new JLabel(new ImageIcon("frutas.jpg"));
+        lblImg.setBounds(0,0,470,470);
+        lblImg.setLayout(null);
+        jpanel.add(lblImg);
+        //jpanel.setComponentZOrder(lblImg, 0);
     }
 
     public void remComponent(){
@@ -91,6 +103,7 @@ public class WindowLogin implements ActionListener {
         jpanel.remove(txtSenha);
         jpanel.remove(btnCancel);
         jpanel.remove(btnLogin);
+        jpanel.remove(lblImg);
     }
 
     @Override
@@ -102,8 +115,9 @@ public class WindowLogin implements ActionListener {
             char[] senhaMask = txtSenha.getPassword();
             String senha = new String(senhaMask);
             if(nutricionista.logar(login, senha)){
+
                 WindowPosLogin telaPosLogin = new WindowPosLogin(
-                        this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut);
+                        this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
                 this.remComponent();
                 jpanel.repaint();
                 telaPosLogin.initComponent();
@@ -111,8 +125,9 @@ public class WindowLogin implements ActionListener {
             else{
                 for(Paciente paciente : pacsDaNut){
                     if(paciente.logar(login,senha)){
+
                         WindowDadosPaciente telaDadosPaciente = new WindowDadosPaciente(
-                                this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut,
+                                this.jframe, this.jpanel, this.width, this.height, this.nutricionista,
                                 pacsDaNut.indexOf(paciente), false);
                         this.remComponent();
                         jpanel.repaint();

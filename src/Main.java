@@ -10,11 +10,13 @@ public class Main {
         Nutricionista lucia = new Nutricionista("luluzinha", "123");
 
         //first window
-        WindowLogin window = new WindowLogin(jframe, jpanel, width, height, lucia, lucia.getPacsDaNut());
+        WindowLogin window = new WindowLogin(jframe, jpanel, width, height, lucia);
         window.initComponent();
 
         jframe.setVisible(true);
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
+
+    public int y = 0;
 
 }

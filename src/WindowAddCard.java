@@ -29,7 +29,7 @@ public class WindowAddCard extends MouseAdapter implements ActionListener {
 
     WindowAddCard(){}
 
-    WindowAddCard(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista, List<Paciente> pacsDaNut){
+    WindowAddCard(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista){
         this.jframe = jframe;
         jframe.setTitle("Add cardápio");
         jframe.setSize(width, height);
@@ -41,12 +41,12 @@ public class WindowAddCard extends MouseAdapter implements ActionListener {
         jpanel.setLayout(null);
 
         this.nutricionista = nutricionista;
-        this.pacsDaNut = pacsDaNut;
+        this.pacsDaNut = nutricionista.getPacsDaNut();
         this.width = width;
         this.height = height;
     }
 
-    WindowAddCard(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista, List<Paciente> pacsDaNut, int nroCard){
+    WindowAddCard(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista, int nroCard){
         this.jframe = jframe;
         jframe.setTitle("Editar cardápio");
         jframe.setSize(width, height);
@@ -60,7 +60,7 @@ public class WindowAddCard extends MouseAdapter implements ActionListener {
         jframe.setContentPane(jpanel);
 
         this.nutricionista = nutricionista;
-        this.pacsDaNut = pacsDaNut;
+        this.pacsDaNut = nutricionista.getPacsDaNut();
         this.width = width;
         this.height = height;
         this.nroCard = nroCard;
@@ -277,14 +277,14 @@ public class WindowAddCard extends MouseAdapter implements ActionListener {
     public void actionPerformed(ActionEvent event) {
         if(event.getSource() == btnLogout){
             WindowLogin telaLogin = new WindowLogin(
-                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut);
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
             this.remComponent();
             jpanel.repaint();
             telaLogin.initComponent();
         }
         else if(event.getSource() == btnVoltar && jframe.getTitle().equals("Add cardápio")){
             WindowListCard telaListCard = new WindowListCard(
-                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut);
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
             this.remComponent();
             jpanel.repaint();
             telaListCard.initList();
@@ -292,7 +292,7 @@ public class WindowAddCard extends MouseAdapter implements ActionListener {
         }
         else if(event.getSource() == btnVoltar && jframe.getTitle().equals("Editar cardápio")){
             WindowDadosCard telaDadosCard = new WindowDadosCard(
-                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut, nroCard);
+                    this.jframe, this.jpanel, this.width, this.height, this.nutricionista, nroCard);
             this.remComponent();
             jpanel.repaint();
             telaDadosCard.initTable();
@@ -313,7 +313,7 @@ public class WindowAddCard extends MouseAdapter implements ActionListener {
                 nutricionista.criarCard(nome, alimentos);
 
                 WindowListCard telaListCard = new WindowListCard(
-                        this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut);
+                        this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
                 this.remComponent();
                 jpanel.repaint();
                 telaListCard.initList();
@@ -322,7 +322,7 @@ public class WindowAddCard extends MouseAdapter implements ActionListener {
                 nutricionista.editarCard(nome,alimentos, nroCard);
 
                 WindowDadosCard telaDadosCard = new WindowDadosCard(
-                        this.jframe, this.jpanel, this.width, this.height, this.nutricionista, this.pacsDaNut, nroCard);
+                        this.jframe, this.jpanel, this.width, this.height, this.nutricionista, nroCard);
                 this.remComponent();
                 jpanel.repaint();
                 telaDadosCard.initTable();
