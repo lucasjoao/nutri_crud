@@ -1,6 +1,7 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,9 +22,10 @@ public class WindowDadosDie implements ActionListener {
     private int width, height, nroDie;
     private DefaultTableModel dadosTable;
     private List<Paciente> pacsDaNut;
+    private boolean root;
 
 
-    WindowDadosDie(){}
+    WindowDadosDie(JFrame jframe2, JPanel jpanel2, int width2, int height2, Nutricionista nutricionista2, int nroDieta, boolean root){}
 
     WindowDadosDie(JFrame jframe, JPanel jpanel, int width, int height, Nutricionista nutricionista, int nroDie){
         this.jframe = jframe;
@@ -42,6 +44,7 @@ public class WindowDadosDie implements ActionListener {
         this.width = width;
         this.height = height;
         this.nroDie = nroDie;
+        this.root = root;
     }
 
     public void initTable(){
@@ -125,6 +128,21 @@ public class WindowDadosDie implements ActionListener {
         lblTtlClrs.setLocation(width/8, 5 * height/7);
         jpanel.add(lblTtlClrs);
 
+        if(this.root){
+            //make editar btn
+            this.btnEditar = new JButton("Editar");
+            btnEditar.setSize(width/5, height/20);
+            btnEditar.setLocation(2*width / 7, 6*height/7);
+            btnEditar.addActionListener(this);
+            jpanel.add(btnEditar);
+            System.out.println("" + root);
+          //make excluir btn
+            this.btnExcluir = new JButton("Excluir");
+            btnExcluir.setSize(width/5, height/20);
+            btnExcluir.setLocation(width / 2, 6*height/7);
+            btnExcluir.addActionListener(this);
+            jpanel.add(btnExcluir);
+        }
         //make logout btn
         this.btnLogout = new JButton("sair");
         btnLogout.setSize(width/6, height/20);
@@ -132,12 +150,7 @@ public class WindowDadosDie implements ActionListener {
         btnLogout.addActionListener(this);
         jpanel.add(btnLogout);
 
-        //make editar btn
-        this.btnEditar = new JButton("Editar");
-        btnEditar.setSize(width/5, height/20);
-        btnEditar.setLocation(2*width / 7, 6*height/7);
-        btnEditar.addActionListener(this);
-        jpanel.add(btnEditar);
+
 
         //make voltar btn
         this.btnVoltar = new JButton("<---");
@@ -146,12 +159,6 @@ public class WindowDadosDie implements ActionListener {
         btnVoltar.addActionListener(this);
         jpanel.add(btnVoltar);
 
-        //make excluir btn
-        this.btnExcluir = new JButton("Excluir");
-        btnExcluir.setSize(width/5, height/20);
-        btnExcluir.setLocation(width / 2, 6*height/7);
-        btnExcluir.addActionListener(this);
-        jpanel.add(btnExcluir);
     }
 
     public void remComponent(){
@@ -165,6 +172,12 @@ public class WindowDadosDie implements ActionListener {
         jpanel.remove(scrollPane);
         jpanel.remove(lblClrs);
         jpanel.remove(lblTtlClrs);
+
+        if(this.root){
+
+            jpanel.remove(btnEditar);
+            jpanel.remove(btnExcluir);
+        }
     }
 
     public void fazCelulas(){
@@ -228,13 +241,32 @@ public class WindowDadosDie implements ActionListener {
             telaLogin.initComponent();
         }
         else if(event.getSource() == btnVoltar) {
-
+       if(this.root){
             WindowListDie telaListDie = new WindowListDie(
                     this.jframe, this.jpanel, this.width, this.height, this.nutricionista);
             this.remComponent();
             jpanel.repaint();
             telaListDie.initList();
-            telaListDie.initComponent();
+            telaListDie.initComponent();}
+       else{
+          Paciente paciente = null;
+
+           for(int i = 0; i <= nutricionista.getPacsDaNut().size(); i++){
+
+            if (nutricionista.getPacsDaNut().get(i).getDieta().equals(this.dieta)) {
+                 paciente = nutricionista.getPaciente(i);
+                break;
+
+            }
+
+           WindowDadosPaciente telaDadosPaciente = new WindowDadosPaciente(
+                   this.jframe, this.jpanel, this.width, this.height, this.nutricionista,
+                   pacsDaNut.indexOf(paciente), false);
+           this.remComponent();
+           jpanel.repaint();
+           telaDadosPaciente.initComponent();
+           }
+       }
         }
         else if(event.getSource() == btnEditar){
             WindowAddDie telaEditarDie = new WindowAddDie(

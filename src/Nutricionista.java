@@ -316,6 +316,10 @@ public class Nutricionista implements Logavel {
         return alisDaNut;
     }
 
+    public Paciente getPaciente(int i){
+        return pacsDaNut.get(i);
+    }
+
     public List<Cardapio> getCardsDaNut() {
         return cardsDaNut;
     }
